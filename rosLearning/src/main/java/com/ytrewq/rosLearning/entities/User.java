@@ -1,7 +1,6 @@
 package com.ytrewq.rosLearning.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -29,6 +28,8 @@ public class User {
     public Role getRole() {
         return role;
     }
+    @ManyToOne()
+    @JoinColumn(name = "role_id")
 
     public void setRole(Role role) {
         this.role = role;
@@ -38,6 +39,8 @@ public class User {
     public Group getGroup() {
         return group;
     }
+    @ManyToOne()
+    @JoinColumn(name = "group_id")
 
     public void setGroup(Group group) {
         this.group = group;
