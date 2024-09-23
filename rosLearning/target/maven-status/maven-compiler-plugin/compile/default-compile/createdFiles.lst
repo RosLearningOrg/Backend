@@ -1,0 +1,5 @@
+com\ytrewq\rosLearning\controller\mongo\TaskController.class
+com\ytrewq\rosLearning\service\mongo\TaskService.class
+com\ytrewq\rosLearning\entity\mongo\Task.class
+com\ytrewq\rosLearning\repository\mongo\TaskRepository.class
+com\ytrewq\rosLearning\RosLearningApplication.class
