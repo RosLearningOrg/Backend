@@ -11,14 +11,12 @@ public class Lesson extends  BaseEntity{
     private String  lesson_theory;
     private int attempts_number;
     private Set<Task> tasks;
-    private Course course;
 
-    public Lesson(String title, String lesson_theory, int attempts_number, Set<Task> tasks,Course course) {
+    public Lesson(String title, String lesson_theory, int attempts_number, Set<Task> tasks) {
         this.title = title;
         this.lesson_theory = lesson_theory;
         this.attempts_number = attempts_number;
         this.tasks=tasks;
-        this.course=course;
     }
 
 
@@ -57,18 +55,12 @@ public class Lesson extends  BaseEntity{
     public Set<Task> getTasks() {
         return tasks;
     }
-    @OneToMany(mappedBy = "lesson",targetEntity = Task.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "lesson", cascade= CascadeType.ALL,fetch = FetchType.LAZY)
+
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+
 
 }

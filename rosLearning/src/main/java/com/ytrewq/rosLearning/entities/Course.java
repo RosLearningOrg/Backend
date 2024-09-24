@@ -36,7 +36,7 @@ public class Course extends BaseEntity{
     public Set<Lesson> getLessons() {
         return lessons;
     }
-    @OneToMany(mappedBy = "course" ,targetEntity =Lesson.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     public void setLessons(Set<Lesson> lessons) {
         this.lessons = lessons;
     }

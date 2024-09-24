@@ -1,4 +1,4 @@
-package org.example.repositories;
+package com.ytrewq.rosLearning.repositories;
 
 public interface AdminRepository {
 }

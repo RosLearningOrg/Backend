@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User extends BaseEntity {
     private String fio;
     private Role role;
     private Group group;
