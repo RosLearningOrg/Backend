@@ -6,14 +6,33 @@
   <component name="ChangeListManager">
     <list default="true" id="636c009e-0298-4f9b-82e4-92afd349c52e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Course.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/CourseGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/CourseGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Lesson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Lesson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/repositories/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/repositories/AdminRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/repositories/BaseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/repositories/BaseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Phone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Phone.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/PhoneTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/PhoneTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/ServiceContract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/ServiceContract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Services.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Services.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/StatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/StatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Subscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Subscriber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Tariff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/domain/Tariff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/BaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Course.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/CourseGroup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Group.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Lesson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/entities/User.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Course.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/CourseGroup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Group.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Lesson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/Task.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/entities/User.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,17 +71,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Public/JDK&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/Public/Backend/Backend/rosLearning/src/main/java/com/ytrewq/rosLearning",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.ytrewq.rosLearning.entities" />

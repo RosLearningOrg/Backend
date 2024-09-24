@@ -20,10 +20,6 @@ public abstract class BaseRepository<Entity,T> {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public void create(Entity entity) {
-        entityManager.persist(entity);
-    }
 
     @Transactional
     public Entity findById(Class<Entity> entityClass, Integer id) {

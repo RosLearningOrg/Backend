@@ -1,7 +1,6 @@
 package com.ytrewq.rosLearning.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "group")

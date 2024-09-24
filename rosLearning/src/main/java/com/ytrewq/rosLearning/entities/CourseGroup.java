@@ -10,10 +10,7 @@ public class CourseGroup extends BaseEntity {
     private Group group;
     private Course course;
 
-    public CourseGroup(Group group, com.ytrewq.rosLearning.entities.Course course) {
-        this.group = group;
-        this.course = course;
-    }
+    
 
     public Group getGroup() {
         return group;
