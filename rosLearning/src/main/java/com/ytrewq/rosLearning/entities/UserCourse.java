@@ -1,9 +1,7 @@
 package com.ytrewq.rosLearning.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "user_courses")
 public class UserCourse extends BaseEntity {
@@ -25,8 +23,11 @@ public class UserCourse extends BaseEntity {
         this.addition_date = addition_date;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne()
+    @JoinColumns( {
+            @JoinColumn(name = "id", referencedColumnName = "id",insertable=false, updatable=false),
+            @JoinColumn(name = "email", referencedColumnName = "email",insertable=false, updatable=false)
+    })
     public User getUser() {
         return user;
     }

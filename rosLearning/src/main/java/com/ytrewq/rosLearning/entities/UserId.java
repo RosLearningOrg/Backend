@@ -1,8 +1,12 @@
 package com.ytrewq.rosLearning.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Embeddable
 public class UserId implements Serializable {
     private String email;
     private Long id;
@@ -11,7 +15,8 @@ public class UserId implements Serializable {
         this.email = email;
         this.id = id;
     }
-
+    @Id
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }

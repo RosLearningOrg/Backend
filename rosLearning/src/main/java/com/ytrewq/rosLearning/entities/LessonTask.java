@@ -5,7 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 @Entity
-@Table(name = "lesson_task")
+@Table(name = "lesson_tasks")
 public class LessonTask extends BaseEntity {
     private Lesson lesson;
     private Task task;

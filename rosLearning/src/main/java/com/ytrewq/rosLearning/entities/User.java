@@ -3,29 +3,28 @@ package com.ytrewq.rosLearning.entities;
 import jakarta.persistence.*;
 
 @Entity
-@IdClass(UserId.class)
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User {
+    @EmbeddedId
+    private UserId  userId;
     private String fio;
-    private String email;
-    private Role role;
     private String position;
     private String registration_date;
 
-    public User(String fio, Role role, String position, String registration_date, String email) {
+    public User(String fio,String position, String registration_date,UserId  userId
+) {
         this.fio = fio;
-        this.email=email;
-        this.role = role;
+        this.userId=userId;
         this.position = position;
         this.registration_date = registration_date;
     }
-    @Id
-    public String getEmail() {
-        return email;
+
+    public UserId getUserId() {
+        return userId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserId(UserId userId) {
+        this.userId = userId;
     }
 
     public String getFio() {
@@ -35,15 +34,7 @@ public class User extends BaseEntity {
     public void setFio(String fio) {
         this.fio = fio;
     }
-    @OneToOne(targetEntity = Role.class)
-    @JoinColumn(name = "role_id")
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     public String getPosition() {
         return position;
