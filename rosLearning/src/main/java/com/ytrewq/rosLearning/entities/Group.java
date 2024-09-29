@@ -3,7 +3,7 @@ package com.ytrewq.rosLearning.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "group")
+@Table(name = "groups")
 public class Group extends BaseEntity {
     private String profile;
 

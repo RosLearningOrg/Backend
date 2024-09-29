@@ -20,6 +20,10 @@ public abstract class AdminBaseRepository<Entity,T> {
     public void create(Entity entity) {
         entityManager.persist(entity);
     }
+    @Transactional
+    public void delete(Entity entity) {
+        entityManager.remove(entity);
+    }
 
     @Transactional
     public Entity update(Entity entity) {

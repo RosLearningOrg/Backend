@@ -3,18 +3,29 @@ package com.ytrewq.rosLearning.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "user")
+@IdClass(UserId.class)
+@Table(name = "users")
 public class User extends BaseEntity {
     private String fio;
+    private String email;
     private Role role;
-    private Group group;
-    private int course_result;
+    private String position;
+    private String registration_date;
 
-    public User(String fio, Role role, Group group, int course_result) {
+    public User(String fio, Role role, String position, String registration_date, String email) {
         this.fio = fio;
+        this.email=email;
         this.role = role;
-        this.group = group;
-        this.course_result = course_result;
+        this.position = position;
+        this.registration_date = registration_date;
+    }
+    @Id
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFio() {
@@ -24,33 +35,29 @@ public class User extends BaseEntity {
     public void setFio(String fio) {
         this.fio = fio;
     }
-
+    @OneToOne(targetEntity = Role.class)
+    @JoinColumn(name = "role_id")
     public Role getRole() {
         return role;
     }
-    @ManyToOne()
-    @JoinColumn(name = "role_id")
 
     public void setRole(Role role) {
         this.role = role;
     }
 
-
-    public Group getGroup() {
-        return group;
-    }
-    @ManyToOne()
-    @JoinColumn(name = "group_id")
-
-    public void setGroup(Group group) {
-        this.group = group;
+    public String getPosition() {
+        return position;
     }
 
-    public int getCourse_result() {
-        return course_result;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public void setCourse_result(int course_result) {
-        this.course_result = course_result;
+    public String getRegistration_date() {
+        return registration_date;
+    }
+
+    public void setRegistration_date(String registration_date) {
+        this.registration_date = registration_date;
     }
 }

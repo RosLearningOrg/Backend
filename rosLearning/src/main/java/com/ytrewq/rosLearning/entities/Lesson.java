@@ -5,43 +5,26 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "lesson")
+@Table(name = "lessons")
 public class Lesson extends  BaseEntity{
-    private String title;
+    private String name;
+
     private String  lesson_theory;
-    private int attempts_number;
-    private Set<Task> tasks;
 
-    public Lesson(String title, String lesson_theory, int attempts_number, Set<Task> tasks) {
-        this.title = title;
+    private String creation_date;
+
+    public Lesson(String name, String lesson_theory, String creation_date) {
+        this.name = name;
         this.lesson_theory = lesson_theory;
-        this.attempts_number = attempts_number;
-        this.tasks=tasks;
+        this.creation_date = creation_date;
     }
 
-
-    public int getAttempts_number() {
-        return attempts_number;
+    public String getName() {
+        return name;
     }
 
-    public void setAttempts_number(int attempts_number) {
-        this.attempts_number = attempts_number;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTheory() {
-        return lesson_theory;
-    }
-
-    public void setTheory(String lesson_theory) {
-        this.lesson_theory = lesson_theory;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLesson_theory() {
@@ -52,15 +35,12 @@ public class Lesson extends  BaseEntity{
         this.lesson_theory = lesson_theory;
     }
 
-    public Set<Task> getTasks() {
-        return tasks;
-    }
-    @OneToMany(mappedBy = "lesson", cascade= CascadeType.ALL,fetch = FetchType.LAZY)
-
-    public void setTasks(Set<Task> tasks) {
-        this.tasks = tasks;
+    public String getCreation_date() {
+        return creation_date;
     }
 
-
+    public void setCreation_date(String creation_date) {
+        this.creation_date = creation_date;
+    }
 
 }

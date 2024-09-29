@@ -32,4 +32,5 @@ public abstract class BaseRepository<Entity,T> {
         return result.getResultList();
 
     }
+
 }

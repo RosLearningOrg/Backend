@@ -8,51 +8,41 @@ import jakarta.persistence.Table;
 import java.util.Set;
 
 @Entity
-@Table(name = "task")
+@Table(name = "tasks")
 public class Task extends BaseEntity {
-    private String data;
-    private int time;
-    private int result;
+    private String name;
 
-    private Lesson lesson;
-    public Task(String data, int time, int result,Lesson lesson) {
-        this.data = data;
-        this.time = time;
-        this.result = result;
-        this.lesson=lesson;
+    private String description;
+
+    private String emulation;
+
+    public Task(String name, String description, String emulation) {
+        this.name = name;
+        this.description = description;
+        this.emulation = emulation;
     }
 
-    public String getData() {
-        return data;
+    public String getName() {
+        return name;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getTime() {
-        return time;
+    public String getDescription() {
+        return description;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getResult() {
-        return result;
+    public String getEmulation() {
+        return emulation;
     }
 
-    public void setResult(int result) {
-        this.result = result;
-    }
-
-    public Lesson getLesson() {
-        return lesson;
-    }
-    @ManyToOne
-    @JoinColumn(name = "lesson_id")
-
-    public void setLesson(Lesson lesson) {
-        this.lesson = lesson;
+    public void setEmulation(String emulation) {
+        this.emulation = emulation;
     }
 }

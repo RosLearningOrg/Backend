@@ -5,41 +5,41 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "course")
-public class Course extends BaseEntity{
-    private String title;
-    private int lessons_number;
-    private Set<Lesson> lessons;
+@Table(name = "courses")
+public class Course extends BaseEntity {
+    private String name;
+    private int description;
+    private String creation_date;
 
-    public Course(String title, int lessons_number, Set<Lesson> lessons) {
-        this.title = title;
-        this.lessons_number = lessons_number;
-        this.lessons=lessons;
+    public Course(String name, int description, String creation_date) {
+
+        this.name = name;
+        this.description = description;
+        this.creation_date = creation_date;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getLessons_number() {
-        return lessons_number;
+    public int getDescription() {
+        return description;
     }
 
-    public void setLessons_number(int lessons_number) {
-        this.lessons_number = lessons_number;
+    public void setDescription(int description) {
+        this.description = description;
     }
 
-    public Set<Lesson> getLessons() {
-        return lessons;
-    }
-    @OneToMany(mappedBy = "course" , cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    public void setLessons(Set<Lesson> lessons) {
-        this.lessons = lessons;
+    public String getCreation_date() {
+        return creation_date;
     }
 
+    public void setCreation_date(String creation_date) {
+        this.creation_date = creation_date;
+    }
 
 }
