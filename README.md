@@ -1,27 +1,166 @@
-# Getting Started
+# API Documentation
 
-### Reference Documentation
-For further reference, please consider the following sections:
+## Введение
 
-* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
-* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/3.3.3/maven-plugin)
-* [Create an OCI image](https://docs.spring.io/spring-boot/3.3.3/maven-plugin/build-image.html)
-* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/3.3.3/reference/htmlsingle/index.html#using.devtools)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/3.3.3/reference/htmlsingle/index.html#web)
-* [Spring Data MongoDB](https://docs.spring.io/spring-boot/docs/3.3.3/reference/htmlsingle/index.html#data.nosql.mongodb)
+Добро пожаловать в документацию нашего API Этот документ предназначен для предоставления информации о доступных конечных точках, их параметрах и возвращаемых данных.
 
-### Guides
-The following guides illustrate how to use some features concretely:
+## Авторизация
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
+### `/api/csrf`
 
-### Maven Parent overrides
+#### Описание
+Получение CSRF токена необходимо для по сути любого post запроса, действителен одну сессию (до выхода с вкладки или выхода из аккаута, потом нужен новый)
+Обычна сессия начинается с него, так же с ним приходят куки спринга, их нужно оставить у себя и предавать с каждым следующим запросом как и сам токен.
+#### Метод
+- **GET**: Получить новый токен.
 
-Due to Maven's design, elements are inherited from the parent POM to the project POM.
-While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
-To prevent this, the project POM contains empty overrides for these elements.
-If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
+#### Пример ответа
+```json
+{
+"token": "токен"
+}
+```
 
+### `/api/login`
+
+#### Описание
+Вход в апи, нужны куки спринга а так же CSRF токен.<br>
+Может кинуть 401 если не будет кук или csrf токена <br>(в теории если уже залогинены может кинуть и 403)
+#### Метод
+- **POST**: Войти в приложение
+
+#### Параметры
+- **username**: Логин пользователя.
+- **password**: Пароль пользователя.
+
+#### Примеры ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+```json
+{
+  "message": "Invalid username or password", "code": 400
+}
+```
+```json
+{
+  "message": "Please logout first.", "code": 400
+}
+```
+
+### `/api/logout`
+
+#### Описание
+Выход из апи, нужны куки спринга а так же CSRF токен.<br>
+Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
+#### Метод
+- **POST**: Выйти из приложения
+
+#### Пример ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+
+### `/api/current-user`
+
+#### Описание
+Получить текущего пользователя<br>
+Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
+#### Метод
+- **GET**: Получить инормацию о пользователе
+
+#### Пример ответа
+```json
+{
+  "username": "qwet", 
+  "email": "a@a.a", 
+  "name": "Иванов Иван Иванович", 
+  "role": "Штатный дебил", 
+  "dateOfRegistration": "2024-10-12T23:47:14.949381", 
+  "admin": true
+}
+```
+
+### `/api/signup`
+
+#### Описание
+Зарегестироваться в апи, нужны куки спринга а так же CSRF токен.<br>
+Может кинуть 401 если не будет кук или csrf токена
+#### Метод
+- **POST**: Зарегестировать нового пользователя
+
+#### Параметры
+- **username**: Логин пользователя.
+- **password**: Пароль пользователя.
+- **email**: Email пользователя.
+- **name**: Имя пользователя.
+- **role**: Должность пользователя (не путать с флагом админ).
+
+#### Пример ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+
+## Тестовые запросы для ребят с бека (тут отличается реализация, нужно посмотреть в код), фронт при желании может потестить их
+
+### `/api/test`
+
+#### Описание
+Тестовый запрос доступ к которому имеют авторизированные пользователи<br>
+Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
+#### Метод
+- **GET**: Общий тестовый запрос
+
+#### Пример ответа (а так же сообщения в консоль)
+```
+Текст ответа:
+запрос с общим доступом
+
+Текст в консоли:
+com.ytrewq.rosLearning.Entities.User@147d4023
+Иванов Иван Иванович Штатный дебил
+```
+
+### `/api/test-user`
+
+#### Описание
+Тестовый запрос доступ к которому имеют только обычные пользователи<br>
+Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
+#### Метод
+- **GET**: Только пользовательский тестовый запрос
+
+#### Пример ответа (а так же сообщения в консоль)
+```
+Текст ответа:
+запрос с доступом только пользователя
+
+
+Текст в консоли:
+com.ytrewq.rosLearning.Entities.User@147d4023
+Иванов Иван Иванович Штатный дебил и он пользователь
+```
+
+### `/api/test-admin`
+
+#### Описание
+Тестовый запрос доступ к которому имеют авторизированные пользователи<br>
+Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
+#### Метод
+- **GET**: Только админский тестовый запрос
+
+#### Пример ответа (а так же сообщения в консоль)
+```
+Текст ответа:
+запрос с доступом только админа
+
+
+Текст в консоли:
+com.ytrewq.rosLearning.Entities.User@147d4023
+Иванов Иван Иванович Штатный дебил и он админ
+```
