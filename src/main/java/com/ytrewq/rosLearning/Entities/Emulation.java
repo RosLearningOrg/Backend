@@ -1,14 +1,17 @@
 package com.ytrewq.rosLearning.Entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "emulations")
 public class Emulation extends BaseEntity {
     private String private_title;
-    private Date dateOfCreation;
+    private LocalDateTime dateOfCreation;
     private Integer timerTime;
     private String timerDescription;
     private String screenImageURL;
@@ -17,7 +20,7 @@ public class Emulation extends BaseEntity {
     private String byteArrayInterface;
     private Task task;
 
-    public Emulation(String private_title, Date dateOfCreation, Integer timerTime, String timerDescription, String screenImageURL, String blockSchemeJSON, String blockCodeJS, String byteArrayInterface, Task task) {
+    public Emulation(String private_title, LocalDateTime dateOfCreation, Integer timerTime, String timerDescription, String screenImageURL, String blockSchemeJSON, String blockCodeJS, String byteArrayInterface, Task task) {
         this.private_title = private_title;
         this.dateOfCreation = dateOfCreation;
         this.timerTime = timerTime;
@@ -42,11 +45,11 @@ public class Emulation extends BaseEntity {
     }
 
     @Column(name = "dateOfCreation")
-    public Date getDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
@@ -77,7 +80,7 @@ public class Emulation extends BaseEntity {
         this.screenImageURL = screenImageURL;
     }
 
-    @Column(name = "blockSchemeJSON", length=32768)
+    @Column(name = "blockSchemeJSON", length = 32768)
     public String getBlockSchemeJSON() {
         return blockSchemeJSON;
     }
@@ -86,7 +89,7 @@ public class Emulation extends BaseEntity {
         this.blockSchemeJSON = blockSchemeJSON;
     }
 
-    @Column(name = "blockCodeJS", length=32768)
+    @Column(name = "blockCodeJS", length = 32768)
     public String getBlockCodeJS() {
         return blockCodeJS;
     }
@@ -95,7 +98,7 @@ public class Emulation extends BaseEntity {
         this.blockCodeJS = blockCodeJS;
     }
 
-    @Column(name = "byteArrayInterface", length=32768)
+    @Column(name = "byteArrayInterface", length = 32768)
     public String getByteArrayInterface() {
         return byteArrayInterface;
     }

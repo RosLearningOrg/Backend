@@ -3,21 +3,19 @@ package com.ytrewq.rosLearning.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tasks")
 public class Task extends BaseEntity {
     private String title;
-    private Date dateOfCreation;
+    private LocalDateTime dateOfCreation;
     private String description;
     private String lessonTitle;
     private String courseTitle;
     private Emulation emulation;
-//    private Set<TaskLessonMaterial> materials;
-//    private Set<UserTask> users;
 
-    public Task(String title, Date dateOfCreation, String description, String lessonTitle, String courseTitle,Emulation emulation) {
+    public Task(String title, LocalDateTime dateOfCreation, String description, String lessonTitle, String courseTitle, Emulation emulation) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -39,11 +37,11 @@ public class Task extends BaseEntity {
     }
 
     @Column(name = "dateOfCreation")
-    public Date getDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
@@ -83,34 +81,4 @@ public class Task extends BaseEntity {
     public void setEmulation(Emulation emulation) {
         this.emulation = emulation;
     }
-
-//    @OneToMany(mappedBy = "task", targetEntity = TaskEmulation.class,
-//            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    public Set<TaskEmulation> getEmulations() {
-//        return emulations;
-//    }
-//
-//    public void setEmulations(Set<TaskEmulation> emulations) {
-//        this.emulations = emulations;
-//    }
-//
-//    @OneToMany(mappedBy = "task", targetEntity = TaskLessonMaterial.class,
-//            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    public Set<TaskLessonMaterial> getMaterials() {
-//        return materials;
-//    }
-//
-//    public void setMaterials(Set<TaskLessonMaterial> materials) {
-//        this.materials = materials;
-//    }
-//
-//    @OneToMany(mappedBy = "task", targetEntity = UserTask.class,
-//            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    public Set<UserTask> getUsers() {
-//        return users;
-//    }
-//
-//    public void setUsers(Set<UserTask> users) {
-//        this.users = users;
-//    }
 }

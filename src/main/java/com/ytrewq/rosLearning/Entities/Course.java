@@ -2,17 +2,17 @@ package com.ytrewq.rosLearning.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "courses")
 public class Course extends BaseEntity {
     private String title;
-    private Date dateOfCreation;
+    private LocalDateTime dateOfCreation;
     private String description;
     private Theme[] themes;
 
-    public Course(String title, Date dateOfCreation, String description, Theme[] themes) {
+    public Course(String title, LocalDateTime dateOfCreation, String description, Theme[] themes) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -32,11 +32,11 @@ public class Course extends BaseEntity {
     }
 
     @Column(name = "dateOfCreation")
-    public Date getDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 

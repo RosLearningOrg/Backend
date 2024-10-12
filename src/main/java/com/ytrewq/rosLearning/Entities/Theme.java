@@ -2,18 +2,18 @@ package com.ytrewq.rosLearning.Entities;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "themes")
 public class Theme extends BaseEntity {
     private String title;
-    private Date dateOfCreation;
+    private LocalDateTime dateOfCreation;
     private String description;
     private Task[] tasks;
     private ThemeMaterial[] materials;
 
-    public Theme(String title, Date dateOfCreation, String description, Task[] tasks, ThemeMaterial[] materials) {
+    public Theme(String title, LocalDateTime dateOfCreation, String description, Task[] tasks, ThemeMaterial[] materials) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -34,11 +34,11 @@ public class Theme extends BaseEntity {
     }
 
     @Column(name = "dateOfCreation")
-    public Date getDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
