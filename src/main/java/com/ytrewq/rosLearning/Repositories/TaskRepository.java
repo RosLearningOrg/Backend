@@ -1,7 +1,8 @@
-package com.ytrewq.rosLearning.repositories;
+package com.ytrewq.rosLearning.Repositories;
 
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Task;
+
+import com.ytrewq.rosLearning.Entities.Task;
+
 import java.util.Set;
 
 public interface TaskRepository {

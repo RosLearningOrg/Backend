@@ -1,7 +1,6 @@
-package com.ytrewq.rosLearning.controllers;
+package com.ytrewq.rosLearning.Controllers;
 
-import com.ytrewq.rosLearning.entities.*;
-import com.ytrewq.rosLearning.repositories.Impl.*;
+import com.ytrewq.rosLearning.Repositories.Impl.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -9,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/create")
@@ -71,9 +67,8 @@ public class TestAddData {
 */
 
 
-
-        return"OK";
-}
+        return "OK";
+    }
 }
    /*       Theme theme = new Theme("Название %d".formatted(i), LocalDateTime.now(), "Описание темы %d".formatted(i), null, null);
             Task task = new Task("Название %d".formatted(i), LocalDateTime.now(), "Описание темы %d".formatted(i), null, null);

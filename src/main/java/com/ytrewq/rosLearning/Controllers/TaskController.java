@@ -1,13 +1,13 @@
-package com.ytrewq.rosLearning.controllers;
+package com.ytrewq.rosLearning.Controllers;
 
-import com.ytrewq.rosLearning.dto.CourseDto;
-import com.ytrewq.rosLearning.dto.TaskDto;
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.User;
-import com.ytrewq.rosLearning.services.TaskService;
+
+import com.ytrewq.rosLearning.DTOs.TaskDto;
+import com.ytrewq.rosLearning.Services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
@@ -21,8 +21,9 @@ public class TaskController {
     public Set<TaskDto> getAllCourseTasks(@RequestParam int id) {
         return taskService.getAllCourseTasks(id);
     }
+
     @GetMapping("/getAllTasks")
-    public Set<TaskDto> getAllTasks () {
+    public Set<TaskDto> getAllTasks() {
         return taskService.getAllTasks();
     }
 }

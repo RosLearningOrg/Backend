@@ -1,12 +1,11 @@
-package com.ytrewq.rosLearning.services;
+package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.dto.CourseDto;
-import com.ytrewq.rosLearning.dto.ThemesDto;
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Theme;
-import com.ytrewq.rosLearning.entities.ThemeMaterial;
-import com.ytrewq.rosLearning.repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.repositories.Impl.ThemeRepositoryImpl;
+
+import com.ytrewq.rosLearning.DTOs.ThemesDto;
+import com.ytrewq.rosLearning.Entities.Course;
+import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.Impl.ThemeRepositoryImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,17 +19,16 @@ public class ThemeService {
     ThemeRepositoryImpl themeRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
-    ModelMapper modelMapper=new ModelMapper();
+    ModelMapper modelMapper = new ModelMapper();
 
     public Set<ThemesDto> getAllCourseThemes(int course_id) {
-        Course course = courseRepository.findById(Course.class,course_id);
-        if (course!=null) {
+        Course course = courseRepository.findById(Course.class, course_id);
+        if (course != null) {
             Set<Theme> themes = themeRepository.getAllCourseThemes(course_id);
             return themes.stream()
                     .map(theme -> modelMapper.map(theme, ThemesDto.class))
                     .collect(Collectors.toSet());
-        }
-         else throw new RuntimeException("Course not  found");
+        } else throw new RuntimeException("Course not  found");
 
     }
 

@@ -1,7 +1,9 @@
-package com.ytrewq.rosLearning.dto;
+package com.ytrewq.rosLearning.DTOs;
 
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.ThemeMaterial;
+
+
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 
 import java.time.LocalDateTime;
 import java.util.List;

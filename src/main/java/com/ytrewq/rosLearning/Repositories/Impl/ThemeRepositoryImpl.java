@@ -1,10 +1,9 @@
-package com.ytrewq.rosLearning.repositories.Impl;
+package com.ytrewq.rosLearning.Repositories.Impl;
 
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Theme;
-import com.ytrewq.rosLearning.entities.ThemeMaterial;
-import com.ytrewq.rosLearning.repositories.BaseRepository;
-import com.ytrewq.rosLearning.repositories.ThemeRepository;
+
+import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Repositories.BaseRepository;
+import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

@@ -1,9 +1,9 @@
-package com.ytrewq.rosLearning.repositories.Impl;
+package com.ytrewq.rosLearning.Repositories.Impl;
 
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.ThemeMaterial;
-import com.ytrewq.rosLearning.repositories.BaseRepository;
-import com.ytrewq.rosLearning.repositories.ThemeMaterialRepository;
+
+import com.ytrewq.rosLearning.Entities.ThemeMaterial;
+import com.ytrewq.rosLearning.Repositories.BaseRepository;
+import com.ytrewq.rosLearning.Repositories.ThemeMaterialRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class ThemeMaterialRepositoryImpl extends BaseRepository<ThemeMaterial,Integer> implements ThemeMaterialRepository {
+public class ThemeMaterialRepositoryImpl extends BaseRepository<ThemeMaterial, Integer> implements ThemeMaterialRepository {
     @Autowired
     EntityManager entityManager;
 

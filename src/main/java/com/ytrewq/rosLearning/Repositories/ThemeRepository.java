@@ -1,13 +1,12 @@
-package com.ytrewq.rosLearning.repositories;
+package com.ytrewq.rosLearning.Repositories;
 
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Theme;
+
+import com.ytrewq.rosLearning.Entities.Theme;
 
 import java.util.Set;
 
 public interface ThemeRepository {
 
     Set<Theme> getAllCourseThemes(int id);
-
 
 }

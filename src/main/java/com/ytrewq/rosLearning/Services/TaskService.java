@@ -1,17 +1,15 @@
-package com.ytrewq.rosLearning.services;
+package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.dto.CourseDto;
-import com.ytrewq.rosLearning.dto.TaskDto;
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.User;
-import com.ytrewq.rosLearning.repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.repositories.Impl.TaskRepositoryImpl;
+
+import com.ytrewq.rosLearning.DTOs.TaskDto;
+import com.ytrewq.rosLearning.Entities.Course;
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.Impl.TaskRepositoryImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,7 +19,7 @@ public class TaskService {
     TaskRepositoryImpl taskRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
-    ModelMapper modelMapper=new ModelMapper();
+    ModelMapper modelMapper = new ModelMapper();
 
     public Set<TaskDto> getAllCourseTasks(int course_id) {
         Course course = courseRepository.findById(Course.class, course_id);

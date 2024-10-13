@@ -1,16 +1,16 @@
-package com.ytrewq.rosLearning.services;
+package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.dto.CourseDto;
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.User;
-import com.ytrewq.rosLearning.repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.repositories.Impl.UserRepositoryImpl;
+
+import com.ytrewq.rosLearning.DTOs.CourseDto;
+import com.ytrewq.rosLearning.Entities.Course;
+import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.Impl.UserRepositoryImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -20,7 +20,7 @@ public class CourseService {
     CourseRepositoryImpl courseRepository;
     @Autowired
     UserRepositoryImpl userRepository;
-    ModelMapper modelMapper=new ModelMapper();
+    ModelMapper modelMapper = new ModelMapper();
 
     public Set<CourseDto> getAllUserCourses(int id) {
         User user = userRepository.findById(User.class, id);

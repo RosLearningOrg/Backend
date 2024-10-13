@@ -1,4 +1,4 @@
-package com.ytrewq.rosLearning.dto;
+package com.ytrewq.rosLearning.DTOs;
 
 public class ThemesDto {
 }

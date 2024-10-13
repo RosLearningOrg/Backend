@@ -1,6 +1,7 @@
-package com.ytrewq.rosLearning.dto;
+package com.ytrewq.rosLearning.DTOs;
 
-import com.ytrewq.rosLearning.entities.User;
+
+import com.ytrewq.rosLearning.Entities.User;
 
 public class ResultDto {
     private String result;

@@ -1,11 +1,9 @@
-package com.ytrewq.rosLearning.repositories.Impl;
+package com.ytrewq.rosLearning.Repositories.Impl;
 
-import com.ytrewq.rosLearning.entities.Course;
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.User;
-import com.ytrewq.rosLearning.repositories.BaseRepository;
-import com.ytrewq.rosLearning.repositories.CourseRepository;
-import com.ytrewq.rosLearning.repositories.TaskRepository;
+
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Repositories.BaseRepository;
+import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

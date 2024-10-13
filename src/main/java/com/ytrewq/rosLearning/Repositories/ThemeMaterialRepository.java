@@ -1,13 +1,12 @@
-package com.ytrewq.rosLearning.repositories;
+package com.ytrewq.rosLearning.Repositories;
 
-import com.ytrewq.rosLearning.entities.Task;
-import com.ytrewq.rosLearning.entities.Theme;
-import com.ytrewq.rosLearning.entities.ThemeMaterial;
 
-import java.util.List;
+import com.ytrewq.rosLearning.Entities.ThemeMaterial;
+
 import java.util.Set;
 
 public interface ThemeMaterialRepository {
 
     Set<ThemeMaterial> getAllThemeMaterials(int them_id);
+
 }

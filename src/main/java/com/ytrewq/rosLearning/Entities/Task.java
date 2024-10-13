@@ -73,7 +73,7 @@ public class Task extends BaseEntity {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emulation_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "emulation_id", referencedColumnName = "id")
     public Emulation getEmulation() {
         return emulation;
     }

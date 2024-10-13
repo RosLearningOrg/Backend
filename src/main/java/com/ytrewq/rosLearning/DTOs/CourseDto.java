@@ -1,13 +1,14 @@
-package com.ytrewq.rosLearning.dto;
+package com.ytrewq.rosLearning.DTOs;
 
-import com.ytrewq.rosLearning.entities.Theme;
 
-import java.util.Date;
+import com.ytrewq.rosLearning.Entities.Theme;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class CourseDto {
     private String title;
-    private Date dateOfCreation;
+    private LocalDateTime dateOfCreation;
     private String description;
 
     public String getTitle() {
@@ -18,11 +19,11 @@ public class CourseDto {
         this.title = title;
     }
 
-    public Date getDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
