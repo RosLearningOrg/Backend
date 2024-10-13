@@ -21,10 +21,10 @@ public class TaskService {
     CourseRepositoryImpl courseRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public Set<TaskDto> getAllCourseTasks(int course_id) {
+    public Set<TaskDto> getAllCourseTasks(int course_id, int theme_id) {
         Course course = courseRepository.findById(Course.class, course_id);
         if (course != null) {
-            Set<Task> tasks = taskRepository.getAllCourseTasks(course_id);
+            Set<Task> tasks = taskRepository.getAllCourseTasks(course_id, theme_id);
             return tasks.stream()
                     .map(task -> modelMapper.map(task, TaskDto.class))
                     .collect(Collectors.toSet());
