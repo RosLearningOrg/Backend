@@ -4,13 +4,14 @@ import com.ytrewq.rosLearning.entities.Task;
 import com.ytrewq.rosLearning.entities.ThemeMaterial;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class TaskDto {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private Task[] tasks;
-    private ThemeMaterial[] materials;
+    private List<Task> tasks;
+    private List<ThemeMaterial> materials;
 
     public String getTitle() {
         return title;
@@ -36,19 +37,19 @@ public class TaskDto {
         this.description = description;
     }
 
-    public Task[] getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Task[] tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public ThemeMaterial[] getMaterials() {
+    public List<ThemeMaterial> getMaterials() {
         return materials;
     }
 
-    public void setMaterials(ThemeMaterial[] materials) {
+    public void setMaterials(List<ThemeMaterial> materials) {
         this.materials = materials;
     }
 }

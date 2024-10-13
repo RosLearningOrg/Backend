@@ -26,10 +26,10 @@ public class CourseRepositoryImpl extends BaseRepository<Course,Integer> impleme
     }
 
     @Override
-    public Set<Course> getAllUserCourses(User user) {
-        String jpql="Select us.courses FROM User us WHERE us = :user";
+    public Set<Course> getAllUserCourses(int id) {
+        String jpql="Select us.courses FROM User us WHERE us.id = :id";
         return new HashSet<>(entityManager.createQuery(jpql, Course.class)
-                .setParameter("us", user)
+                .setParameter("id", id)
                 .getResultList());
     }
 }

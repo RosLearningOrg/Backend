@@ -23,10 +23,10 @@ public class TaskRepositoryImpl extends BaseRepository<Task, Integer> implements
     }
 
     @Override
-    public Set<Task> getAllCourseTasks(Course course) {
-        String jpql = "Select cs.tasks.themes FROM Course cs WHERE cs = :course";
+    public Set<Task> getAllCourseTasks(int course_id) {
+        String jpql = "SELECT t FROM Course c JOIN c.themes th JOIN th.tasks t WHERE c.id = :course_id";
         return new HashSet<>(entityManager.createQuery(jpql, Task.class)
-                .setParameter("cs", course)
+                .setParameter("course_id", course_id)
                 .getResultList());
     }
 }

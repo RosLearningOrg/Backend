@@ -1,5 +1,6 @@
 package com.ytrewq.rosLearning.controllers;
 
+import com.ytrewq.rosLearning.dto.TaskDto;
 import com.ytrewq.rosLearning.entities.Course;
 import com.ytrewq.rosLearning.entities.Task;
 import com.ytrewq.rosLearning.entities.User;
@@ -15,8 +16,8 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @GetMapping("/getAllCourseTasks/")
-    public Set<Task> getAllCourseTasks(@RequestParam int id) {
+    @GetMapping("/getAllCourseTasks")
+    public Set<TaskDto> getAllCourseTasks(@RequestParam int id) {
         return taskService.getAllCourseTasks(id);
     }
 }

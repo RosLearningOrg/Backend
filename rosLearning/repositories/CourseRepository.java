@@ -9,5 +9,5 @@ import java.util.Set;
 
 public interface CourseRepository {
     Course getCourseByTitle(String title);
-    Set<Course> getAllUserCourses(User user);
+    Set<Course> getAllUserCourses(int user_id);
 }

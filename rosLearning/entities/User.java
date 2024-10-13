@@ -3,6 +3,7 @@ package com.ytrewq.rosLearning.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -14,9 +15,9 @@ public class User extends BaseEntity {
     private Date dateOfRegistration;
     private Boolean admin;
     private Result result;
-    private Course[] courses;
+    private List<Course> courses;
 
-    public User(String email, String name, String role, Date dateOfRegistration, Boolean admin, Result result, Course[] courses) {
+    public User(String email, String name, String role, Date dateOfRegistration, Boolean admin, Result result, List<Course> courses) {
         this.email = email;
         this.name = name;
         this.role = role;
@@ -86,11 +87,11 @@ public class User extends BaseEntity {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    public Course[] getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Course[] courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }

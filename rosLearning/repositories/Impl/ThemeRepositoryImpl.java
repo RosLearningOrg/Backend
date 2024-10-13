@@ -23,10 +23,10 @@ public class ThemeRepositoryImpl extends BaseRepository<Theme, Integer> implemen
 
 
     @Override
-    public Set<Theme> getAllCourseThemes(Course course) {
-        String jpql = "Select cs.themes FROM Course cs WHERE cs = :course";
+    public Set<Theme> getAllCourseThemes(int course_id) {
+        String jpql = "Select cs.themes FROM Course cs WHERE cs.id = :course_id";
         return new HashSet<>(entityManager.createQuery(jpql, Theme.class)
-                .setParameter("cs", course)
+                .setParameter("course_id", course_id)
                 .getResultList());
     }
 

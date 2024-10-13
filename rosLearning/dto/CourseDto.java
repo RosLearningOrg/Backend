@@ -3,6 +3,7 @@ package com.ytrewq.rosLearning.dto;
 import com.ytrewq.rosLearning.entities.Theme;
 
 import java.util.Date;
+import java.util.List;
 
 public class CourseDto {
     private String title;
@@ -33,15 +34,15 @@ public class CourseDto {
         this.description = description;
     }
 
-    public Theme[] getThemes() {
+    public List<Theme> getThemes() {
         return themes;
     }
 
-    public void setThemes(Theme[] themes) {
+    public void setThemes(List<Theme> themes) {
         this.themes = themes;
     }
 
-    private Theme[] themes;
+    private List<Theme> themes;
 
 
 }

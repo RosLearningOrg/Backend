@@ -39,7 +39,7 @@ public abstract class BaseRepository<Entity,T> {
     }
     @Transactional
     public List<Entity> findAll(Class<Entity> entityClass) {
-        String jpqlQuery = "SELECT e FROM %s e".formatted(entityClass);
+        String jpqlQuery = "SELECT e FROM %s e".formatted(entityClass.getName());
         TypedQuery<Entity>  result= entityManager.createQuery(jpqlQuery,entityClass);
         return result.getResultList();
 

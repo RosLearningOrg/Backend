@@ -1,5 +1,6 @@
 package com.ytrewq.rosLearning.controllers;
 
+import com.ytrewq.rosLearning.dto.ThemesDto;
 import com.ytrewq.rosLearning.entities.Course;
 import com.ytrewq.rosLearning.entities.Task;
 import com.ytrewq.rosLearning.entities.Theme;
@@ -23,7 +24,7 @@ public class ThemeController {
     CourseService courseService;
 
     @GetMapping("/getAllCourseThemes")
-    public Set<Theme> getAllCourseThemes(@RequestParam int id) {
+    public Set<ThemesDto> getAllCourseThemes(@RequestParam int id) {
         Course course=courseService.getCourseById(id);
         if (course!= null){
             return themeService.getAllCourseThemes(id);

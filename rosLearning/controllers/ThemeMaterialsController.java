@@ -1,5 +1,6 @@
 package com.ytrewq.rosLearning.controllers;
 
+import com.ytrewq.rosLearning.dto.ThemeMaterialDto;
 import com.ytrewq.rosLearning.entities.*;
 import com.ytrewq.rosLearning.services.TaskService;
 import com.ytrewq.rosLearning.services.ThemeMaterialService;
@@ -19,12 +20,8 @@ public class ThemeMaterialsController {
 
 
     @GetMapping("/getAllThemeMaterials")
-    public Set<ThemeMaterial> getAllThemeMaterials(@RequestParam int task_id) {
-        Theme theme = themeService.getThemeById(task_id);
-        if (theme!=null){
-            return themeMaterialService.getAllThemeMaterials(task_id);
-        }
-        return null;
+    public Set<ThemeMaterialDto> getAllThemeMaterials(@RequestParam int theme_id) {
+            return themeMaterialService.getAllThemeMaterials(theme_id);
 
     }
 }

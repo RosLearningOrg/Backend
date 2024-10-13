@@ -1,14 +1,17 @@
 package com.ytrewq.rosLearning.services;
 
+import com.ytrewq.rosLearning.dto.CourseDto;
+import com.ytrewq.rosLearning.dto.ThemesDto;
 import com.ytrewq.rosLearning.entities.Course;
 import com.ytrewq.rosLearning.entities.Theme;
 import com.ytrewq.rosLearning.repositories.Impl.CourseRepositoryImpl;
 import com.ytrewq.rosLearning.repositories.Impl.ThemeRepositoryImpl;
-import com.ytrewq.rosLearning.repositories.ThemeRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ThemeService {
@@ -16,14 +19,17 @@ public class ThemeService {
     ThemeRepositoryImpl themeRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
-    public Set<Theme> getAllCourseThemes(int course_id) {
-        Course course=courseRepository.findById(Course.class,course_id);
-        if (course != null) {
-            themeRepository.getAllCourseThemes(course);
-        }
-        return null;
+    ModelMapper modelMapper;
+
+    public Set<ThemesDto> getAllCourseThemes(int course_id) {
+        Set<Theme> themes = themeRepository.getAllCourseThemes(course_id);
+        return themes.stream()
+                .map(theme -> modelMapper.map(theme, ThemesDto.class))
+                .collect(Collectors.toSet());
+
     }
-    public Theme getThemeById(int theme_id){
-        return themeRepository.findById(Theme.class,theme_id);
+
+    public Theme getThemeById(int theme_id) {
+        return themeRepository.findById(Theme.class, theme_id);
     }
 }

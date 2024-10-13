@@ -7,7 +7,7 @@ import java.util.Set;
 
 public interface ThemeRepository {
 
-    Set<Theme> getAllCourseThemes(Course course);
+    Set<Theme> getAllCourseThemes(int id);
 
 
 }

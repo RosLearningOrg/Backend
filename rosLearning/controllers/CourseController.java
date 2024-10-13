@@ -19,12 +19,9 @@ public class CourseController {
     UserService userService;
 
     @GetMapping("/getAllUserCourses")
-    public Set<Course> getAllUserCourses(@RequestParam int id) {
-        User user = userService.getUserById(id);
-        if (user != null) {
-            return courseService.getAllUserCourses(user);
-        }
-        return null;
+    public Set<CourseDto> getAllUserCourses(@RequestParam int id) {
+            return courseService.getAllUserCourses(id);
+
     }
 /*    @PostMapping("/createCourse")
     public Course createCourse(CourseDto courseDto){

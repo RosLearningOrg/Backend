@@ -6,6 +6,6 @@ import java.util.Set;
 
 public interface TaskRepository {
 
-    Set<Task> getAllCourseTasks(Course course);
+    Set<Task> getAllCourseTasks(int id);
 
 }
