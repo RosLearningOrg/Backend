@@ -21,9 +21,10 @@ public class ThemeMaterialRepositoryImpl extends BaseRepository<ThemeMaterial, I
     }
 
     @Override
-    public Set<ThemeMaterial> getAllThemeMaterials(int theme_id) {
-        String jpql = "Select tm.materials FROM Theme tm WHERE tm.id = :theme_id";
+    public Set<ThemeMaterial> getAllThemeMaterials(int course_id, int theme_id) {
+        String jpql = "SELECT tm FROM Course c JOIN c.themes th JOIN th.themes tm WHERE c.id = :course_id AND th.id = theme_id";
         return new HashSet<>(entityManager.createQuery(jpql, ThemeMaterial.class)
+                .setParameter("course_id", course_id)
                 .setParameter("theme_id", theme_id)
                 .getResultList());
     }
