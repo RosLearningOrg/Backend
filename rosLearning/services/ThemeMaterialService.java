@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 public class ThemeMaterialService {
     @Autowired
     ThemeMaterialRepositoryImpl themeMaterialRepository;
-    ModelMapper modelMapper;
+    ModelMapper modelMapper=new ModelMapper();
 
     public Set<ThemeMaterialDto> getAllThemeMaterials(int theme_id){
-        ThemeMaterial theme = themeMaterialRepository.getAllThemeMaterials(theme_id);
+        ThemeMaterial theme = themeMaterialRepository.findById(ThemeMaterial.class,theme_id);
         if (theme!=null) {
             Set<ThemeMaterial> themeMaterials = themeMaterialRepository.getAllThemeMaterials(theme_id);
             return themeMaterials.stream()

@@ -23,6 +23,11 @@ public class CourseController {
             return courseService.getAllUserCourses(id);
 
     }
+    @GetMapping("/getAllCourses")
+    public Set<CourseDto> getAllCourses() {
+        return courseService.getAllCourses();
+
+    }
 /*    @PostMapping("/createCourse")
     public Course createCourse(CourseDto courseDto){
     return

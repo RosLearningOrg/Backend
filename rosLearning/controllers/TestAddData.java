@@ -42,10 +42,10 @@ public class TestAddData {
 
         User user = new User("admin@mail.ru", "Admin", "admin", null, true, result, null);
         userRepository.create(user);*/
-            Theme theme = themeRepository.findById(Theme.class, 10);
+/*            Theme theme = themeRepository.findById(Theme.class, 10);
             List<Task> tasks = taskRepository.findAll(Task.class);
             theme.setTasks(tasks);
-            themeRepository.update(theme);
+            themeRepository.update(theme);*/
 /*            List<Course> courseList = courseRepository.findAll(Course.class);
             User user = userRepository.findById(User.class, i);
             user.setCourses(courseList);

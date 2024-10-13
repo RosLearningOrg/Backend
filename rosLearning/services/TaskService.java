@@ -21,18 +21,27 @@ public class TaskService {
     TaskRepositoryImpl taskRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
-    ModelMapper modelMapper;
+    ModelMapper modelMapper=new ModelMapper();
+
     public Set<TaskDto> getAllCourseTasks(int course_id) {
-        Course  course=courseRepository.findById(Course.class,course_id);
+        Course course = courseRepository.findById(Course.class, course_id);
         if (course != null) {
             Set<Task> tasks = taskRepository.getAllCourseTasks(course_id);
             return tasks.stream()
                     .map(task -> modelMapper.map(task, TaskDto.class))
                     .collect(Collectors.toSet());
-        }
-        else throw new RuntimeException("Course not  found");
+        } else throw new RuntimeException("Course not  found");
     }
-    public Task getTaskById(int id){
-        return taskRepository.findById(Task.class,id);
+
+    public Set<TaskDto> getAllTasks() {
+        Set<Task> tasks = taskRepository.findAll(Task.class);
+        return tasks.stream()
+                .map(task -> modelMapper.map(task, TaskDto.class))
+                .collect(Collectors.toSet());
+    }
+
+
+    public Task getTaskById(int id) {
+        return taskRepository.findById(Task.class, id);
     }
 }

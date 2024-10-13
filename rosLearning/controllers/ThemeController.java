@@ -32,4 +32,9 @@ public class ThemeController {
         }
         return null;
     }
+    @GetMapping("/getAllThemes")
+    public Set<ThemesDto> getAllThemes() {
+        return themeService.getAllThemes();
+    }
+
 }

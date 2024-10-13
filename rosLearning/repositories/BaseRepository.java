@@ -7,7 +7,9 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public abstract class BaseRepository<Entity,T> {
@@ -38,10 +40,9 @@ public abstract class BaseRepository<Entity,T> {
         return entityManager.find(entityClass, id);
     }
     @Transactional
-    public List<Entity> findAll(Class<Entity> entityClass) {
+    public Set<Entity> findAll(Class<Entity> entityClass) {
         String jpqlQuery = "SELECT e FROM %s e".formatted(entityClass.getName());
-        TypedQuery<Entity>  result= entityManager.createQuery(jpqlQuery,entityClass);
-        return result.getResultList();
+        return new HashSet<>(entityManager.createQuery(jpqlQuery,entityClass).getResultList());
 
     }
 
