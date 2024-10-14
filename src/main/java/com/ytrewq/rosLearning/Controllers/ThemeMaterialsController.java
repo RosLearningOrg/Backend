@@ -24,7 +24,7 @@ public class ThemeMaterialsController {
 
 
     @GetMapping("/user/getThemeMaterials/<course_id>_<theme_id>")
-    public Set<ThemeMaterialDto> getAllThemeMaterials(@AuthenticationPrincipal User user, @RequestParam int course_id, int theme_id ) {
+    public ThemeMaterialDto[] getAllThemeMaterials(@AuthenticationPrincipal User user, @RequestParam int course_id, int theme_id ) {
         return themeMaterialService.getAllThemeMaterials(course_id,theme_id);
 
     }

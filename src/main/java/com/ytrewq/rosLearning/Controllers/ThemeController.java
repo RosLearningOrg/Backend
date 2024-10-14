@@ -24,8 +24,8 @@ public class ThemeController {
     CourseService courseService;
 
     @GetMapping("/user/getCourseThemes/{course_id}")
-    public Set<ThemesDto> getAllCourseThemes(@AuthenticationPrincipal User user, @RequestParam int course_id) {
-        Course course = courseService.getCourseById(course_id);
+    public ThemesDto[] getAllCourseThemes(@AuthenticationPrincipal User user, @RequestParam int course_id) {
+        Course course = courseService.findById(course_id);
         if (course != null) {
             return themeService.getAllCourseThemes(course_id);
 
