@@ -19,9 +19,8 @@ public class CourseController {
     CourseService courseService;
 
     @GetMapping("/user/getUserCourses")
-    public Set<CourseDto> getUserCourses(@AuthenticationPrincipal User user) {
+    public CourseDto[] getUserCourses(@AuthenticationPrincipal User user) {
         return courseService.getAllUserCourses(user.getId());
-
     }
 
 //    @GetMapping("/getAllCourses")

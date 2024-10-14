@@ -1,55 +1,50 @@
 package com.ytrewq.rosLearning.Services;
 
-
 import com.ytrewq.rosLearning.DTOs.CourseDto;
 import com.ytrewq.rosLearning.Entities.Course;
-import com.ytrewq.rosLearning.Entities.User;
-import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.Repositories.Impl.UserRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.CourseRepository;
+import com.ytrewq.rosLearning.Repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CourseService {
     @Autowired
-    CourseRepositoryImpl courseRepository;
-    @Autowired
-    UserRepositoryImpl userRepository;
+    CourseRepository courseRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public Set<CourseDto> getAllUserCourses(int id) {
-        User user = userRepository.findById(User.class, id);
-        if (user != null) {
-            Set<Course> courses = courseRepository.getAllUserCourses(user.getId());
-            return courses.stream()
-                    .map(course -> modelMapper.map(course, CourseDto.class))
-                    .collect(Collectors.toSet());
-        } else throw new RuntimeException("User not  found");
+    public CourseDto[] getAllUserCourses(int id) {
+        Course[] courses = courseRepository.getAllUserCourses(id);
+        return Arrays.stream(courses).map(course -> modelMapper.map(course, CourseDto.class))
+                .toArray(CourseDto[]::new);
+
     }
 
-    public Set<CourseDto> getAllCourses() {
-        Set<Course> courses = courseRepository.findAll(Course.class);
+    public CourseDto[] getAllCourses() {
+        List<Course> courses = (List<Course>) courseRepository.findAll();
         return courses.stream()
                 .map(course -> modelMapper.map(course, CourseDto.class))
-                .collect(Collectors.toSet());
+                .toArray(CourseDto[]::new);
+
     }
 
-    public void createCourse(CourseDto courseDto) {
+    public void saveCourse(CourseDto courseDto) {
         String description = courseDto.getDescription();
         String title = courseDto.getTitle();
         LocalDateTime date_of_creation = LocalDateTime.now();
         Course course = new Course(title, date_of_creation, description, null);
-        courseRepository.create(course);
+        courseRepository.save(course);
     }
 
 
-    public Course getCourseById(int id) {
-        return courseRepository.findById(Course.class, id);
+    public Optional<Course> getCourseById(int id) {
+        return courseRepository.findById(id);
 
     }
 }

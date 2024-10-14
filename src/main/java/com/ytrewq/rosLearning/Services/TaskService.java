@@ -1,45 +1,46 @@
 package com.ytrewq.rosLearning.Services;
 
-
 import com.ytrewq.rosLearning.DTOs.TaskDto;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Task;
-import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.Repositories.Impl.TaskRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.CourseRepository;
+import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
     @Autowired
-    TaskRepositoryImpl taskRepository;
+    TaskRepository taskRepository;
     @Autowired
-    CourseRepositoryImpl courseRepository;
+    CourseRepository courseRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public Set<TaskDto> getAllCourseTasks(int course_id, int theme_id) {
-        Course course = courseRepository.findById(Course.class, course_id);
-        if (course != null) {
-            Set<Task> tasks = taskRepository.getAllCourseTasks(course_id, theme_id);
-            return tasks.stream()
+    public TaskDto[] getAllCourseTasks(int course_id, int theme_id) {
+        Optional<Course> course = courseRepository.findById(course_id);
+        if (course.isPresent()) {
+            Task[]tasks = taskRepository.getAllCourseTasks(course_id, theme_id);
+            return Arrays.stream(tasks)
                     .map(task -> modelMapper.map(task, TaskDto.class))
-                    .collect(Collectors.toSet());
-        } else throw new RuntimeException("Course not  found");
+                    .toArray(TaskDto[]::new);
+        }
+        return null;
     }
 
-    public Set<TaskDto> getAllTasks() {
-        Set<Task> tasks = taskRepository.findAll(Task.class);
+    public TaskDto[] getAllTasks() {
+        List<Task> tasks = (List<Task>) taskRepository.findAll();
         return tasks.stream()
                 .map(task -> modelMapper.map(task, TaskDto.class))
-                .collect(Collectors.toSet());
+                .toArray(TaskDto[]::new);
     }
 
 
-    public Task getTaskById(int id) {
-        return taskRepository.findById(Task.class, id);
+    public Optional<Task> getTaskById(int id) {
+        return taskRepository.findById(id);
     }
 }

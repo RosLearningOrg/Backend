@@ -20,7 +20,7 @@ public class TaskController {
     TaskService taskService;
 
     @GetMapping("/user/getThemeTasks/{course_id}_{theme_id}")
-    public Set<TaskDto> getThemeTasks(@AuthenticationPrincipal User user, @RequestParam int course_id, int theme_id) {
+    public TaskDto[] getThemeTasks(@AuthenticationPrincipal User user, @RequestParam int course_id, int theme_id) {
         return taskService.getAllCourseTasks(course_id, theme_id);
     }
 
