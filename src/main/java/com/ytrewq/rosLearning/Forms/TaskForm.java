@@ -1,13 +1,13 @@
-package com.ytrewq.rosLearning.Entities;
+package com.ytrewq.rosLearning.Forms;
 
-
-import jakarta.persistence.*;
+import com.ytrewq.rosLearning.Entities.Emulation;
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
-@Table(name = "tasks")
-public class Task extends BaseEntity {
+public class TaskForm {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
@@ -15,7 +15,7 @@ public class Task extends BaseEntity {
     private String courseTitle;
     private Emulation emulation;
 
-    public Task(String title, LocalDateTime dateOfCreation, String description, String lessonTitle, String courseTitle, Emulation emulation) {
+    public TaskForm(String title, LocalDateTime dateOfCreation, String description, String lessonTitle, String courseTitle, Emulation emulation) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
@@ -24,10 +24,6 @@ public class Task extends BaseEntity {
         this.emulation = emulation;
     }
 
-    public Task() {
-    }
-
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -36,7 +32,6 @@ public class Task extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "dateOfCreation")
     public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
@@ -45,7 +40,6 @@ public class Task extends BaseEntity {
         this.dateOfCreation = dateOfCreation;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -54,7 +48,6 @@ public class Task extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "lessonTitle")
     public String getLessonTitle() {
         return lessonTitle;
     }
@@ -63,7 +56,6 @@ public class Task extends BaseEntity {
         this.lessonTitle = lessonTitle;
     }
 
-    @Column(name = "courseTitle")
     public String getCourseTitle() {
         return courseTitle;
     }
@@ -72,8 +64,6 @@ public class Task extends BaseEntity {
         this.courseTitle = courseTitle;
     }
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "emulation_id", referencedColumnName = "id")
     public Emulation getEmulation() {
         return emulation;
     }
@@ -81,4 +71,19 @@ public class Task extends BaseEntity {
     public void setEmulation(Emulation emulation) {
         this.emulation = emulation;
     }
+//    public List<Task> getTasks() {
+//        return tasks;
+//    }
+//
+//    public void setTasks(List<Task> tasks) {
+//        this.tasks = tasks;
+//    }
+//
+//    public List<ThemeMaterial> getMaterials() {
+//        return materials;
+//    }
+//
+//    public void setMaterials(List<ThemeMaterial> materials) {
+//        this.materials = materials;
+//    }
 }

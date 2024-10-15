@@ -6,6 +6,7 @@ import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Task;
 import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
 import com.ytrewq.rosLearning.Repositories.Impl.TaskRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
+    private final TaskRepository repo;
     @Autowired
     TaskRepositoryImpl taskRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
     ModelMapper modelMapper = new ModelMapper();
+
+    public TaskService(TaskRepository repo) {
+        this.repo = repo;
+    }
 
     public Set<TaskDto> getAllCourseTasks(int course_id) {
         Course course = courseRepository.findById(Course.class, course_id);
@@ -41,5 +47,8 @@ public class TaskService {
 
     public Task getTaskById(int id) {
         return taskRepository.findById(Task.class, id);
+    }
+    public void save(Task task) {
+        repo.save(task);
     }
 }

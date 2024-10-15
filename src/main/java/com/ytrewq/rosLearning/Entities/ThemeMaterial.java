@@ -20,7 +20,7 @@ public class ThemeMaterial extends BaseEntity {
         this.materialText = materialText;
     }
 
-    protected ThemeMaterial() {
+    public ThemeMaterial() {
     }
 
     @Column(name = "title")

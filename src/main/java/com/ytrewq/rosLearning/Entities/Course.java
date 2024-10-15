@@ -19,7 +19,7 @@ public class Course extends BaseEntity {
         this.themes = themes;
     }
 
-    protected Course() {
+    public Course() {
     }
 
     @Column(name = "title")

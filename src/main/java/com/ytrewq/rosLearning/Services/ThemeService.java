@@ -4,8 +4,10 @@ package com.ytrewq.rosLearning.Services;
 import com.ytrewq.rosLearning.DTOs.ThemesDto;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
 import com.ytrewq.rosLearning.Repositories.Impl.ThemeRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +17,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class ThemeService {
+    private final ThemeRepository repo;
     @Autowired
     ThemeRepositoryImpl themeRepository;
     @Autowired
     CourseRepositoryImpl courseRepository;
     ModelMapper modelMapper = new ModelMapper();
+
+    public ThemeService(ThemeRepository repo) {
+        this.repo = repo;
+    }
 
     public Set<ThemesDto> getAllCourseThemes(int course_id) {
         Course course = courseRepository.findById(Course.class, course_id);
@@ -41,5 +48,8 @@ public class ThemeService {
         return themes.stream()
                 .map(theme -> modelMapper.map(theme, ThemesDto.class))
                 .collect(Collectors.toSet());
+    }
+    public void save(Theme theme) {
+        repo.save(theme);
     }
 }

@@ -4,6 +4,7 @@ package com.ytrewq.rosLearning.Services;
 import com.ytrewq.rosLearning.DTOs.CourseDto;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
 import com.ytrewq.rosLearning.Repositories.Impl.UserRepositoryImpl;
 import org.modelmapper.ModelMapper;
@@ -16,11 +17,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
+    private final CourseRepository repo;
     @Autowired
     CourseRepositoryImpl courseRepository;
     @Autowired
     UserRepositoryImpl userRepository;
     ModelMapper modelMapper = new ModelMapper();
+
+    public CourseService(CourseRepository repo) {
+        this.repo = repo;
+    }
 
     public Set<CourseDto> getAllUserCourses(int id) {
         User user = userRepository.findById(User.class, id);
@@ -51,5 +57,8 @@ public class CourseService {
     public Course getCourseById(int id) {
         return courseRepository.findById(Course.class, id);
 
+    }
+    public void save(Course course) {
+        repo.save(course);
     }
 }

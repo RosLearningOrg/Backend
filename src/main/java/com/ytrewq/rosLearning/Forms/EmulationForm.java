@@ -1,11 +1,10 @@
-package com.ytrewq.rosLearning.DTOs;
-
+package com.ytrewq.rosLearning.Forms;
 
 import com.ytrewq.rosLearning.Entities.Task;
 
 import java.time.LocalDateTime;
 
-public class EmulationDto {
+public class EmulationForm {
     private String private_title;
     private LocalDateTime dateOfCreation;
     private Integer timerTime;
