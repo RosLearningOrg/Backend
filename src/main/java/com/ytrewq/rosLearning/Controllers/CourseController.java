@@ -6,6 +6,7 @@ import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Forms.CourseForm;
 import com.ytrewq.rosLearning.Services.CourseService;
 import com.ytrewq.rosLearning.Services.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,43 +16,40 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api")
 public class CourseController {
     @Autowired
-    private final CourseService customCourseService;
-    @Autowired
-    private final UserService userService;
+    CourseService courseService;
 
-    public CourseController(CourseService customCourseService, UserService userService) {
-        this.customCourseService = customCourseService;
-        this.userService = userService;
+    @GetMapping("/user/getUserCourses")
+    public CourseDto[] getUserCourses(@AuthenticationPrincipal User user) {
+        return courseService.getAllUserCourses(user.getId());
     }
 
-    @GetMapping("/getAllUserCourses")
-    public Set<CourseDto> getAllUserCourses(@RequestParam int id) {
-        return customCourseService.getAllUserCourses(id);
+    @GetMapping("/admin/getAllCourses")
+    public CourseDto[] getAllCourses() {
+        return courseService.getAllCourses();
 
     }
 
-    @GetMapping("/getAllCourses")
-    public Set<CourseDto> getAllCourses() {
-        return customCourseService.getAllCourses();
 
-    }
-/*    @PostMapping("/createCourse")
-    public Course createCourse(CourseDto courseDto){
-    return
-   }*/
-    @PostMapping("/api/admin/createCourse")
+    @PostMapping("/admin/createCourse")
     public Map<String, String> createCourse(@RequestBody CourseForm form){
         Course course = new Course();
         course.setTitle(form.getTitle());
         course.setDateOfCreation(LocalDateTime.now());
         course.setDescription(form.getDescription());
-        customCourseService.save(course);
+        courseService.save(course);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
     }
+
+    @GetMapping("/admin/getCourse/{course_id}")
+    public CourseDto getCourse(@RequestParam int course_id) {
+        return courseService.getCourseById(course_id);
+
+    }
+
 }

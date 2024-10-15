@@ -5,51 +5,45 @@ import com.ytrewq.rosLearning.DTOs.ThemesDto;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
-import com.ytrewq.rosLearning.Repositories.Impl.CourseRepositoryImpl;
-import com.ytrewq.rosLearning.Repositories.Impl.ThemeRepositoryImpl;
 import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ThemeService {
-    private final ThemeRepository repo;
     @Autowired
-    ThemeRepositoryImpl themeRepository;
+    ThemeRepository themeRepository;
     @Autowired
-    CourseRepositoryImpl courseRepository;
+    CourseRepository courseRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public ThemeService(ThemeRepository repo) {
-        this.repo = repo;
-    }
-
-    public Set<ThemesDto> getAllCourseThemes(int course_id) {
-        Course course = courseRepository.findById(Course.class, course_id);
-        if (course != null) {
-            Set<Theme> themes = themeRepository.getAllCourseThemes(course_id);
-            return themes.stream()
-                    .map(theme -> modelMapper.map(theme, ThemesDto.class))
-                    .collect(Collectors.toSet());
+    public ThemesDto[] getAllCourseThemes(int course_id) {
+        Optional<Course> course = courseRepository.findById(course_id);
+        if (course.isPresent()) {
+            Theme[] themes = themeRepository.getAllCourseThemes(course_id);
+            return Arrays.stream(themes).map(theme -> modelMapper.map(theme, ThemesDto.class))
+                    .toArray(ThemesDto[]::new);
         } else throw new RuntimeException("Course not  found");
 
     }
 
-    public Theme getThemeById(int theme_id) {
-        return themeRepository.findById(Theme.class, theme_id);
+    public ThemesDto getThemeById(int theme_id) {
+
+        return modelMapper.map(themeRepository.findById(theme_id), ThemesDto.class);
     }
 
-    public Set<ThemesDto> getAllThemes() {
-        Set<Theme> themes = themeRepository.findAll(Theme.class);
+    public ThemesDto[] getAllThemes() {
+        List<Theme> themes = (List<Theme>) themeRepository.findAll();
         return themes.stream()
                 .map(theme -> modelMapper.map(theme, ThemesDto.class))
-                .collect(Collectors.toSet());
+                .toArray(ThemesDto[]::new);
     }
     public void save(Theme theme) {
-        repo.save(theme);
+        themeRepository.save(theme);
     }
 }
