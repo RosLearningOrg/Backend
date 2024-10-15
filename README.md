@@ -274,3 +274,676 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   "result": "all_ok"
 }
 ```
+
+### `/api/user/getUserCourses`
+
+#### Описание
+
+Тестовый запрос доступ чтобы получить курсы залогиненного пользователя
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+- **user**. Залогиненный пользователнь
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Курс 1",
+    "description": "Описание курса 1",
+    "dateOfCreation": "22-09-2024",
+    "themes": [
+      {
+        "id": 1,
+        "title": "Тема 1",
+        "description": "Описание темы 1",
+        "dateOfCreation": "22-09-2024",
+        "tasks": [
+          {
+            "id": 1,
+            "title": "Задача 1",
+            "description": "Описание задачи 1",
+            "dateOfCreation": "22-10-2024",
+            "lessonTitle": "Тема 1",
+            "courseTitle": "Курс 1",
+            "emulation": {
+              "id": 1,
+              "private_title": "Эмуляция 1",
+              "dateOfCreation": "22-09-2024",
+              "timerTime": "",
+              "timerDescription": "",
+              "screenImageURL": "",
+              "blockSchemeJSON": "",
+              "blockCodeJS": "",
+              "byteArrayInterface": ""
+            }
+          }
+        ],
+        "materials": [
+          {
+            "id": 1,
+            "title": "Название материала 1",
+            "materialType": "Тип материала 1",
+            "materialURL": "Ссылка на материал 1",
+            "materialText": "Описание материала 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Курс 2",
+    "description": "Описание курса 2",
+    "dateOfCreation": "22-09-2024",
+    "themes": []
+  }
+]
+
+```
+
+### `api/user/getThemeTasks/<course_id>_<theme_id>`
+
+#### Описание
+
+Тестовый запрос доступ чтобы получить получить задачи темы по id
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+- **user**. Залогиненый пользователь.
+- **course_id**. id курса.
+- **theme_id**. id темы.
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Задача 1",
+    "description": "Описание задачи 1",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 1,
+      "private_title": "Эмуляция 1",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  },
+  {
+    "id": 2,
+    "title": "Задача 2",
+    "description": "Описание задачи 2",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 2,
+      "private_title": "Эмуляция 2",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  }
+]
+
+```
+
+### ` api/user/getCourseThemes/<course_id>`
+
+#### Описание
+
+Тестовый запрос, чтобы получить темы по id курса
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+- **user**. Залогиненный пользователь.
+- **course_id**. id курса.
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Тема 1",
+    "description": "Описание темы 1",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Задача 1",
+        "description": "Описание задачи 1",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 1",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 1,
+          "private_title": "Эмуляция 1",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 1,
+        "title": "Название материала 1",
+        "materialType": "Тип материала 1",
+        "materialURL": "Ссылка на материал 1",
+        "materialText": "Описание материала 1"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Тема 2",
+    "description": "Описание темы 2",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 3,
+        "title": "Задача 2",
+        "description": "Описание задачи 2",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 2",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 2,
+          "private_title": "Эмуляция 2",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 3,
+        "title": "Название материала 3",
+        "materialType": "Тип материала 3",
+        "materialURL": "Ссылка на материал 3",
+        "materialText": "Описание материала 3"
+      }
+    ]
+  }
+]
+
+
+```
+
+### ` api/user/getThemeMaterials/<course_id>_<theme_id> -`
+
+#### Описание
+
+Тестовый запрос, чтобы получить материалы темы по id
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+- **user**. Залогиненный пользователь.
+- **course_id**. id курса.
+- **theme_id**. id темы.
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Название материала 1",
+    "materialType": "Тип материала 1",
+    "materialURL": "Ссылка на материал 1",
+    "materialText": "Описание материала 1"
+  },
+  {
+    "id": 3,
+    "title": "Название материала 2",
+    "materialType": "Тип материала 2",
+    "materialURL": "Ссылка на материал 2",
+    "materialText": "Описание материала 2"
+  }
+]
+
+
+
+
+```
+
+### ` api/admin/getAllCourses  -`
+
+#### Описание
+
+Тестовый запрос, чтобы получить все возможные курсы
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Курс 1",
+    "description": "Описание курса 1",
+    "dateOfCreation": "22-09-2024",
+    "themes": [
+      {
+        "id": 1,
+        "title": "Тема 1",
+        "description": "Описание темы 1",
+        "dateOfCreation": "22-09-2024",
+        "tasks": [
+          {
+            "id": 1,
+            "title": "Задача 1",
+            "description": "Описание задачи 1",
+            "dateOfCreation": "22-10-2024",
+            "lessonTitle": "Тема 1",
+            "courseTitle": "Курс 1",
+            "emulation": {
+              "id": 1,
+              "private_title": "Эмуляция 1",
+              "dateOfCreation": "22-09-2024",
+              "timerTime": "",
+              "timerDescription": "",
+              "screenImageURL": "",
+              "blockSchemeJSON": "",
+              "blockCodeJS": "",
+              "byteArrayInterface": ""
+            }
+          }
+        ],
+        "materials": [
+          {
+            "id": 1,
+            "title": "Название материала 1",
+            "materialType": "Тип материала 1",
+            "materialURL": "Ссылка на материал 1",
+            "materialText": "Описание материала 1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Курс 2",
+    "description": "Описание курса 2",
+    "dateOfCreation": "22-09-2024",
+    "themes": []
+  },
+  {
+    "id": 3,
+    "title": "Курс 3",
+    "description": "Описание курса 3",
+    "dateOfCreation": "22-09-2024",
+    "themes": []
+  }
+]
+
+
+
+
+```
+
+### ` api/admin/getAllThemes  -`
+
+#### Описание
+
+Тестовый запросб, чтобы получить все возможные темы
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Тема 1",
+    "description": "Описание темы 1",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Задача 1",
+        "description": "Описание задачи 1",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 1",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 1,
+          "private_title": "Эмуляция 1",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 1,
+        "title": "Название материала 1",
+        "materialType": "Тип материала 1",
+        "materialURL": "Ссылка на материал 1",
+        "materialText": "Описание материала 1"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Тема 2",
+    "description": "Описание темы 2",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 3,
+        "title": "Задача 2",
+        "description": "Описание задачи 2",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 2",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 2,
+          "private_title": "Эмуляция 2",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 3,
+        "title": "Название материала 3",
+        "materialType": "Тип материала 3",
+        "materialURL": "Ссылка на материал 3",
+        "materialText": "Описание материала 3"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Тема 3",
+    "description": "Описание темы 3",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [],
+    "materials": []
+  }
+]
+
+
+
+
+```
+### `  api/admin/getAllTasks  -`
+
+#### Описание
+
+Тестовый запрос, чтобы получить все возможные задачи
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Задача 1",
+    "description": "Описание задачи 1",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 1,
+      "private_title": "Эмуляция 1",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  },
+  {
+    "id": 2,
+    "title": "Задача 2",
+    "description": "Описание задачи 2",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 2,
+      "private_title": "Эмуляция 2",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  },
+  {
+    "id": 3,
+    "title": "Задача 3",
+    "description": "Описание задачи 3",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 3,
+      "private_title": "Эмуляция 3",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  }
+
+]
+
+
+
+
+```
+
+### `  api/admin/getCourse/<course_id>  -`
+
+#### Описание
+
+Тестовый запрос, чтобы получить курс по id
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+- **course_id**. id курса.
+#### Пример ответа
+
+```json
+
+
+{
+  "id": 1,
+  "title": "Курс 1",
+  "description": "Описание курса 1",
+  "dateOfCreation": "22-09-2024",
+  "themes": [
+    {
+      "id": 1,
+      "title": "Тема 1",
+      "description": "Описание темы 1",
+      "dateOfCreation": "22-09-2024",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Задача 1",
+          "description": "Описание задачи 1",
+          "dateOfCreation": "22-10-2024",
+          "lessonTitle": "Тема 1",
+          "courseTitle": "Курс 1",
+          "emulation": {
+            "id": 1,
+            "private_title": "Эмуляция 1",
+            "dateOfCreation": "22-09-2024",
+            "timerTime": "",
+            "timerDescription": "",
+            "screenImageURL": "",
+            "blockSchemeJSON": "",
+            "blockCodeJS": "",
+            "byteArrayInterface": ""
+          }
+        }
+      ],
+      "materials": [
+        {
+          "id": 1,
+          "title": "Название материала 1",
+          "materialType": "Тип материала 1",
+          "materialURL": "Ссылка на материал 1",
+          "materialText": "Описание материала 1"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+```
+### `   api/admin/getTheme/<theme_id>  -`
+
+#### Описание
+
+Тестовый запрос, чтобы получить тему по id
+
+#### Метод
+
+- **GET**: Общий тестовый запрос
+
+### Параметры
+- **theme_id**. id темы.
+#### Пример ответа
+
+```json
+
+
+{
+  "id": 1,
+  "title": "Тема 1",
+  "description": "Описание темы 1",
+  "dateOfCreation": "22-09-2024",
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Задача 1",
+      "description": "Описание задачи 1",
+      "dateOfCreation": "22-10-2024",
+      "lessonTitle": "Тема 1",
+      "courseTitle": "Курс 1",
+      "emulation": {
+        "id": 1,
+        "private_title": "Эмуляция 1",
+        "dateOfCreation": "22-09-2024",
+        "timerTime": "",
+        "timerDescription": "",
+        "screenImageURL": "",
+        "blockSchemeJSON": "",
+        "blockCodeJS": "",
+        "byteArrayInterface": ""
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": 1,
+      "title": "Название материала 1",
+      "materialType": "Тип материала 1",
+      "materialURL": "Ссылка на материал 1",
+      "materialText": "Описание материала 1"
+    }
+  ]
+}
+
+
+
+
+
+```
