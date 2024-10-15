@@ -1,6 +1,6 @@
-package com.ytrewq.rosLearning.DTOs;
+package com.ytrewq.rosLearning.Forms;
 
-public class ThemeMaterialDto {
+public class ThemeMaterialForm {
     private String title;
     private String materialType;
     private String materialURL;

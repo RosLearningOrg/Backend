@@ -32,7 +32,7 @@ public class Emulation extends BaseEntity {
         this.task = task;
     }
 
-    protected Emulation() {
+    public Emulation() {
     }
 
     @Column(name = "private_name", unique = true)

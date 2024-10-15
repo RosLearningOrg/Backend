@@ -4,6 +4,7 @@ package com.ytrewq.rosLearning.Services;
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 import com.ytrewq.rosLearning.Repositories.Impl.ThemeMaterialRepositoryImpl;
+import com.ytrewq.rosLearning.Repositories.ThemeMaterialRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class ThemeMaterialService {
+    private final ThemeMaterialRepository repo;
     @Autowired
     ThemeMaterialRepositoryImpl themeMaterialRepository;
     ModelMapper modelMapper = new ModelMapper();
+
+    public ThemeMaterialService(ThemeMaterialRepository repo) {
+        this.repo = repo;
+    }
 
     public Set<ThemeMaterialDto> getAllThemeMaterials(int theme_id) {
         ThemeMaterial theme = themeMaterialRepository.findById(ThemeMaterial.class, theme_id);
@@ -26,6 +32,8 @@ public class ThemeMaterialService {
                     .collect(Collectors.toSet());
         } else throw new RuntimeException("ThemeMaterial not  found");
     }
-
+    public void save(ThemeMaterial themeMaterial) {
+        repo.save(themeMaterial);
+    }
 
 }

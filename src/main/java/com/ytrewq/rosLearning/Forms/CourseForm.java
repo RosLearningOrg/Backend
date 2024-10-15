@@ -1,15 +1,20 @@
-package com.ytrewq.rosLearning.DTOs;
-
+package com.ytrewq.rosLearning.Forms;
 
 import com.ytrewq.rosLearning.Entities.Theme;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class CourseDto {
+public class CourseForm {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
+
+    public CourseForm(String title, LocalDateTime dateOfCreation, String description) {
+        this.title = title;
+        this.dateOfCreation = dateOfCreation;
+        this.description = description;
+    }
 
     public String getTitle() {
         return title;
@@ -34,16 +39,4 @@ public class CourseDto {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public List<Theme> getThemes() {
-        return themes;
-    }
-
-    public void setThemes(List<Theme> themes) {
-        this.themes = themes;
-    }
-
-    private List<Theme> themes;
-
-
 }

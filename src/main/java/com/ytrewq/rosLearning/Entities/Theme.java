@@ -21,7 +21,7 @@ public class Theme extends BaseEntity {
         this.materials = materials;
     }
 
-    protected Theme() {
+    public Theme() {
     }
 
     @Column(name = "title")
