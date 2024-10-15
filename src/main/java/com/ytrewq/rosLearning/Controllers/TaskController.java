@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
-
 @RestController
 @RequestMapping("/api")
 public class TaskController {
@@ -24,9 +22,9 @@ public class TaskController {
         return taskService.getAllCourseTasks(course_id, theme_id);
     }
 
-//    @GetMapping("/admin/getAllTasks")
-//    public Set<TaskDto> getAllTasks(@AuthenticationPrincipal User admin) {
-//        return taskService.getAllTasks();
-//    }
+    @GetMapping("/admin/getAllTasks")
+    public TaskDto[] getAllTasks() {
+        return taskService.getAllTasks();
+    }
 }
 

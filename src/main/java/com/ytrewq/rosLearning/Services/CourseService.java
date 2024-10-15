@@ -3,7 +3,6 @@ package com.ytrewq.rosLearning.Services;
 import com.ytrewq.rosLearning.DTOs.CourseDto;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
-import com.ytrewq.rosLearning.Repositories.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseService {
@@ -43,8 +41,11 @@ public class CourseService {
     }
 
 
-    public Optional<Course> getCourseById(int id) {
-        return courseRepository.findById(id);
+    public CourseDto getCourseById(int id) {
+        if (courseRepository.findById(id).isPresent()){
+            return modelMapper.map(courseRepository.findById(id),CourseDto.class);
+        }
+
 
     }
 }

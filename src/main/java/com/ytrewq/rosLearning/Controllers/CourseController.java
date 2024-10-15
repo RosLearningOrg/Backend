@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -23,10 +22,16 @@ public class CourseController {
         return courseService.getAllUserCourses(user.getId());
     }
 
-//    @GetMapping("/getAllCourses")
-//    public Set<CourseDto> getAllCourses() {
-//        return courseService.getAllCourses();
-//
-//    }
+   @GetMapping("/admin/getAllCourses")
+    public CourseDto[] getAllCourses() {
+        return courseService.getAllCourses();
+
+    }
+    @GetMapping("/admin/getCourse/{course_id}")
+    public CourseDto getCourse(@RequestParam int course_id) {
+        return courseService.getCourseById(course_id);
+
+    }
+
 
 }

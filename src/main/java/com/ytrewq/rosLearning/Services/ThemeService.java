@@ -33,8 +33,9 @@ public class ThemeService {
 
     }
 
-    public Optional<Theme> getThemeById(int theme_id) {
-        return themeRepository.findById(theme_id);
+    public ThemesDto getThemeById(int theme_id) {
+
+        return modelMapper.map(themeRepository.findById(theme_id), ThemesDto.class);
     }
 
     public ThemesDto[] getAllThemes() {
