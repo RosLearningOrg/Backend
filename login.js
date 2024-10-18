@@ -22,29 +22,30 @@ const handleInput = () => {
 const getCSRF = async () => {
   const init = {
     method: "GET",
+            credentials: "include",
+
   };
 
-  fetch(API_URL + "/csrf", init).then(r => console.log(r.headers));
-//  const resp = await fetch(API_URL + "/csrf", init);
-//  console.log(await resp);
-//  document.cookie = await resp.headers.getSetCookie();
-//  const data = await resp.json();
-//    return data.token
+  const resp = await fetch(API_URL + "/csrf", init);
+  const data = await resp.json();
+    return data.token
 };
 
 const reqLogin = async (csrf) => {
+    const body = {
+                      username: loginInput.value,
+                      password: passwdInput.value
+                  };
     const init = {
         method: "POST",
-        credentials: "same-origin",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-TOKEN": csrf
         },
-        body: {
-            username: loginInput.value,
-            password: passwdInput.value
-        }
+        body: JSON.stringify(body)
     }
+
 
   const resp = await fetch(API_URL + "/login", init);
   const data = await resp.json();
@@ -55,8 +56,8 @@ const login = async (e) => {
     e.preventDefault();
 	const csrf = await getCSRF();
     console.log(csrf);
-//    const data = await reqLogin(csrf);
-//    console.log(data);
+    const data = await reqLogin(csrf);
+    console.log(data);
 };
 
 loginInput.value = "";
