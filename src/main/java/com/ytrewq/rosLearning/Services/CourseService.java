@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -28,7 +29,11 @@ public class CourseService {
     public List<CourseDto> getAllCourses() {
         Set<Course> courses = courseRepository.findAll();
         return courses.stream().map(course -> modelMapper.map(course, CourseDto.class)).toList();
+    }
 
+    public Course getCourseById(int courseId) {
+        Optional<Course> course = courseRepository.findById(courseId);
+        return course.orElse(null);
     }
 
 //    public Course getUserCourseById(User currentUser, int courseId) {

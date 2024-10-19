@@ -11,7 +11,7 @@ public class Theme extends BaseEntity {
     private LocalDateTime dateOfCreation;
     private String description;
     private Task[] tasks;
-    private String materialsIdsStr;
+    private String materialsIdsStr = "";
 
     public Theme(String title, LocalDateTime dateOfCreation, String description, Task[] tasks, String materialsIdsStr) {
         this.title = title;

@@ -55,6 +55,9 @@ public class UserService {
 
     public void addUserCourse(User currentUser, Course course) {
         String courseId = String.valueOf(course.getId());
+        if (currentUser.getCoursesIdsStr() == null) {
+            currentUser.setCoursesIdsStr("");
+        }
         if (!currentUser.getCoursesIdsStr().isEmpty()) {
             currentUser.setCoursesIdsStr(currentUser.getCoursesIdsStr() + "/;/" + courseId);
         } else {
