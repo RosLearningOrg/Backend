@@ -20,16 +20,16 @@ public class User extends BaseEntity implements UserDetails {
     private LocalDateTime dateOfRegistration;
     private Boolean admin;
     private Result result;
-    private Course[] courses;
+    private String coursesIdsStr = "";
 
-    public User(String email, String name, String role, LocalDateTime dateOfRegistration, Boolean admin, Result result, Course[] courses, String username, String password) {
+    public User(String email, String name, String role, LocalDateTime dateOfRegistration, Boolean admin, Result result, String coursesIdsStr, String username, String password) {
         this.email = email;
         this.name = name;
         this.role = role;
         this.dateOfRegistration = dateOfRegistration;
         this.admin = admin;
         this.result = result;
-        this.courses = courses;
+        this.coursesIdsStr = coursesIdsStr;
         this.username = username;
         this.password = password;
     }
@@ -108,15 +108,15 @@ public class User extends BaseEntity implements UserDetails {
         this.result = result;
     }
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    public Course[] getCourses() {
-        return courses;
+    @Column(name = "courses_ids", length = 511)
+    public String getCoursesIdsStr() {
+        return coursesIdsStr;
     }
 
-    public void setCourses(Course[] courses) {
-        this.courses = courses;
+    public void setCoursesIdsStr(String coursesIdsStr) {
+        this.coursesIdsStr = coursesIdsStr;
     }
+
 
     @Transient
     @Override

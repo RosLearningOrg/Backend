@@ -1,6 +1,8 @@
 package com.ytrewq.rosLearning.Entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
@@ -10,15 +12,15 @@ public class Theme extends BaseEntity {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private Task[] tasks;
-    private ThemeMaterial[] materials;
+    private String tasksIdsStr = "";
+    private String materialsIdsStr = "";
 
-    public Theme(String title, LocalDateTime dateOfCreation, String description, Task[] tasks, ThemeMaterial[] materials) {
+    public Theme(String title, LocalDateTime dateOfCreation, String description, String tasksIdsStr, String materialsIdsStr) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
-        this.tasks = tasks;
-        this.materials = materials;
+        this.tasksIdsStr = tasksIdsStr;
+        this.materialsIdsStr = materialsIdsStr;
     }
 
     public Theme() {
@@ -51,23 +53,21 @@ public class Theme extends BaseEntity {
         this.description = description;
     }
 
-    @OneToMany
-    @JoinColumn(name = "theme_id")
-    public Task[] getTasks() {
-        return tasks;
+    @Column(name = "tasks_ids", length = 511)
+    public String getTasksIdsStr() {
+        return tasksIdsStr;
     }
 
-    public void setTasks(Task[] tasks) {
-        this.tasks = tasks;
+    public void setTasksIdsStr(String tasksIdsStr) {
+        this.tasksIdsStr = tasksIdsStr;
     }
 
-    @OneToMany
-    @JoinColumn(name = "theme_id")
-    public ThemeMaterial[] getMaterials() {
-        return materials;
+    @Column(name = "materials_ids", length = 511)
+    public String getMaterialsIdsStr() {
+        return materialsIdsStr;
     }
 
-    public void setMaterials(ThemeMaterial[] materials) {
-        this.materials = materials;
+    public void setMaterialsIdsStr(String materialsIdsStr) {
+        this.materialsIdsStr = materialsIdsStr;
     }
 }
