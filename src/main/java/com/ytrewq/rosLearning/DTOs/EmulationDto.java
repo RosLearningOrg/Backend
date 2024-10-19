@@ -1,8 +1,6 @@
 package com.ytrewq.rosLearning.DTOs;
 
 
-import com.ytrewq.rosLearning.Entities.Task;
-
 import java.time.LocalDateTime;
 
 public class EmulationDto {
@@ -14,7 +12,6 @@ public class EmulationDto {
     private String blockSchemeJSON;
     private String blockCodeJS;
     private String byteArrayInterface;
-    private Task task;
 
     public String getPrivate_title() {
         return private_title;
@@ -78,13 +75,5 @@ public class EmulationDto {
 
     public void setByteArrayInterface(String byteArrayInterface) {
         this.byteArrayInterface = byteArrayInterface;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
     }
 }
