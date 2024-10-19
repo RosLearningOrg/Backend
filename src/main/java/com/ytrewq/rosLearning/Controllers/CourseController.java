@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -18,20 +19,21 @@ public class CourseController {
     CourseService courseService;
 
     @GetMapping("/user/getUserCourses")
-    public CourseDto[] getUserCourses(@AuthenticationPrincipal User user) {
-        return courseService.getAllUserCourses(user.getId());
+    public List<CourseDto> getUserCourses(@AuthenticationPrincipal User user) {
+        return courseService.getUserCourses(user);
     }
 
-   @GetMapping("/admin/getAllCourses")
-    public CourseDto[] getAllCourses() {
+    @GetMapping("/admin/getAllCourses")
+    public List<CourseDto> getAllCourses() {
         return courseService.getAllCourses();
 
     }
-    @GetMapping("/admin/getCourse/{course_id}")
-    public CourseDto getCourse(@RequestParam int course_id) {
-        return courseService.getCourseById(course_id);
 
-    }
+//    @GetMapping("/admin/getCourse/{course_id}")
+//    public CourseDto getCourse(@RequestParam int course_id) {
+//        return courseService.getCourseById(course_id);
+//
+//    }
 
 
 }

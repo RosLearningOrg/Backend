@@ -1,8 +1,10 @@
 package com.ytrewq.rosLearning.Repositories;
 
 import com.ytrewq.rosLearning.Entities.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+import java.util.Optional;
 
+@Repository
+public interface UserRepository extends BaseRepo<User> {
 }

@@ -1,13 +1,12 @@
 package com.ytrewq.rosLearning.Repositories;
 
 import com.ytrewq.rosLearning.Entities.Course;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-public interface CourseRepository extends CrudRepository<Course, Integer> {
+@Repository
+public interface CourseRepository extends BaseRepo<Course> {
     Course getCourseByTitle(String title);
 
-    @Query("Select us.courses FROM User us WHERE us.id = :user_id")
-    Course[] getAllUserCourses(@Param("user_id") int user_id);
+//    @Query("Select user.courses FROM User user WHERE user = :user AND ")
+//    Course[] getAllUserCourses(@Param("user_id") int user_id);
 }
