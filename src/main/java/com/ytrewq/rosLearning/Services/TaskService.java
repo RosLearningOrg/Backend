@@ -21,17 +21,14 @@ public class TaskService {
     @Autowired
     private final ThemeRepository themeRepository;
     @Autowired
-    private final UserService userService;
-    @Autowired
     private final ThemeService themeService;
 
     ModelMapper modelMapper = new ModelMapper();
 
 
-    public TaskService(TaskRepository taskRepository, ThemeRepository themeRepository, UserService userService, ThemeService themeService) {
+    public TaskService(TaskRepository taskRepository, ThemeRepository themeRepository, ThemeService themeService) {
         this.taskRepository = taskRepository;
         this.themeRepository = themeRepository;
-        this.userService = userService;
         this.themeService = themeService;
     }
 

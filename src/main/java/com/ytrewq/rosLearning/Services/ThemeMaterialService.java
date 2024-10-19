@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @Service
 public class ThemeMaterialService {
-    private final ThemeMaterialRepository repo;
     @Autowired
     private final ThemeRepository themeRepository;
     @Autowired
