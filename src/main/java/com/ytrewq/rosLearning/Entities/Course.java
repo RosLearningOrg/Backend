@@ -1,6 +1,8 @@
 package com.ytrewq.rosLearning.Entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
@@ -10,13 +12,13 @@ public class Course extends BaseEntity {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private Theme[] themes;
+    private String themesIdsStr = "";
 
-    public Course(String title, LocalDateTime dateOfCreation, String description, Theme[] themes) {
+    public Course(String title, LocalDateTime dateOfCreation, String description, String themesIdsStr) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
-        this.themes = themes;
+        this.themesIdsStr = themesIdsStr;
     }
 
     public Course() {
@@ -49,13 +51,12 @@ public class Course extends BaseEntity {
         this.description = description;
     }
 
-    @OneToMany
-    @JoinColumn(name = "course_id")
-    public Theme[] getThemes() {
-        return themes;
+    @Column(name = "themes_ids", length = 511)
+    public String getThemesIdsStr() {
+        return themesIdsStr;
     }
 
-    public void setThemes(Theme[] themes) {
-        this.themes = themes;
+    public void setThemesIdsStr(String themesIdsStr) {
+        this.themesIdsStr = themesIdsStr;
     }
 }

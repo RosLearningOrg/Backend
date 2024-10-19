@@ -13,5 +13,6 @@ public class GlobalExceptionHandler {
         return new AppExceptionResponse(e.getMessage(), e.getCode());
     }
 
-    public record AppExceptionResponse(String message, int code) { }
+    public record AppExceptionResponse(String message, int code) {
+    }
 }

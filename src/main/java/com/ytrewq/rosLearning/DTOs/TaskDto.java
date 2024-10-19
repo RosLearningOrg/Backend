@@ -1,19 +1,15 @@
 package com.ytrewq.rosLearning.DTOs;
 
 
-
-import com.ytrewq.rosLearning.Entities.Task;
-import com.ytrewq.rosLearning.Entities.ThemeMaterial;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class TaskDto {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private List<Task> tasks;
-    private List<ThemeMaterial> materials;
+
+    public TaskDto() {
+    }
 
     public String getTitle() {
         return title;
@@ -37,21 +33,5 @@ public class TaskDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<ThemeMaterial> getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(List<ThemeMaterial> materials) {
-        this.materials = materials;
     }
 }

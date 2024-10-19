@@ -3,6 +3,7 @@ package com.ytrewq.rosLearning.Controllers;
 import com.ytrewq.rosLearning.Entities.Emulation;
 import com.ytrewq.rosLearning.Forms.EmulationForm;
 import com.ytrewq.rosLearning.Services.EmulationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,14 +16,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/emulations")
 public class EmulationController {
-    private final EmulationService customEmulationService;
-
-    public EmulationController(EmulationService customEmulationService) {
-        this.customEmulationService = customEmulationService;
-    }
+    @Autowired
+    EmulationService emulationService;
 
     @PostMapping("/admin/createEmulation")
-    public Map<String, String> createEmulation(@RequestBody EmulationForm form){
+    public Map<String, String> createEmulation(@RequestBody EmulationForm form) {
         Emulation emulation = new Emulation();
         emulation.setPrivate_title(form.getPrivate_title());
         emulation.setDateOfCreation(LocalDateTime.now());
@@ -33,7 +31,7 @@ public class EmulationController {
         emulation.setBlockCodeJS(form.getBlockCodeJS());
         emulation.setByteArrayInterface(form.getByteArrayInterface());
         emulation.setTask(form.getTask());
-        customEmulationService.save(emulation);
+        emulationService.save(emulation);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");

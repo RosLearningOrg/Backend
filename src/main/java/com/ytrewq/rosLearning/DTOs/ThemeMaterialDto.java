@@ -6,6 +6,9 @@ public class ThemeMaterialDto {
     private String materialURL;
     private String materialText;
 
+    public ThemeMaterialDto() {
+    }
+
     public String getTitle() {
         return title;
     }
