@@ -1,30 +1,21 @@
-package com.ytrewq.rosLearning.Entities;
+package com.ytrewq.rosLearning.Forms;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.ytrewq.rosLearning.Entities.Theme;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
-@Table(name = "courses")
-public class Course extends BaseEntity {
+public class CourseForm {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private String themesIdsStr = "";
 
-    public Course(String title, LocalDateTime dateOfCreation, String description, String themesIdsStr) {
+    public CourseForm(String title, LocalDateTime dateOfCreation, String description) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
-        this.themesIdsStr = themesIdsStr;
     }
 
-    public Course() {
-    }
-
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -33,7 +24,6 @@ public class Course extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "dateOfCreation")
     public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
@@ -42,21 +32,11 @@ public class Course extends BaseEntity {
         this.dateOfCreation = dateOfCreation;
     }
 
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Column(name = "themes_ids", length = 511)
-    public String getThemesIdsStr() {
-        return themesIdsStr;
-    }
-
-    public void setThemesIdsStr(String themesIdsStr) {
-        this.themesIdsStr = themesIdsStr;
     }
 }

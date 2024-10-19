@@ -1,8 +1,5 @@
 package com.ytrewq.rosLearning.DTOs;
 
-import com.ytrewq.rosLearning.Entities.Course;
-import com.ytrewq.rosLearning.Entities.Result;
-
 import java.time.LocalDateTime;
 
 public class UserDTO {
@@ -73,4 +70,3 @@ public class UserDTO {
         this.admin = admin;
     }
 }
-

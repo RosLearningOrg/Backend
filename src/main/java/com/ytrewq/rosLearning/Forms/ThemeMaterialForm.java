@@ -1,29 +1,11 @@
-package com.ytrewq.rosLearning.Entities;
+package com.ytrewq.rosLearning.Forms;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "themeMaterials")
-public class ThemeMaterial extends BaseEntity {
+public class ThemeMaterialForm {
     private String title;
     private String materialType;
     private String materialURL;
     private String materialText;
 
-    public ThemeMaterial(String title, String materialType, String materialURL, String materialText) {
-        this.title = title;
-        this.materialType = materialType;
-        this.materialURL = materialURL;
-        this.materialText = materialText;
-    }
-
-    public ThemeMaterial() {
-    }
-
-    @Column(name = "title")
     public String getTitle() {
         return title;
     }
@@ -32,7 +14,6 @@ public class ThemeMaterial extends BaseEntity {
         this.title = title;
     }
 
-    @Column(name = "materialType")
     public String getMaterialType() {
         return materialType;
     }
@@ -41,7 +22,6 @@ public class ThemeMaterial extends BaseEntity {
         this.materialType = materialType;
     }
 
-    @Column(name = "materialURL")
     public String getMaterialURL() {
         return materialURL;
     }
@@ -50,7 +30,6 @@ public class ThemeMaterial extends BaseEntity {
         this.materialURL = materialURL;
     }
 
-    @Column(name = "materialText")
     public String getMaterialText() {
         return materialText;
     }
