@@ -35,4 +35,8 @@ public class CourseService {
         Optional<Course> course = courseRepository.findById(courseId);
         return course.orElse(null);
     }
+
+    public void save(Course course) {
+        courseRepository.save(course);
+    }
 }

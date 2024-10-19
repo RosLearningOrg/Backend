@@ -20,7 +20,7 @@ public class Task extends BaseEntity {
         this.emulation = emulation;
     }
 
-    protected Task() {
+    public Task() {
     }
 
     @Column(name = "title")

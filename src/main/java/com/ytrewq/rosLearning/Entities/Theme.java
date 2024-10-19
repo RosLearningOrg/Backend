@@ -23,7 +23,7 @@ public class Theme extends BaseEntity {
         this.materialsIdsStr = materialsIdsStr;
     }
 
-    protected Theme() {
+    public Theme() {
     }
 
     @Column(name = "title")

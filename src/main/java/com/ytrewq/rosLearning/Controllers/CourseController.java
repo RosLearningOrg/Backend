@@ -28,4 +28,17 @@ public class CourseController {
         return courseService.getAllCourses();
 
     }
+
+    @PostMapping("/admin/createCourse")
+    public Map<String, String> createCourse(@RequestBody CourseForm form) {
+        Course course = new Course();
+        course.setTitle(form.getTitle());
+        course.setDateOfCreation(LocalDateTime.now());
+        course.setDescription(form.getDescription());
+        courseService.save(course);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
 }

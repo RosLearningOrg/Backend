@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @Service
 public class ThemeMaterialService {
+    private final ThemeMaterialRepository repo;
     @Autowired
     private final ThemeRepository themeRepository;
     @Autowired
@@ -91,5 +92,9 @@ public class ThemeMaterialService {
 
     public List<ThemeMaterialDto> getAllMaterials() {
         return themeMaterialRepository.findAll().stream().map(material -> modelMapper.map(material, ThemeMaterialDto.class)).toList();
+    }
+
+    public void save(ThemeMaterial themeMaterial) {
+        themeMaterialRepository.save(themeMaterial);
     }
 }

@@ -110,4 +110,8 @@ public class ThemeService {
         Optional<Theme> theme = themeRepository.findById(themeId);
         return theme.orElse(null);
     }
+
+    public void save(Theme theme) {
+        themeRepository.save(theme);
+    }
 }

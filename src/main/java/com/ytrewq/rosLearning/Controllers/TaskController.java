@@ -53,4 +53,19 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
+    @PostMapping("/admin/createTask")
+    public Map<String, String> createCourse(@RequestBody TaskForm form) {
+        Task task = new Task();
+        task.setTitle(form.getTitle());
+        task.setDateOfCreation(LocalDateTime.now());
+        task.setDescription(form.getDescription());
+        task.setCourseTitle(form.getCourseTitle());
+        task.setLessonTitle(form.getLessonTitle());
+        task.setEmulation(form.getEmulation());
+        customTaskServise.save(task);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
 }

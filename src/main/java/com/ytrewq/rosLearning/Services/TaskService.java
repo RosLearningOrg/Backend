@@ -96,4 +96,8 @@ public class TaskService {
     public List<TaskDto> getAllTasks() {
         return taskRepository.findAll().stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
     }
+
+    public void save(Task task) {
+        taskRepository.save(task);
+    }
 }

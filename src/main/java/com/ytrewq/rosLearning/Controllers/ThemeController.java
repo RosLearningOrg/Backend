@@ -46,4 +46,17 @@ public class ThemeController {
     public List<ThemesDto> getAllThemes() {
         return themeService.getAllThemes();
     }
+
+    @PostMapping("/admin/createTheme")
+    public Map<String, String> createCourse(@RequestBody ThemeForm form) {
+        Theme theme = new Theme();
+        theme.setTitle(form.getTitle());
+        theme.setDateOfCreation(LocalDateTime.now());
+        theme.setDescription(form.getDescription());
+        customThemeService.save(theme);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
 }
