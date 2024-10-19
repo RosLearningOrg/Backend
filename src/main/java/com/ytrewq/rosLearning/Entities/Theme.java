@@ -11,14 +11,14 @@ public class Theme extends BaseEntity {
     private LocalDateTime dateOfCreation;
     private String description;
     private Task[] tasks;
-    private ThemeMaterial[] materials;
+    private String materialsIdsStr;
 
-    public Theme(String title, LocalDateTime dateOfCreation, String description, Task[] tasks, ThemeMaterial[] materials) {
+    public Theme(String title, LocalDateTime dateOfCreation, String description, Task[] tasks, String materialsIdsStr) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
         this.tasks = tasks;
-        this.materials = materials;
+        this.materialsIdsStr = materialsIdsStr;
     }
 
     protected Theme() {
@@ -61,13 +61,12 @@ public class Theme extends BaseEntity {
         this.tasks = tasks;
     }
 
-    @OneToMany
-    @JoinColumn(name = "theme_id")
-    public ThemeMaterial[] getMaterials() {
-        return materials;
+    @Column(name = "materialsIdsStr", length = 511)
+    public String getMaterialsIdsStr() {
+        return materialsIdsStr;
     }
 
-    public void setMaterials(ThemeMaterial[] materials) {
-        this.materials = materials;
+    public void setMaterialsIdsStr(String materialsIdsStr) {
+        this.materialsIdsStr = materialsIdsStr;
     }
 }
