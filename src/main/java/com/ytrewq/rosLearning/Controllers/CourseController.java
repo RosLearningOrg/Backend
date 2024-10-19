@@ -28,12 +28,4 @@ public class CourseController {
         return courseService.getAllCourses();
 
     }
-
-//    @GetMapping("/admin/getCourse/{course_id}")
-//    public CourseDto getCourse(@RequestParam int course_id) {
-//        return courseService.getCourseById(course_id);
-//
-//    }
-
-
 }

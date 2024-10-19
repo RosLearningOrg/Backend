@@ -35,33 +35,4 @@ public class CourseService {
         Optional<Course> course = courseRepository.findById(courseId);
         return course.orElse(null);
     }
-
-//    public Course getUserCourseById(User currentUser, int courseId) {
-//        Course[] courses = currentUser.getCourses();
-//        for (Course course : courses) {
-//            if (course.getId() == courseId) {
-//                return course;
-//            }
-//        }
-//        return null;
-//    }
-
-
-//
-//    public void saveCourse(CourseDto courseDto) {
-//        String description = courseDto.getDescription();
-//        String title = courseDto.getTitle();
-//        LocalDateTime date_of_creation = LocalDateTime.now();
-//        Course course = new Course(title, date_of_creation, description, null);
-//        courseRepository.save(course);
-//    }
-//
-//
-//    public CourseDto getCourseById(int id) {
-//        if (courseRepository.findById(id).isPresent()){
-//            return modelMapper.map(courseRepository.findById(id),CourseDto.class);
-//        }
-//
-//
-//    }
 }

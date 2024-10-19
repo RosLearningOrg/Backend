@@ -1,16 +1,11 @@
 package com.ytrewq.rosLearning;
 
-import com.ytrewq.rosLearning.Entities.Course;
-import com.ytrewq.rosLearning.Entities.Theme;
-import com.ytrewq.rosLearning.Entities.ThemeMaterial;
-import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Entities.*;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
+import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import com.ytrewq.rosLearning.Repositories.ThemeMaterialRepository;
 import com.ytrewq.rosLearning.Repositories.ThemeRepository;
-import com.ytrewq.rosLearning.Services.AuthService;
-import com.ytrewq.rosLearning.Services.ThemeMaterialService;
-import com.ytrewq.rosLearning.Services.ThemeService;
-import com.ytrewq.rosLearning.Services.UserService;
+import com.ytrewq.rosLearning.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,9 +32,13 @@ public class MyCommandLineRunner implements CommandLineRunner {
     private final ThemeMaterialRepository themeMaterialRepository;
     @Autowired
     private final ThemeMaterialService themeMaterialService;
+    @Autowired
+    private final TaskRepository taskRepository;
+    @Autowired
+    private final TaskService taskService;
 
 
-    public MyCommandLineRunner(AuthService customUserDetailsService, PasswordEncoder passwordEncoder, CourseRepository courseRepository, UserService userService, ThemeRepository themeRepository, ThemeService themeService, ThemeMaterialRepository themeMaterialRepository, ThemeMaterialService themeMaterialService) {
+    public MyCommandLineRunner(AuthService customUserDetailsService, PasswordEncoder passwordEncoder, CourseRepository courseRepository, UserService userService, ThemeRepository themeRepository, ThemeService themeService, ThemeMaterialRepository themeMaterialRepository, ThemeMaterialService themeMaterialService, TaskRepository taskRepository, TaskService taskService) {
         this.customUserDetailsService = customUserDetailsService;
         this.passwordEncoder = passwordEncoder;
         this.courseRepository = courseRepository;
@@ -48,6 +47,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
         this.themeService = themeService;
         this.themeMaterialRepository = themeMaterialRepository;
         this.themeMaterialService = themeMaterialService;
+        this.taskRepository = taskRepository;
+        this.taskService = taskService;
     }
 
     @Override
@@ -114,7 +115,6 @@ public class MyCommandLineRunner implements CommandLineRunner {
         themeMaterialRepository.save(material7);
 
 
-
         themeMaterialService.addThemeMaterial(theme1, material1);
         themeMaterialService.addThemeMaterial(theme2, material2);
         themeMaterialService.addThemeMaterial(theme3, material3);
@@ -125,6 +125,28 @@ public class MyCommandLineRunner implements CommandLineRunner {
         themeMaterialService.addThemeMaterial(theme3, material1);
         themeMaterialService.addThemeMaterial(theme1, material7);
 
+        Task task1 = new Task("Задача 1", LocalDateTime.now(), "Описание задачи", null);
+        Task task2 = new Task("Задача 2", LocalDateTime.now(), "Описание задачи", null);
+        Task task3 = new Task("Задача 3", LocalDateTime.now(), "Описание задачи", null);
+        Task task4 = new Task("Задача 4", LocalDateTime.now(), "Описание задачи", null);
+        Task task5 = new Task("Задача 5", LocalDateTime.now(), "Описание задачи", null);
+        Task task6 = new Task("Задача 6", LocalDateTime.now(), "Описание задачи", null);
+        taskRepository.save(task1);
+        taskRepository.save(task2);
+        taskRepository.save(task3);
+        taskRepository.save(task4);
+        taskRepository.save(task5);
+        taskRepository.save(task6);
+
+        taskService.addThemeTask(theme1, task1);
+        taskService.addThemeTask(theme2, task2);
+        taskService.addThemeTask(theme1, task3);
+        taskService.addThemeTask(theme2, task4);
+        taskService.addThemeTask(theme2, task5);
+        taskService.addThemeTask(theme2, task6);
+        taskService.addThemeTask(theme3, task1);
+        taskService.addThemeTask(theme4, task2);
+        taskService.addThemeTask(theme1, task3);
 
         System.out.println();
         System.out.println();

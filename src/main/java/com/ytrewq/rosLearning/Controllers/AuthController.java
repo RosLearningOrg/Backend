@@ -105,7 +105,7 @@ public class AuthController {
         return map;
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public Map<String, String> logout(HttpServletRequest request) throws ServletException {
         request.logout();
 
@@ -119,6 +119,7 @@ public class AuthController {
         return new UserDTO(user.getUsername(), user.getEmail(), user.getName(),
                 user.getRole(), user.getDateOfRegistration(), user.isAdmin());
     }
+
     public record CsrfResponse(String token) {
     }
 }

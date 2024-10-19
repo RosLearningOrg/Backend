@@ -25,7 +25,7 @@ public class ThemeController {
     CourseService courseService;
 
     @GetMapping("/user/getCourseThemes")
-    public List<ThemesDto> getCourseThemes(@AuthenticationPrincipal User user, @RequestParam(name="course_id") int courseId) {
+    public List<ThemesDto> getCourseThemes(@AuthenticationPrincipal User user, @RequestParam(name = "course_id") int courseId) {
         List<ThemesDto> themes = themeService.getCourseThemes(user, courseId);
         if (themes == null) {
             throw new AppException("Course not allow for user");
@@ -34,7 +34,7 @@ public class ThemeController {
     }
 
     @GetMapping("/admin/getCourseThemes")
-    public List<ThemesDto> getCourseThemesAdmin(@AuthenticationPrincipal User user, @RequestParam(name="course_id") int courseId) {
+    public List<ThemesDto> getCourseThemesAdmin(@AuthenticationPrincipal User user, @RequestParam(name = "course_id") int courseId) {
         List<ThemesDto> themes = themeService.getCourseThemesAdmin(courseId);
         if (themes == null) {
             throw new AppException("Course not exists");
