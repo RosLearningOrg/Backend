@@ -16,7 +16,7 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
     @Autowired
-    private final CourseRepository courseRepository;
+    private final CourseRepository coursRepository;
 
     public UserService(UserRepository userRepository, CourseRepository courseRepository) {
         this.userRepository = userRepository;
@@ -26,6 +26,7 @@ public class UserService {
     public List<Course> getUserCourses(User currentUser) {
         String[] coursesIdsStr = currentUser.getCoursesIdsStr().split("/;/");
         List<Integer> coursesIds = new ArrayList<>();
+//        TODO fix for empty str
         for (String s : coursesIdsStr) {
             coursesIds.add(Integer.parseInt(s));
         }

@@ -31,7 +31,6 @@ public class SecurityConfig {
                         .requestMatchers("/api/csrf").permitAll()
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/signup").permitAll()
-                        .requestMatchers("/api/test/makeTestData").permitAll() // TODO удалить после тестов
                         .requestMatchers("/api/logout").authenticated()
                         .requestMatchers("/api/test-user").hasAuthority("user")
                         .requestMatchers("/api/test-admin").hasAuthority("admin")
