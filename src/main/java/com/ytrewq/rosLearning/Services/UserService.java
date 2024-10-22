@@ -26,6 +26,7 @@ public class UserService {
     public List<Course> getUserCourses(User currentUser) {
         String[] coursesIdsStr = currentUser.getCoursesIdsStr().split("/;/");
         List<Integer> coursesIds = new ArrayList<>();
+//        TODO fix for empty str
         for (String s : coursesIdsStr) {
             coursesIds.add(Integer.parseInt(s));
         }

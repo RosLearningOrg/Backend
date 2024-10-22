@@ -29,7 +29,6 @@ public class CourseController {
     @GetMapping("/admin/getAllCourses")
     public List<CourseDto> getAllCourses() {
         return courseService.getAllCourses();
-
     }
 
     @PostMapping("/admin/createCourse")
