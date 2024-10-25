@@ -9,7 +9,10 @@ import java.util.Optional;
 @Repository
 public interface AuthRepository extends CrudRepository<User, Integer> {
     Optional<User> findByUsername(String username);
+
     Boolean existsByUsername(String username);
+
     Boolean existsByEmail(String email);
+
     <S extends User> S save(S entity);
 }
