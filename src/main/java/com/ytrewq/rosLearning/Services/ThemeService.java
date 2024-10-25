@@ -36,7 +36,9 @@ public class ThemeService {
         String[] themesIdsStr = course.getThemesIdsStr().split("/;/");
         List<Integer> themesIds = new ArrayList<>();
         for (String s : themesIdsStr) {
-            themesIds.add(Integer.parseInt(s));
+            if (!s.isEmpty()) {
+                themesIds.add(Integer.parseInt(s));
+            }
         }
         return (List<Theme>) themeRepository.findAllById(themesIds);
     }
