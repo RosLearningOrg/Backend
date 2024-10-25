@@ -35,7 +35,9 @@ public class ThemeMaterialService {
         String[] materialsIdsStr = theme.getMaterialsIdsStr().split("/;/");
         List<Integer> materialsIds = new ArrayList<>();
         for (String s : materialsIdsStr) {
-            materialsIds.add(Integer.parseInt(s));
+            if (!s.isEmpty()) {
+                materialsIds.add(Integer.parseInt(s));
+            }
         }
         return (List<ThemeMaterial>) themeMaterialRepository.findAllById(materialsIds);
     }

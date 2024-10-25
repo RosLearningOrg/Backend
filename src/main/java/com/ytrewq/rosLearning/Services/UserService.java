@@ -26,9 +26,10 @@ public class UserService {
     public List<Course> getUserCourses(User currentUser) {
         String[] coursesIdsStr = currentUser.getCoursesIdsStr().split("/;/");
         List<Integer> coursesIds = new ArrayList<>();
-//        TODO fix for empty str
         for (String s : coursesIdsStr) {
-            coursesIds.add(Integer.parseInt(s));
+            if (!s.isEmpty()) {
+                coursesIds.add(Integer.parseInt(s));
+            }
         }
         return (List<Course>) courseRepository.findAllById(coursesIds);
     }

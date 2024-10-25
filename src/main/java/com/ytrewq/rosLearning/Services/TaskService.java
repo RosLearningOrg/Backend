@@ -36,7 +36,9 @@ public class TaskService {
         String[] tasksIdsStr = theme.getTasksIdsStr().split("/;/");
         List<Integer> tasksIds = new ArrayList<>();
         for (String s : tasksIdsStr) {
-            tasksIds.add(Integer.parseInt(s));
+            if (!s.isEmpty()) {
+                tasksIds.add(Integer.parseInt(s));
+            }
         }
         return (List<Task>) taskRepository.findAllById(tasksIds);
     }
