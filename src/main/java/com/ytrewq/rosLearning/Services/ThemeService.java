@@ -74,6 +74,20 @@ public class ThemeService {
         courseRepository.save(course);
     }
 
+    public void removeCourseTheme(Course course, Integer themeId) {
+        String themeIdStr = themeId.toString();
+        String themesIdsStr = course.getThemesIdsStr();
+        themesIdsStr = "/;/" + themesIdsStr + "/;/";
+        themesIdsStr = themesIdsStr.replace("/;/" + themeIdStr + "/;/", "/;/");
+        if (!themesIdsStr.equals("/;/")) {
+            themesIdsStr = themesIdsStr.substring(3, themesIdsStr.length() - 3);
+        } else {
+            themesIdsStr = "";
+        }
+        course.setThemesIdsStr(themesIdsStr);
+        courseRepository.save(course);
+    }
+
     public List<ThemesDto> getCourseThemes(User user, Integer courseId) {
         Course course = userService.getUserCourse(user, courseId);
         if (course != null) {

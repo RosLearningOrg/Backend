@@ -73,6 +73,20 @@ public class ThemeMaterialService {
         themeRepository.save(theme);
     }
 
+    public void removeThemeMaterial(Theme theme, Integer materialId) {
+        String materialIdStr = materialId.toString();
+        String materialsIdsStr = theme.getMaterialsIdsStr();
+        materialsIdsStr = "/;/" + materialsIdsStr + "/;/";
+        materialsIdsStr = materialsIdsStr.replace("/;/" + materialIdStr + "/;/", "/;/");
+        if (!materialsIdsStr.equals("/;/")) {
+            materialsIdsStr = materialsIdsStr.substring(3, materialsIdsStr.length() - 3);
+        } else {
+            materialsIdsStr = "";
+        }
+        theme.setMaterialsIdsStr(materialsIdsStr);
+        themeRepository.save(theme);
+    }
+
     public List<ThemeMaterialDto> getThemeMaterials(User currentUser, Integer courseId, Integer themeId) {
         Theme theme = themeService.getCourseTheme(currentUser, courseId, themeId);
         if (theme != null) {

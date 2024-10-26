@@ -65,4 +65,18 @@ public class UserService {
         }
         userRepository.save(currentUser);
     }
+
+    public void removeUserCourse(User currentUser, Integer courseId) {
+        String courseIdStr = courseId.toString();
+        String coursesIdsStr = currentUser.getCoursesIdsStr();
+        coursesIdsStr = "/;/" + coursesIdsStr + "/;/";
+        coursesIdsStr = coursesIdsStr.replace("/;/" + courseIdStr + "/;/", "/;/");
+        if (!coursesIdsStr.equals("/;/")) {
+            coursesIdsStr = coursesIdsStr.substring(3, coursesIdsStr.length() - 3);
+        } else {
+            coursesIdsStr = "";
+        }
+        currentUser.setCoursesIdsStr(coursesIdsStr);
+        userRepository.save(currentUser);
+    }
 }

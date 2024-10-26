@@ -74,6 +74,21 @@ public class TaskService {
         themeRepository.save(theme);
     }
 
+    public void removeThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = taskId.toString();
+        String tasksIdsStr = theme.getTasksIdsStr();
+        tasksIdsStr = "/;/" + tasksIdsStr + "/;/";
+        tasksIdsStr = tasksIdsStr.replace("/;/" + taskIdStr + "/;/", "/;/");
+        if (!tasksIdsStr.equals("/;/")) {
+            tasksIdsStr = tasksIdsStr.substring(3, tasksIdsStr.length() - 3);
+        } else {
+            tasksIdsStr = "";
+        }
+        theme.setTasksIdsStr(tasksIdsStr);
+        themeRepository.save(theme);
+
+    }
+
     public List<TaskDto> getThemeTasks(User currentUser, Integer courseId, Integer themeId) {
         Theme theme = themeService.getCourseTheme(currentUser, courseId, themeId);
         if (theme != null) {
