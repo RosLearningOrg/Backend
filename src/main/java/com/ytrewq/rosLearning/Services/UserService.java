@@ -45,11 +45,9 @@ public class UserService {
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
-        for (String courseIdStrI : currentUser.getCoursesIdsStr().split("/;/")) {
-            if (courseIdStrI.equals(courseIdStr)) {
-                Optional<Course> course = courseRepository.findById(courseId);
-                return course.orElse(null);
-            }
+        if (("/;/" + currentUser.getCoursesIdsStr() + "/;/").contains("/;/" + courseIdStr + "/;/")) {
+            Optional<Course> course = courseRepository.findById(courseId);
+            return course.orElse(null);
         }
         return null;
     }

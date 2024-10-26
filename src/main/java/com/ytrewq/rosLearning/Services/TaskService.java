@@ -54,11 +54,9 @@ public class TaskService {
 
     public Task getThemeTask(Theme theme, Integer taskId) {
         String taskIdStr = taskId.toString();
-        for (String taskIdStrI : theme.getTasksIdsStr().split("/;/")) {
-            if (taskIdStrI.equals(taskIdStr)) {
-                Optional<Task> task = taskRepository.findById(taskId);
-                return task.orElse(null);
-            }
+        if (("/;/" + theme.getTasksIdsStr() + "/;/").contains("/;/" + taskIdStr + "/;/")) {
+            Optional<Task> task = taskRepository.findById(taskId);
+            return task.orElse(null);
         }
         return null;
     }

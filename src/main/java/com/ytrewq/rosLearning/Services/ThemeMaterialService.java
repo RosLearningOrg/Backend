@@ -53,11 +53,9 @@ public class ThemeMaterialService {
 
     public ThemeMaterial getThemeMaterial(Theme theme, Integer materialId) {
         String materialIdStr = materialId.toString();
-        for (String materialIdStrI : theme.getMaterialsIdsStr().split("/;/")) {
-            if (materialIdStrI.equals(materialIdStr)) {
-                Optional<ThemeMaterial> material = themeMaterialRepository.findById(materialId);
-                return material.orElse(null);
-            }
+        if (("/;/" + theme.getMaterialsIdsStr() + "/;/").contains("/;/" + materialIdStr + "/;/")) {
+            Optional<ThemeMaterial> material = themeMaterialRepository.findById(materialId);
+            return material.orElse(null);
         }
         return null;
     }

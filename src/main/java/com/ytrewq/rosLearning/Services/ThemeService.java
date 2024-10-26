@@ -54,11 +54,9 @@ public class ThemeService {
 
     public Theme getCourseTheme(Course course, Integer themeId) {
         String themeIdStr = themeId.toString();
-        for (String themeIdStrI : course.getThemesIdsStr().split("/;/")) {
-            if (themeIdStrI.equals(themeIdStr)) {
-                Optional<Theme> theme = themeRepository.findById(themeId);
-                return theme.orElse(null);
-            }
+        if (("/;/" + course.getThemesIdsStr() + "/;/").contains("/;/" + themeIdStr + "/;/")) {
+            Optional<Theme> theme = themeRepository.findById(themeId);
+            return theme.orElse(null);
         }
         return null;
     }
