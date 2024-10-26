@@ -24,7 +24,8 @@ public class UserService {
     }
 
     public List<Course> getUserCourses(User currentUser) {
-        String[] coursesIdsStr = currentUser.getCoursesIdsStr().split("/;/");
+        String[] coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId()).split("/;/");
+
         List<Integer> coursesIds = new ArrayList<>();
         for (String s : coursesIdsStr) {
             if (!s.isEmpty()) {
@@ -45,7 +46,7 @@ public class UserService {
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
-        if (("/;/" + currentUser.getCoursesIdsStr() + "/;/").contains("/;/" + courseIdStr + "/;/")) {
+        if (("/;/" + userRepository.findCoursesIdsStrById(currentUser.getId()) + "/;/").contains("/;/" + courseIdStr + "/;/")) {
             Optional<Course> course = courseRepository.findById(courseId);
             return course.orElse(null);
         }
@@ -55,11 +56,13 @@ public class UserService {
 
     public void addUserCourse(User currentUser, Course course) {
         String courseId = String.valueOf(course.getId());
-        if (currentUser.getCoursesIdsStr() == null) {
+        String coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId());
+        if (coursesIdsStr == null) {
             currentUser.setCoursesIdsStr("");
+            coursesIdsStr = "";
         }
-        if (!currentUser.getCoursesIdsStr().isEmpty()) {
-            currentUser.setCoursesIdsStr(currentUser.getCoursesIdsStr() + "/;/" + courseId);
+        if (!coursesIdsStr.isEmpty()) {
+            currentUser.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
         } else {
             currentUser.setCoursesIdsStr(courseId);
         }
@@ -68,7 +71,7 @@ public class UserService {
 
     public void removeUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
-        String coursesIdsStr = currentUser.getCoursesIdsStr();
+        String coursesIdsStr =  userRepository.findCoursesIdsStrById(currentUser.getId());
         coursesIdsStr = "/;/" + coursesIdsStr + "/;/";
         coursesIdsStr = coursesIdsStr.replace("/;/" + courseIdStr + "/;/", "/;/");
         if (!coursesIdsStr.equals("/;/")) {
@@ -78,5 +81,9 @@ public class UserService {
         }
         currentUser.setCoursesIdsStr(coursesIdsStr);
         userRepository.save(currentUser);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
 }

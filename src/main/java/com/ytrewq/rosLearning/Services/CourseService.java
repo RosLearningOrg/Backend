@@ -36,6 +36,10 @@ public class CourseService {
         return course.orElse(null);
     }
 
+    public boolean existsById(int courseId) {
+        return courseRepository.existsById(courseId);
+    }
+
     public void save(Course course) {
         courseRepository.save(course);
     }
