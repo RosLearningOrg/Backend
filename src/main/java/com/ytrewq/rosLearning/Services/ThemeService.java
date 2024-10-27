@@ -125,6 +125,10 @@ public class ThemeService {
         return theme.orElse(null);
     }
 
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
+    }
+
     public void save(Theme theme) {
         themeRepository.save(theme);
     }

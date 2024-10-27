@@ -107,6 +107,10 @@ public class ThemeMaterialService {
         return themeMaterialRepository.findAll().stream().map(material -> modelMapper.map(material, ThemeMaterialDto.class)).toList();
     }
 
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
+    }
+
     public void save(ThemeMaterial themeMaterial) {
         themeMaterialRepository.save(themeMaterial);
     }

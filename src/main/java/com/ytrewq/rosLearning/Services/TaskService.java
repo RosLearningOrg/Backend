@@ -109,6 +109,10 @@ public class TaskService {
         return taskRepository.findAll().stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
     }
 
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
+    }
+
     public void save(Task task) {
         taskRepository.save(task);
     }
