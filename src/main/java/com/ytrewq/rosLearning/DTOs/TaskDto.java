@@ -7,6 +7,7 @@ public class TaskDto {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
+    private Integer id;
 
     public TaskDto() {
     }
@@ -33,5 +34,13 @@ public class TaskDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

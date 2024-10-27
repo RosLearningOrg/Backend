@@ -7,6 +7,7 @@ public class ThemesDto {
     public String title;
     public LocalDateTime dateOfCreation;
     public String description;
+    private Integer id;
 
     public ThemesDto() {
     }
@@ -33,5 +34,13 @@ public class ThemesDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

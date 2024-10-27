@@ -2,6 +2,7 @@ package com.ytrewq.rosLearning.Controllers;
 
 
 import com.ytrewq.rosLearning.DTOs.ThemesDto;
+import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Exeptions.AppException;
@@ -56,6 +57,27 @@ public class ThemeController {
         theme.setDateOfCreation(LocalDateTime.now());
         theme.setDescription(form.getDescription());
         themeService.save(theme);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @GetMapping("/admin/removeCourseThemes")
+    public Map<String, String> removeCourseThemes(@RequestParam(name = "course_id") int courseId,
+                                                  @RequestParam(name = "theme_id") int themeId) {
+
+        Course course = courseService.getCourseById(courseId);
+        if (course == null) {
+            throw new AppException("Course not found.");
+        }
+
+
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme not found.");
+        }
+
+        themeService.removeCourseTheme(course, themeId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");

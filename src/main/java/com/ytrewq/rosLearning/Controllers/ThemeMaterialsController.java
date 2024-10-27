@@ -2,11 +2,14 @@ package com.ytrewq.rosLearning.Controllers;
 
 
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
+import com.ytrewq.rosLearning.Entities.Course;
+import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Exeptions.AppException;
 import com.ytrewq.rosLearning.Forms.ThemeMaterialForm;
 import com.ytrewq.rosLearning.Services.ThemeMaterialService;
+import com.ytrewq.rosLearning.Services.ThemeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,8 @@ import java.util.Map;
 public class ThemeMaterialsController {
     @Autowired
     ThemeMaterialService themeMaterialService;
+    @Autowired
+    ThemeService themeService;
 
     @GetMapping("/user/getThemeMaterials")
     public List<ThemeMaterialDto> getAllThemeMaterials(@AuthenticationPrincipal User user,
@@ -55,6 +60,28 @@ public class ThemeMaterialsController {
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
         themeMaterialService.save(themeMaterial);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+
+    @GetMapping("/admin/removeThemeMaterial")
+    public Map<String, String> removeThemeMaterial(@RequestParam(name = "theme_id") int themeId,
+                                                  @RequestParam(name = "material_id") int materialId) {
+
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme == null) {
+            throw new AppException("Theme not found.");
+        }
+
+
+        if (!themeMaterialService.existsById(themeId)) {
+            throw new AppException("ThemeMaterial not found.");
+        }
+
+        themeMaterialService.removeThemeMaterial(theme, materialId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
