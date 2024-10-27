@@ -56,7 +56,7 @@
 Выход из апи, нужны куки спринга а так же CSRF токен.<br>
 Может кинуть 401 если не будет кук или csrf токена <br>Если не залогинены кинет 403
 #### Метод
-- **POST**: Выйти из приложения
+- **GET**: Выйти из приложения
 
 #### Пример ответа
 ```json
@@ -275,19 +275,14 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 }
 ```
 
-### `/api/user/getUserCourses`
+### `api/user/getUserCourses`
 
 #### Описание
 
-Тестовый запрос доступ чтобы получить курсы залогиненного пользователя
+Получить курсы залогиненного пользователя
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
-
-### Параметры
-
-- **user**. Залогиненный пользователнь
+- **GET**: Получить все курсы пользователя
 
 #### Пример ответа
 
@@ -349,26 +344,23 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 
 ```
 
-### `api/user/getThemeTasks/<course_id>_<theme_id>`
+### `api/user/getThemeTasks/?course_id=&theme_id=`
 
 #### Описание
 
-Тестовый запрос доступ чтобы получить получить задачи темы по id
+Получение задач темы по id курса и id темы.\
+Проверка на то, что у пользователя есть доступ к этому курсу и к этой теме.
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
+- **GET**: Получить задачи темы.
 
 ### Параметры
-
-- **user**. Залогиненый пользователь.
 - **course_id**. id курса.
 - **theme_id**. id темы.
 
 #### Пример ответа
 
 ```json
-
 [
   {
     "id": 1,
@@ -412,25 +404,23 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 
 ```
 
-### ` api/user/getCourseThemes/<course_id>`
+### `api/user/getCourseThemes?course_id=`
 
 #### Описание
 
-Тестовый запрос, чтобы получить темы по id курса
+Получение тем курса по id курса.\
+Проверка, что у пользователя есть доступ к этому курсу.
 
 #### Метод
 
-- **GET**: Общий тестовый запрос
+- **GET**: Получить темы курса.
 
 ### Параметры
-
-- **user**. Залогиненный пользователь.
 - **course_id**. id курса.
 
 #### Пример ответа
 
 ```json
-
 [
   {
     "id": 1,
@@ -505,23 +495,19 @@ com.ytrewq.rosLearning.Entities.User@147d4023
     ]
   }
 ]
-
-
 ```
 
-### ` api/user/getThemeMaterials/<course_id>_<theme_id> -`
+### `api/user/getThemeMaterials?course_id=&theme_id= `
 
 #### Описание
 
-Тестовый запрос, чтобы получить материалы темы по id
+Получение материалов темы по id курса и id темы.\
+Проверка, что у пользователя есть доступ к этому курсу и к этой теме.
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
+- **GET**: Получить материалы темы.
 
 ### Параметры
-
-- **user**. Залогиненный пользователь.
 - **course_id**. id курса.
 - **theme_id**. id темы.
 
@@ -551,18 +537,200 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 
 ```
 
-### ` api/admin/getAllCourses  -`
+### `api/admin/getThemeTasks/?course_id=&theme_id=`
 
 #### Описание
 
-Тестовый запрос, чтобы получить все возможные курсы
+Получение задач темы по id курса и id темы.\
+Проверка на то, что у пользователя есть доступ к этому курсу и к этой теме.
+
+#### Метод
+- **GET**: Получить задачи темы.
+
+### Параметры
+- **course_id**. id курса.
+- **theme_id**. id темы.
+
+#### Пример ответа
+
+```json
+
+[
+  {
+    "id": 1,
+    "title": "Задача 1",
+    "description": "Описание задачи 1",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 1,
+      "private_title": "Эмуляция 1",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  },
+  {
+    "id": 2,
+    "title": "Задача 2",
+    "description": "Описание задачи 2",
+    "dateOfCreation": "22-10-2024",
+    "lessonTitle": "Тема 1",
+    "courseTitle": "Курс 1",
+    "emulation": {
+      "id": 2,
+      "private_title": "Эмуляция 2",
+      "dateOfCreation": "22-09-2024",
+      "timerTime": "",
+      "timerDescription": "",
+      "screenImageURL": "",
+      "blockSchemeJSON": "",
+      "blockCodeJS": "",
+      "byteArrayInterface": ""
+    }
+  }
+]
+```
+
+### ` api/admin/getCourseThemes/?course_id=`
+
+#### Описание
+
+Получение тем курса по id курса.
 
 #### Метод
 
-- **GET**: Общий тестовый запрос
+- **GET**: Получить темы курса.
 
 ### Параметры
+- **course_id**. id курса.
 
+#### Пример ответа
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Тема 1",
+    "description": "Описание темы 1",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Задача 1",
+        "description": "Описание задачи 1",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 1",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 1,
+          "private_title": "Эмуляция 1",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 1,
+        "title": "Название материала 1",
+        "materialType": "Тип материала 1",
+        "materialURL": "Ссылка на материал 1",
+        "materialText": "Описание материала 1"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Тема 2",
+    "description": "Описание темы 2",
+    "dateOfCreation": "22-09-2024",
+    "tasks": [
+      {
+        "id": 3,
+        "title": "Задача 2",
+        "description": "Описание задачи 2",
+        "dateOfCreation": "22-10-2024",
+        "lessonTitle": "Тема 2",
+        "courseTitle": "Курс 1",
+        "emulation": {
+          "id": 2,
+          "private_title": "Эмуляция 2",
+          "dateOfCreation": "22-09-2024",
+          "timerTime": "",
+          "timerDescription": "",
+          "screenImageURL": "",
+          "blockSchemeJSON": "",
+          "blockCodeJS": "",
+          "byteArrayInterface": ""
+        }
+      }
+    ],
+    "materials": [
+      {
+        "id": 3,
+        "title": "Название материала 3",
+        "materialType": "Тип материала 3",
+        "materialURL": "Ссылка на материал 3",
+        "materialText": "Описание материала 3"
+      }
+    ]
+  }
+]
+```
+
+### `api/admin/getThemeMaterials/?course_id=&theme_id=`
+
+#### Описание
+
+Получение материалов темы по id курса и id темы.
+
+#### Метод
+- **GET**: Получить материалы темы.
+
+### Параметры
+- **course_id**. id курса.
+- **theme_id**. id темы.
+
+#### Пример ответа
+
+```json
+[
+  {
+    "id": 1,
+    "title": "Название материала 1",
+    "materialType": "Тип материала 1",
+    "materialURL": "Ссылка на материал 1",
+    "materialText": "Описание материала 1"
+  },
+  {
+    "id": 3,
+    "title": "Название материала 2",
+    "materialType": "Тип материала 2",
+    "materialURL": "Ссылка на материал 2",
+    "materialText": "Описание материала 2"
+  }
+]
+```
+
+### `api/admin/getAllCourses`
+
+#### Описание
+
+Получение всех курсов.
+
+#### Метод
+- **GET**: Получить все курсы.
 
 #### Пример ответа
 
@@ -628,29 +796,20 @@ com.ytrewq.rosLearning.Entities.User@147d4023
     "themes": []
   }
 ]
-
-
-
-
 ```
 
-### ` api/admin/getAllThemes  -`
+### `api/admin/getAllThemes`
 
 #### Описание
 
-Тестовый запросб, чтобы получить все возможные темы
+Получение всех тем.
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
-
-### Параметры
-
+- **GET**: Получить все темы.
 
 #### Пример ответа
 
 ```json
-
 [
   {
     "id": 1,
@@ -733,28 +892,57 @@ com.ytrewq.rosLearning.Entities.User@147d4023
     "materials": []
   }
 ]
-
-
-
-
 ```
-### `  api/admin/getAllTasks  -`
+### `  api/admin/getAllTasks`
 
 #### Описание
 
-Тестовый запрос, чтобы получить все возможные задачи
+Получение всех задач.
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
-
-### Параметры
-
+- **GET**: Получить все задачи.
 
 #### Пример ответа
 
 ```json
+[
+  {
+    "id": 1,
+    "title": "Название материала 1",
+    "materialType": "Тип материала 1",
+    "materialURL": "Ссылка на материал 1",
+    "materialText": "Описание материала 1"
+  },
+  {
+    "id": 2,
+    "title": "Название материала 2",
+    "materialType": "Тип материала 2",
+    "materialURL": "Ссылка на материал 2",
+    "materialText": "Описание материала 2"
+  },
+  {
+    "id": 3,
+    "title": "Название материала 3",
+    "materialType": "Тип материала 3",
+    "materialURL": "Ссылка на материал 3",
+    "materialText": "Описание материала 3"
+  }
+]
+```
 
+
+### `  api/admin/getAllMaterials`
+
+#### Описание
+
+Получение всех материалов.
+
+#### Метод
+- **GET**: Получить все материалы.
+
+#### Пример ответа
+
+```json
 [
   {
     "id": 1,
@@ -815,29 +1003,23 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   }
 
 ]
-
-
-
-
 ```
 
-### `  api/admin/getCourse/<course_id>  -`
+
+### `  api/admin/getCourse/?course_id`
 
 #### Описание
 
-Тестовый запрос, чтобы получить курс по id
+Получение курса по id.
 
 #### Метод
-
-- **GET**: Общий тестовый запрос
+- **GET**: Получить курс по id.
 
 ### Параметры
 - **course_id**. id курса.
 #### Пример ответа
 
 ```json
-
-
 {
   "id": 1,
   "title": "Курс 1",
@@ -882,29 +1064,22 @@ com.ytrewq.rosLearning.Entities.User@147d4023
     }
   ]
 }
-
-
-
-
-
 ```
-### `   api/admin/getTheme/<theme_id>  -`
+### `   api/admin/getTheme/?theme_id= `
 
 #### Описание
 
-Тестовый запрос, чтобы получить тему по id
+Получение темы по id.
 
 #### Метод
 
-- **GET**: Общий тестовый запрос
+- **GET**: Получить тему по id.
 
 ### Параметры
 - **theme_id**. id темы.
 #### Пример ответа
 
 ```json
-
-
 {
   "id": 1,
   "title": "Тема 1",
@@ -941,9 +1116,4 @@ com.ytrewq.rosLearning.Entities.User@147d4023
     }
   ]
 }
-
-
-
-
-
 ```

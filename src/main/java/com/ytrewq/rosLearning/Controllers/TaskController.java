@@ -3,6 +3,7 @@ package com.ytrewq.rosLearning.Controllers;
 
 import com.ytrewq.rosLearning.DTOs.TaskDto;
 import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Exeptions.AppException;
 import com.ytrewq.rosLearning.Forms.TaskForm;
@@ -63,6 +64,28 @@ public class TaskController {
         task.setDescription(form.getDescription());
         task.setEmulation(form.getEmulation());
         taskService.save(task);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+
+    @GetMapping("/admin/removeThemeTask")
+    public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeId,
+                                               @RequestParam(name = "task_id") int taskId) {
+
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme == null) {
+            throw new AppException("Theme not found.");
+        }
+
+
+        if (!taskService.existsById(taskId)) {
+            throw new AppException("Task not found.");
+        }
+
+        taskService.removeThemeTask(theme, taskId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");

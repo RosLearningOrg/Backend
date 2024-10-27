@@ -12,6 +12,8 @@ public class EmulationDto {
     private String blockSchemeJSON;
     private String blockCodeJS;
     private String byteArrayInterface;
+    private Integer id;
+
 
     public String getPrivate_title() {
         return private_title;
@@ -75,5 +77,13 @@ public class EmulationDto {
 
     public void setByteArrayInterface(String byteArrayInterface) {
         this.byteArrayInterface = byteArrayInterface;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
