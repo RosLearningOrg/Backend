@@ -62,14 +62,17 @@ public class TaskService {
     }
 
     public void addThemeTask(Theme theme, Task task) {
-        String taskId = String.valueOf(task.getId());
+        addThemeTask(theme, task.getId());
+    }
+    public void addThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = String.valueOf(taskId);
         if (theme.getTasksIdsStr() == null) {
             theme.setTasksIdsStr("");
         }
         if (!theme.getTasksIdsStr().isEmpty()) {
             theme.setTasksIdsStr(theme.getTasksIdsStr() + "/;/" + taskId);
         } else {
-            theme.setTasksIdsStr(taskId);
+            theme.setTasksIdsStr(taskIdStr);
         }
         themeRepository.save(theme);
     }

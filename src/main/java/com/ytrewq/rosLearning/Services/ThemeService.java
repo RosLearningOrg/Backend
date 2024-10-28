@@ -62,14 +62,17 @@ public class ThemeService {
     }
 
     public void addCourseTheme(Course course, Theme theme) {
-        String themeId = String.valueOf(theme.getId());
+        addCourseTheme(course, theme.getId());
+    }
+    public void addCourseTheme(Course course, Integer themeId) {
+        String themeIdStr = String.valueOf(themeId);
         if (course.getThemesIdsStr() == null) {
             course.setThemesIdsStr("");
         }
         if (!course.getThemesIdsStr().isEmpty()) {
             course.setThemesIdsStr(course.getThemesIdsStr() + "/;/" + themeId);
         } else {
-            course.setThemesIdsStr(themeId);
+            course.setThemesIdsStr(themeIdStr);
         }
         courseRepository.save(course);
     }
