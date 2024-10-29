@@ -1118,7 +1118,7 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 }
 ```
 
-### `/api/admin/addUserCourse`
+### `/api/admin/addUserCourse?username=&course_id`
 
 #### Описание
 Связывание пользователя и курса.<br>
@@ -1136,7 +1136,7 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   "result": "all_ok"
 }
 ```
-### `/api/admin/addCourseThemes`
+### `/api/admin/addCourseThemes?course_id=&theme_id`
 
 #### Описание
 Связывание курса и темы.<br>
@@ -1154,7 +1154,7 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   "result": "all_ok"
 }
 ```
-### `/api/admin/addThemeTask`
+### `/api/admin/addThemeTask?theme_id=&task_id`
 
 #### Описание
 Связывание темы и задачи.<br>
@@ -1172,7 +1172,7 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   "result": "all_ok"
 }
 ```
-### `/api/admin/addThemeMaterial`
+### `/api/admin/addThemeMaterial?theme_id=&material_id`
 
 #### Описание
 Связывание темы и учебных материалов к ней.<br>
