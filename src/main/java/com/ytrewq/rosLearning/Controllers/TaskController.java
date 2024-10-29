@@ -70,6 +70,25 @@ public class TaskController {
         return map;
     }
 
+    @GetMapping("/admin/addThemeTask")
+    public Map<String, String> addThemeTask(@RequestParam(name = "theme_id") int themeId,
+                                            @RequestParam(name = "task_id") int taskId) {
+
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme == null) {
+            throw new AppException("Theme not found.");
+        }
+
+        if (!taskService.existsById(taskId)) {
+            throw new AppException("Task not found.");
+        }
+
+        taskService.addThemeTask(theme, taskId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
 
     @GetMapping("/admin/removeThemeTask")
     public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeId,

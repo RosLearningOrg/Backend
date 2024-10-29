@@ -61,7 +61,11 @@ public class ThemeMaterialService {
     }
 
     public void addThemeMaterial(Theme theme, ThemeMaterial material) {
-        String courseId = String.valueOf(material.getId());
+        addThemeMaterial(theme, material.getId());
+    }
+
+    public void addThemeMaterial(Theme theme, Integer materialId) {
+        String courseId = String.valueOf(materialId);
         if (theme.getMaterialsIdsStr() == null) {
             theme.setMaterialsIdsStr("");
         }
