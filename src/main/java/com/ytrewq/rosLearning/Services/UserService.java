@@ -55,16 +55,20 @@ public class UserService {
 
 
     public void addUserCourse(User currentUser, Course course) {
-        String courseId = String.valueOf(course.getId());
+        addUserCourse(currentUser, course.getId());
+    }
+
+    public void addUserCourse(User currentUser, Integer courseId) {
+        String courseIdStr = String.valueOf(courseId);
         String coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId());
         if (coursesIdsStr == null) {
             currentUser.setCoursesIdsStr("");
             coursesIdsStr = "";
         }
         if (!coursesIdsStr.isEmpty()) {
-            currentUser.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
+            currentUser.setCoursesIdsStr(coursesIdsStr + "/;/" + courseIdStr);
         } else {
-            currentUser.setCoursesIdsStr(courseId);
+            currentUser.setCoursesIdsStr(courseIdStr);
         }
         userRepository.save(currentUser);
     }

@@ -59,6 +59,23 @@ public class CourseController {
         return map;
     }
 
+    @GetMapping("/admin/addUserCourse")
+    public Map<String, String> addUserCourse(@RequestParam(name = "username") String username,
+                                             @RequestParam(name = "course_id") int courseId){
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            throw new AppException("User not found.");
+        }
+
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+        userService.addUserCourse(user, courseId);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
     @GetMapping("/admin/removeUserCourse")
     public Map<String, String> removeUserCourse(@RequestParam(name = "username") String username,
                                                 @RequestParam(name = "course_id") int courseId) {

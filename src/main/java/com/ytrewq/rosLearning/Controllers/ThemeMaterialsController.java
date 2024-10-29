@@ -66,6 +66,26 @@ public class ThemeMaterialsController {
         return map;
     }
 
+    @GetMapping("/admin/addThemeMaterial")
+    public Map<String, String> addThemeMaterial(@RequestParam(name = "theme_id") int themeId,
+                                                @RequestParam(name = "material_id") int materialId) {
+
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme == null) {
+            throw new AppException("Theme not found.");
+        }
+
+
+        if (!themeMaterialService.existsById(themeId)) {
+            throw new AppException("ThemeMaterial not found.");
+        }
+
+        themeMaterialService.addThemeMaterial(theme, materialId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
 
     @GetMapping("/admin/removeThemeMaterial")
     public Map<String, String> removeThemeMaterial(@RequestParam(name = "theme_id") int themeId,
