@@ -5,6 +5,10 @@ public class ThemeMaterialDto {
     private String materialType;
     private String materialURL;
     private String materialText;
+    private Integer id;
+
+    public ThemeMaterialDto() {
+    }
 
     public String getTitle() {
         return title;
@@ -36,5 +40,13 @@ public class ThemeMaterialDto {
 
     public void setMaterialText(String materialText) {
         this.materialText = materialText;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

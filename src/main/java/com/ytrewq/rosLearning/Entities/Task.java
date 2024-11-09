@@ -11,20 +11,16 @@ public class Task extends BaseEntity {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
-    private String lessonTitle;
-    private String courseTitle;
     private Emulation emulation;
 
-    public Task(String title, LocalDateTime dateOfCreation, String description, String lessonTitle, String courseTitle, Emulation emulation) {
+    public Task(String title, LocalDateTime dateOfCreation, String description, Emulation emulation) {
         this.title = title;
         this.dateOfCreation = dateOfCreation;
         this.description = description;
-        this.lessonTitle = lessonTitle;
-        this.courseTitle = courseTitle;
         this.emulation = emulation;
     }
 
-    protected Task() {
+    public Task() {
     }
 
     @Column(name = "title")
@@ -52,24 +48,6 @@ public class Task extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Column(name = "lessonTitle")
-    public String getLessonTitle() {
-        return lessonTitle;
-    }
-
-    public void setLessonTitle(String lessonTitle) {
-        this.lessonTitle = lessonTitle;
-    }
-
-    @Column(name = "courseTitle")
-    public String getCourseTitle() {
-        return courseTitle;
-    }
-
-    public void setCourseTitle(String courseTitle) {
-        this.courseTitle = courseTitle;
     }
 
     @OneToOne(fetch = FetchType.LAZY)

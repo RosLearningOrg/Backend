@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class RosLearningApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RosLearningApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(RosLearningApplication.class, args);
+    }
 }

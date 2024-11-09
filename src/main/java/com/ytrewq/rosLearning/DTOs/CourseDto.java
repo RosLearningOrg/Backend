@@ -1,15 +1,16 @@
 package com.ytrewq.rosLearning.DTOs;
 
 
-import com.ytrewq.rosLearning.Entities.Theme;
-
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class CourseDto {
     private String title;
     private LocalDateTime dateOfCreation;
     private String description;
+    private Integer id;
+
+    public CourseDto() {
+    }
 
     public String getTitle() {
         return title;
@@ -35,15 +36,11 @@ public class CourseDto {
         this.description = description;
     }
 
-    public List<Theme> getThemes() {
-        return themes;
+    public Integer getId() {
+        return id;
     }
 
-    public void setThemes(List<Theme> themes) {
-        this.themes = themes;
+    public void setId(Integer id) {
+        this.id = id;
     }
-
-    private List<Theme> themes;
-
-
 }

@@ -1,41 +1,24 @@
-package com.ytrewq.rosLearning.Entities;
+package com.ytrewq.rosLearning.Forms;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
-
-@Entity
-@Table(name = "emulations")
-public class Emulation extends BaseEntity {
+public class EmulationForm {
     private String private_title;
-    private LocalDateTime dateOfCreation;
     private Integer timerTime;
     private String timerDescription;
     private String screenImageURL;
     private String blockSchemeJSON;
     private String blockCodeJS;
     private String byteArrayInterface;
-    private Task task;
 
-    public Emulation(String private_title, LocalDateTime dateOfCreation, Integer timerTime, String timerDescription, String screenImageURL, String blockSchemeJSON, String blockCodeJS, String byteArrayInterface, Task task) {
+    public EmulationForm(String private_title, Integer timerTime, String timerDescription, String screenImageURL, String blockSchemeJSON, String blockCodeJS, String byteArrayInterface) {
         this.private_title = private_title;
-        this.dateOfCreation = dateOfCreation;
         this.timerTime = timerTime;
         this.timerDescription = timerDescription;
         this.screenImageURL = screenImageURL;
         this.blockSchemeJSON = blockSchemeJSON;
         this.blockCodeJS = blockCodeJS;
         this.byteArrayInterface = byteArrayInterface;
-        this.task = task;
     }
 
-    public Emulation() {
-    }
-
-    @Column(name = "private_name", unique = true)
     public String getPrivate_title() {
         return private_title;
     }
@@ -44,16 +27,6 @@ public class Emulation extends BaseEntity {
         this.private_title = private_title;
     }
 
-    @Column(name = "dateOfCreation")
-    public LocalDateTime getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
-    }
-
-    @Column(name = "timerTime")
     public Integer getTimerTime() {
         return timerTime;
     }
@@ -62,7 +35,6 @@ public class Emulation extends BaseEntity {
         this.timerTime = timerTime;
     }
 
-    @Column(name = "timerDescription")
     public String getTimerDescription() {
         return timerDescription;
     }
@@ -71,7 +43,6 @@ public class Emulation extends BaseEntity {
         this.timerDescription = timerDescription;
     }
 
-    @Column(name = "screenImageURL")
     public String getScreenImageURL() {
         return screenImageURL;
     }
@@ -80,7 +51,6 @@ public class Emulation extends BaseEntity {
         this.screenImageURL = screenImageURL;
     }
 
-    @Column(name = "blockSchemeJSON", length = 32768)
     public String getBlockSchemeJSON() {
         return blockSchemeJSON;
     }
@@ -89,7 +59,6 @@ public class Emulation extends BaseEntity {
         this.blockSchemeJSON = blockSchemeJSON;
     }
 
-    @Column(name = "blockCodeJS", length = 32768)
     public String getBlockCodeJS() {
         return blockCodeJS;
     }
@@ -98,21 +67,11 @@ public class Emulation extends BaseEntity {
         this.blockCodeJS = blockCodeJS;
     }
 
-    @Column(name = "byteArrayInterface", length = 32768)
     public String getByteArrayInterface() {
         return byteArrayInterface;
     }
 
     public void setByteArrayInterface(String byteArrayInterface) {
         this.byteArrayInterface = byteArrayInterface;
-    }
-
-    @OneToOne(mappedBy = "emulation")
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
     }
 }

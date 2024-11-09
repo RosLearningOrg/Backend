@@ -1,46 +1,132 @@
 package com.ytrewq.rosLearning.Services;
 
 import com.ytrewq.rosLearning.DTOs.TaskDto;
-import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Task;
-import com.ytrewq.rosLearning.Repositories.CourseRepository;
+import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.TaskRepository;
+import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
     @Autowired
-    TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
     @Autowired
-    CourseRepository courseRepository;
+    private final ThemeRepository themeRepository;
+    @Autowired
+    private final ThemeService themeService;
+
     ModelMapper modelMapper = new ModelMapper();
 
-    public TaskDto[] getAllCourseTasks(int course_id, int theme_id) {
-        Optional<Course> course = courseRepository.findById(course_id);
-        if (course.isPresent()) {
-            Task[]tasks = taskRepository.getAllCourseTasks(course_id, theme_id);
-            return Arrays.stream(tasks)
-                    .map(task -> modelMapper.map(task, TaskDto.class))
-                    .toArray(TaskDto[]::new);
+
+    public TaskService(TaskRepository taskRepository, ThemeRepository themeRepository, ThemeService themeService) {
+        this.taskRepository = taskRepository;
+        this.themeRepository = themeRepository;
+        this.themeService = themeService;
+    }
+
+    public List<Task> getThemeTasks(Theme theme) {
+        String[] tasksIdsStr = theme.getTasksIdsStr().split("/;/");
+        List<Integer> tasksIds = new ArrayList<>();
+        for (String s : tasksIdsStr) {
+            if (!s.isEmpty()) {
+                tasksIds.add(Integer.parseInt(s));
+            }
+        }
+        return (List<Task>) taskRepository.findAllById(tasksIds);
+    }
+
+    public void setThemeTasks(Theme theme, List<Task> tasks) {
+        List<String> tasksIdsStr = new ArrayList<>();
+        for (Task task : tasks) {
+            tasksIdsStr.add(String.valueOf(task.getId()));
+        }
+        theme.setTasksIdsStr(String.join("/;/", tasksIdsStr));
+        themeRepository.save(theme);
+    }
+
+    public Task getThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = taskId.toString();
+        if (("/;/" + theme.getTasksIdsStr() + "/;/").contains("/;/" + taskIdStr + "/;/")) {
+            Optional<Task> task = taskRepository.findById(taskId);
+            return task.orElse(null);
         }
         return null;
     }
 
-    public TaskDto[] getAllTasks() {
-        List<Task> tasks = (List<Task>) taskRepository.findAll();
-        return tasks.stream()
-                .map(task -> modelMapper.map(task, TaskDto.class))
-                .toArray(TaskDto[]::new);
+    public TaskDto getThemeTaskDto(Theme theme, Integer taskId) {
+        Task task = getThemeTask(theme, taskId);
+        return modelMapper.map(task, TaskDto.class);
     }
 
+    public void addThemeTask(Theme theme, Task task) {
+        addThemeTask(theme, task.getId());
+    }
 
-    public Optional<Task> getTaskById(int id) {
-        return taskRepository.findById(id);
+    public void addThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = String.valueOf(taskId);
+        if (theme.getTasksIdsStr() == null) {
+            theme.setTasksIdsStr("");
+        }
+        if (!theme.getTasksIdsStr().isEmpty()) {
+            theme.setTasksIdsStr(theme.getTasksIdsStr() + "/;/" + taskId);
+        } else {
+            theme.setTasksIdsStr(taskIdStr);
+        }
+        themeRepository.save(theme);
+    }
+
+    public void removeThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = taskId.toString();
+        String tasksIdsStr = theme.getTasksIdsStr();
+        tasksIdsStr = "/;/" + tasksIdsStr + "/;/";
+        tasksIdsStr = tasksIdsStr.replace("/;/" + taskIdStr + "/;/", "/;/");
+        if (!tasksIdsStr.equals("/;/")) {
+            tasksIdsStr = tasksIdsStr.substring(3, tasksIdsStr.length() - 3);
+        } else {
+            tasksIdsStr = "";
+        }
+        theme.setTasksIdsStr(tasksIdsStr);
+        themeRepository.save(theme);
+
+    }
+
+    public List<TaskDto> getThemeTasks(User currentUser, Integer courseId, Integer themeId) {
+        Theme theme = themeService.getCourseTheme(currentUser, courseId, themeId);
+        if (theme != null) {
+            return getThemeTasks(theme).stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
+        }
+        return null;
+    }
+
+    public List<TaskDto> getThemeTasksAdmin(Integer themeId) {
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme != null) {
+            return getThemeTasks(theme).stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
+        }
+        return null;
+    }
+
+    public Task getTaskById(Integer taskId) {
+        return taskRepository.findById(taskId).orElse(null);
+    }
+
+    public List<TaskDto> getAllTasks() {
+        return taskRepository.findAll().stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
+    }
+
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
+    }
+
+    public void save(Task task) {
+        taskRepository.save(task);
     }
 }

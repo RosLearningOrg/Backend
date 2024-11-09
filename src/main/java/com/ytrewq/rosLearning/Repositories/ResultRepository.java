@@ -1,7 +1,8 @@
 package com.ytrewq.rosLearning.Repositories;
 
 import com.ytrewq.rosLearning.Entities.Result;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ResultRepository extends CrudRepository<Result, Integer> {
+@Repository
+public interface ResultRepository extends BaseRepo<Result> {
 }

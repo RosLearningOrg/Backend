@@ -1,11 +1,9 @@
 package com.ytrewq.rosLearning.DTOs;
 
 
-import com.ytrewq.rosLearning.Entities.User;
-
 public class ResultDto {
     private String result;
-    private User user;
+    private Integer id;
 
     public String getResult() {
         return result;
@@ -15,12 +13,12 @@ public class ResultDto {
         this.result = result;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
 
