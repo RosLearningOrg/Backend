@@ -57,12 +57,11 @@ public class TaskController {
     }
 
     @PostMapping("/admin/createTask")
-    public Map<String, String> createCourse(@RequestBody TaskForm form) {
+    public Map<String, String> createTask(@RequestBody TaskForm form) {
         Task task = new Task();
         task.setTitle(form.getTitle());
         task.setDateOfCreation(LocalDateTime.now());
         task.setDescription(form.getDescription());
-        task.setEmulation(form.getEmulation());
         taskService.save(task);
 
         HashMap<String, String> map = new HashMap<>();

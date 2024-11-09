@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CourseRepository extends BaseRepo<Course> {
-    public boolean existsById(int courseId);
+    boolean existsById(int courseId);
 }
