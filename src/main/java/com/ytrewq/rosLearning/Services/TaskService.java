@@ -61,9 +61,15 @@ public class TaskService {
         return null;
     }
 
+    public TaskDto getThemeTaskDto(Theme theme, Integer taskId) {
+        Task task = getThemeTask(theme, taskId);
+        return modelMapper.map(task, TaskDto.class);
+    }
+
     public void addThemeTask(Theme theme, Task task) {
         addThemeTask(theme, task.getId());
     }
+
     public void addThemeTask(Theme theme, Integer taskId) {
         String taskIdStr = String.valueOf(taskId);
         if (theme.getTasksIdsStr() == null) {
@@ -106,6 +112,10 @@ public class TaskService {
             return getThemeTasks(theme).stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
         }
         return null;
+    }
+
+    public Task getTaskById(Integer taskId) {
+        return taskRepository.findById(taskId).orElse(null);
     }
 
     public List<TaskDto> getAllTasks() {
