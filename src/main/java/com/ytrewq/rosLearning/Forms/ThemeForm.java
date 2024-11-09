@@ -6,12 +6,10 @@ import java.time.LocalDateTime;
 
 public class ThemeForm {
     private String title;
-    private LocalDateTime dateOfCreation;
     private String description;
 
-    public ThemeForm(String title, LocalDateTime dateOfCreation, String description) {
+    public ThemeForm(String title, String description) {
         this.title = title;
-        this.dateOfCreation = dateOfCreation;
         this.description = description;
     }
 
@@ -21,14 +19,6 @@ public class ThemeForm {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public LocalDateTime getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public String getDescription() {

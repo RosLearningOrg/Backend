@@ -54,11 +54,9 @@ public class TaskService {
 
     public Task getThemeTask(Theme theme, Integer taskId) {
         String taskIdStr = taskId.toString();
-        for (String taskIdStrI : theme.getTasksIdsStr().split("/;/")) {
-            if (taskIdStrI.equals(taskIdStr)) {
-                Optional<Task> task = taskRepository.findById(taskId);
-                return task.orElse(null);
-            }
+        if (("/;/" + theme.getTasksIdsStr() + "/;/").contains("/;/" + taskIdStr + "/;/")) {
+            Optional<Task> task = taskRepository.findById(taskId);
+            return task.orElse(null);
         }
         return null;
     }
@@ -74,6 +72,21 @@ public class TaskService {
             theme.setTasksIdsStr(taskId);
         }
         themeRepository.save(theme);
+    }
+
+    public void removeThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = taskId.toString();
+        String tasksIdsStr = theme.getTasksIdsStr();
+        tasksIdsStr = "/;/" + tasksIdsStr + "/;/";
+        tasksIdsStr = tasksIdsStr.replace("/;/" + taskIdStr + "/;/", "/;/");
+        if (!tasksIdsStr.equals("/;/")) {
+            tasksIdsStr = tasksIdsStr.substring(3, tasksIdsStr.length() - 3);
+        } else {
+            tasksIdsStr = "";
+        }
+        theme.setTasksIdsStr(tasksIdsStr);
+        themeRepository.save(theme);
+
     }
 
     public List<TaskDto> getThemeTasks(User currentUser, Integer courseId, Integer themeId) {
@@ -94,6 +107,10 @@ public class TaskService {
 
     public List<TaskDto> getAllTasks() {
         return taskRepository.findAll().stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
+    }
+
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
     }
 
     public void save(Task task) {

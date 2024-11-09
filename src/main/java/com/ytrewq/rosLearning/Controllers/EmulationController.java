@@ -30,7 +30,6 @@ public class EmulationController {
         emulation.setBlockSchemeJSON(form.getBlockSchemeJSON());
         emulation.setBlockCodeJS(form.getBlockCodeJS());
         emulation.setByteArrayInterface(form.getByteArrayInterface());
-        emulation.setTask(form.getTask());
         emulationService.save(emulation);
 
         HashMap<String, String> map = new HashMap<>();

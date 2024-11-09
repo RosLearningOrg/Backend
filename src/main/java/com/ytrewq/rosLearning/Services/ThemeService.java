@@ -54,11 +54,9 @@ public class ThemeService {
 
     public Theme getCourseTheme(Course course, Integer themeId) {
         String themeIdStr = themeId.toString();
-        for (String themeIdStrI : course.getThemesIdsStr().split("/;/")) {
-            if (themeIdStrI.equals(themeIdStr)) {
-                Optional<Theme> theme = themeRepository.findById(themeId);
-                return theme.orElse(null);
-            }
+        if (("/;/" + course.getThemesIdsStr() + "/;/").contains("/;/" + themeIdStr + "/;/")) {
+            Optional<Theme> theme = themeRepository.findById(themeId);
+            return theme.orElse(null);
         }
         return null;
     }
@@ -73,6 +71,20 @@ public class ThemeService {
         } else {
             course.setThemesIdsStr(themeId);
         }
+        courseRepository.save(course);
+    }
+
+    public void removeCourseTheme(Course course, Integer themeId) {
+        String themeIdStr = themeId.toString();
+        String themesIdsStr = course.getThemesIdsStr();
+        themesIdsStr = "/;/" + themesIdsStr + "/;/";
+        themesIdsStr = themesIdsStr.replace("/;/" + themeIdStr + "/;/", "/;/");
+        if (!themesIdsStr.equals("/;/")) {
+            themesIdsStr = themesIdsStr.substring(3, themesIdsStr.length() - 3);
+        } else {
+            themesIdsStr = "";
+        }
+        course.setThemesIdsStr(themesIdsStr);
         courseRepository.save(course);
     }
 
@@ -111,6 +123,10 @@ public class ThemeService {
     public Theme getThemeAdmin(Integer themeId) {
         Optional<Theme> theme = themeRepository.findById(themeId);
         return theme.orElse(null);
+    }
+
+    public boolean existsById(Integer themeId) {
+        return themeRepository.existsById(themeId);
     }
 
     public void save(Theme theme) {
