@@ -1,19 +1,23 @@
 package com.ytrewq.rosLearning.Forms;
 
-import com.ytrewq.rosLearning.Entities.Task;
-
-import java.time.LocalDateTime;
-
 public class EmulationForm {
     private String private_title;
-    private LocalDateTime dateOfCreation;
     private Integer timerTime;
     private String timerDescription;
     private String screenImageURL;
     private String blockSchemeJSON;
     private String blockCodeJS;
     private String byteArrayInterface;
-    private Task task;
+
+    public EmulationForm(String private_title, Integer timerTime, String timerDescription, String screenImageURL, String blockSchemeJSON, String blockCodeJS, String byteArrayInterface) {
+        this.private_title = private_title;
+        this.timerTime = timerTime;
+        this.timerDescription = timerDescription;
+        this.screenImageURL = screenImageURL;
+        this.blockSchemeJSON = blockSchemeJSON;
+        this.blockCodeJS = blockCodeJS;
+        this.byteArrayInterface = byteArrayInterface;
+    }
 
     public String getPrivate_title() {
         return private_title;
@@ -21,14 +25,6 @@ public class EmulationForm {
 
     public void setPrivate_title(String private_title) {
         this.private_title = private_title;
-    }
-
-    public LocalDateTime getDateOfCreation() {
-        return dateOfCreation;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
     }
 
     public Integer getTimerTime() {
@@ -77,13 +73,5 @@ public class EmulationForm {
 
     public void setByteArrayInterface(String byteArrayInterface) {
         this.byteArrayInterface = byteArrayInterface;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
     }
 }
