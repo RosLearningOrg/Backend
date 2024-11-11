@@ -1,16 +1,24 @@
 package com.ytrewq.rosLearning.Controllers;
 
+import com.ytrewq.rosLearning.DTOs.EmulationDto;
 import com.ytrewq.rosLearning.Entities.Emulation;
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Exeptions.AppException;
 import com.ytrewq.rosLearning.Forms.EmulationForm;
+import com.ytrewq.rosLearning.Services.CourseService;
 import com.ytrewq.rosLearning.Services.EmulationService;
+import com.ytrewq.rosLearning.Services.TaskService;
+import com.ytrewq.rosLearning.Services.ThemeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -18,6 +26,14 @@ import java.util.Map;
 public class EmulationController {
     @Autowired
     EmulationService emulationService;
+    @Autowired
+    CourseService courseService;
+    @Autowired
+    ThemeService themeService;
+    @Autowired
+    TaskService taskService;
+
+    ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/admin/createEmulation")
     public Map<String, String> createEmulation(@RequestBody EmulationForm form) {
@@ -30,11 +46,46 @@ public class EmulationController {
         emulation.setBlockSchemeJSON(form.getBlockSchemeJSON());
         emulation.setBlockCodeJS(form.getBlockCodeJS());
         emulation.setByteArrayInterface(form.getByteArrayInterface());
-        emulation.setTask(form.getTask());
         emulationService.save(emulation);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @GetMapping("/user/getTaskEmulation")
+    public EmulationDto getTaskEmulationUser(@AuthenticationPrincipal User user,
+                                             @RequestParam(name = "course_id") int courseId,
+                                             @RequestParam(name = "theme_id") int themeId,
+                                             @RequestParam(name = "task_id") int taskId) {
+        if (!courseService.existsById(taskId)) {
+            throw new AppException("Course is not exists");
+        }
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme is not exists");
+        }
+        Theme theme = themeService.getCourseTheme(user, courseId, themeId);
+        if (theme == null) {
+            throw new AppException("Task not allow for user");
+        }
+        Task task = taskService.getThemeTask(theme, themeId);
+        if (task == null) {
+            throw new AppException("Task is not exists");
+        }
+        return modelMapper.map(task.getEmulation(), EmulationDto.class);
+    }
+
+    @GetMapping("/admin/getTaskEmulation")
+    public EmulationDto getTaskEmulationUser(@RequestParam(name = "task_id") int taskId) {
+        Task task = taskService.getTaskById(taskId);
+        if (task == null) {
+            throw new AppException("Task is not exists");
+        }
+        return modelMapper.map(task.getEmulation(), EmulationDto.class);
+    }
+
+    @GetMapping("/admin/getAllEmulations")
+    public List<EmulationDto> getAllEmulations() {
+        return emulationService.getAllEmulations();
     }
 }
