@@ -53,17 +53,13 @@ public class ThemeMaterialsController {
     }
 
     @PostMapping("/admin/createThemeMaterial")
-    public Map<String, String> createThemeMaterial(@RequestBody ThemeMaterialForm form) {
+    public ThemeMaterialDto createThemeMaterial(@RequestBody ThemeMaterialForm form) {
         ThemeMaterial themeMaterial = new ThemeMaterial();
         themeMaterial.setTitle(form.getTitle());
         themeMaterial.setMaterialType(form.getMaterialType());
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
-        themeMaterialService.save(themeMaterial);
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
+        return themeMaterialService.save(themeMaterial);
     }
 
     @GetMapping("/admin/addThemeMaterial")
