@@ -166,6 +166,43 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 ```
 
 ### `/api/admin/createCourse`
+#### Описание
+Создает новый курс.<br>
+Проверяет на null
+#### Метод
+- **POST**: Создать новый курс
+
+#### Параметры
+- **title**: Название курса.
+- **dateOfCreation**: Дата создания курса.
+- **description**: Описание курса.
+
+#### Пример ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+
+### `/api/admin/createEmulation`
+
+#### Описание
+Создает новую эмуляцию.<br>
+Проверяет на null
+#### Метод
+- **POST**: Создать новую эмуляцию
+
+#### Параметры
+- **private_title**: Название эмуляции.
+- **dateOfCreation**: Дата создания эмуляции.
+- **timerTime**: Таймер для задачи.
+- **timerDescription**: Описание таймера для задачи.
+- **screenImageURL**: Ссылка на изображение.
+- **blockSchemeJSON**: JSON-файл с блок-схемой.
+- **blockCodeJS**: Код для эмуляции на JS.
+- **byteArrayInterface**: Дамп интерфейса в виде байт-кода.
+- **task**: Задача.
+=======
 
 #### Описание
 Создает новый курс.<br>
@@ -226,6 +263,28 @@ com.ytrewq.rosLearning.Entities.User@147d4023
 - **lessonTitle**: Название связанного урока.
 - **courseTitle**: Название связанного курса.
 - **emulation**: Эмуляция.
+#### Пример ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+
+### `/api/admin/createTask`
+
+#### Описание
+Создает новую задачу.<br>
+Проверяет на null
+#### Метод
+- **POST**: Создать новую задачу
+
+#### Параметры
+- **title**: Название задачи.
+- **dateOfCreation**: Дата создания задачи.
+- **description**: Описание задачи.
+- **lessonTitle**: Название связанного урока.
+- **courseTitle**: Название связанного курса.
+- **emulation**: Эмуляция.
 
 #### Пример ответа
 ```json
@@ -233,6 +292,42 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   "result": "all_ok"
 }
 ```
+
+### `/api/admin/createTheme`
+
+#### Описание
+Создать новую тему.<br>
+Проверяет на null
+#### Метод
+- **POST**: Создать новую тему
+
+#### Параметры
+- **title**: Название темы.
+- **dateOfCreation**: Дата создания темы.
+- **title**: Описание темы.
+
+#### Пример ответа
+```json
+{
+  "result": "all_ok"
+}
+```
+
+### `/api/admin/createThemeMaterial`
+
+#### Описание
+Добавить учебные материалы для темы.<br>
+Проверяет на null
+#### Метод
+- **POST**: Добавить учебные материалы
+
+#### Параметры
+- **title**: Название учебных материалов.
+- **materialType**: Тип учебных материалов.
+- **materialURL**: Ссылки на исходные и дополнительные источники.
+- **materialText**: Текстовое поле для информации.
+
+=======
 
 ### `/api/admin/createTheme`
 
@@ -1117,7 +1212,6 @@ com.ytrewq.rosLearning.Entities.User@147d4023
   ]
 }
 ```
-
 ### `/api/admin/addUserCourse?username=&course_id`
 
 #### Описание
