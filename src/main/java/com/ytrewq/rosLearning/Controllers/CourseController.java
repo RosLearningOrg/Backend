@@ -47,21 +47,17 @@ public class CourseController {
     }
 
     @PostMapping("/admin/createCourse")
-    public Map<String, String> createCourse(@RequestBody CourseForm form) {
+    public CourseDto createCourse(@RequestBody CourseForm form) {
         Course course = new Course();
         course.setTitle(form.getTitle());
         course.setDateOfCreation(LocalDateTime.now());
         course.setDescription(form.getDescription());
-        courseService.save(course);
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
+        return courseService.save(course);
     }
 
     @GetMapping("/admin/addUserCourse")
     public Map<String, String> addUserCourse(@RequestParam(name = "username") String username,
-                                             @RequestParam(name = "course_id") int courseId){
+                                             @RequestParam(name = "course_id") int courseId) {
         User user = userService.findByUsername(username);
         if (user == null) {
             throw new AppException("User not found.");
@@ -94,4 +90,5 @@ public class CourseController {
         map.put("result", "all_ok");
         return map;
     }
+
 }

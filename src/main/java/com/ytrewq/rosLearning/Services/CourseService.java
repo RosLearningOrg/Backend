@@ -40,7 +40,8 @@ public class CourseService {
         return courseRepository.existsById(courseId);
     }
 
-    public void save(Course course) {
+    public CourseDto save(Course course) {
         courseRepository.save(course);
+        return modelMapper.map(course,CourseDto.class);
     }
 }

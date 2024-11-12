@@ -81,16 +81,12 @@ public class TaskController {
     }
 
     @PostMapping("/admin/createTask")
-    public Map<String, String> createTask(@RequestBody TaskForm form) {
+    public TaskDto createTask(@RequestBody TaskForm form) {
         Task task = new Task();
         task.setTitle(form.getTitle());
         task.setDateOfCreation(LocalDateTime.now());
         task.setDescription(form.getDescription());
-        taskService.save(task);
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
+        return taskService.save(task);
     }
 
     @GetMapping("/admin/addThemeTask")
