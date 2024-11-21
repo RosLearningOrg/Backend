@@ -2,7 +2,6 @@ package com.ytrewq.rosLearning.Controllers;
 
 
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
-import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 import com.ytrewq.rosLearning.Entities.User;
@@ -105,15 +104,31 @@ public class ThemeMaterialsController {
     }
 
     @GetMapping("/admin/deleteThemeMaterial")
-    public Map<String, String> deleteThemeMaterial(@RequestParam(name = "theme_id") int themeID) {
-        if (!themeMaterialService.existsById(themeID)) {
-            throw new AppException("Task not found.");
+    public Map<String, String> deleteThemeMaterial(@RequestParam(name = "material_id") int materialId) {
+        if (!themeMaterialService.existsById(materialId)) {
+            throw new AppException("Material not found.");
         }
 
-        themeMaterialService.deleteThemeMaterial(themeID);
+        themeMaterialService.deleteThemeMaterial(materialId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @PostMapping("/admin/updateThemeMaterial")
+    public ThemeMaterialDto updateThemeMaterial(@RequestParam(name = "material_id") int materialId,
+                                                @RequestBody ThemeMaterialForm form) {
+        if (!themeMaterialService.existsById(materialId)) {
+            throw new AppException("Material not found.");
+        }
+
+        ThemeMaterial themeMaterial = new ThemeMaterial();
+        themeMaterial.setId(materialId);
+        themeMaterial.setTitle(form.getTitle());
+        themeMaterial.setMaterialType(form.getMaterialType());
+        themeMaterial.setMaterialURL(form.getMaterialURL());
+        themeMaterial.setMaterialText(form.getMaterialText());
+        return themeMaterialService.save(themeMaterial);
     }
 }

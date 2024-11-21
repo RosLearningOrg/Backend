@@ -103,15 +103,31 @@ public class ThemeController {
     }
 
     @GetMapping("/admin/deleteTheme")
-    public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeID) {
-        if (!themeService.existsById(themeID)) {
+    public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeId) {
+        if (!themeService.existsById(themeId)) {
             throw new AppException("Theme not found.");
         }
 
-        themeService.deleteTheme(themeID);
+        themeService.deleteTheme(themeId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @PostMapping("/admin/updateTheme")
+    public ThemesDto updateTheme(@RequestParam(name = "theme_id") int themeId,
+                                 @RequestBody ThemeForm form) {
+
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme not found.");
+        }
+
+        Theme theme = new Theme();
+        theme.setId(themeId);
+        theme.setTitle(form.getTitle());
+        theme.setDateOfCreation(LocalDateTime.now());
+        theme.setDescription(form.getDescription());
+        return themeService.save(theme);
     }
 }

@@ -104,4 +104,18 @@ public class CourseController {
         return map;
     }
 
+    @PostMapping("/admin/updateCourse")
+    public CourseDto updateCourse(@RequestParam(name = "course_id") int courseId,
+                                  @RequestBody CourseForm form) {
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+
+        Course course = new Course();
+        course.setId(courseId);
+        course.setTitle(form.getTitle());
+        course.setDateOfCreation(LocalDateTime.now());
+        course.setDescription(form.getDescription());
+        return courseService.save(course);
+    }
 }

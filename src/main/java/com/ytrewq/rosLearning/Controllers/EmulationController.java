@@ -1,7 +1,10 @@
 package com.ytrewq.rosLearning.Controllers;
 
 import com.ytrewq.rosLearning.DTOs.EmulationDto;
-import com.ytrewq.rosLearning.Entities.*;
+import com.ytrewq.rosLearning.Entities.Emulation;
+import com.ytrewq.rosLearning.Entities.Task;
+import com.ytrewq.rosLearning.Entities.Theme;
+import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Exeptions.AppException;
 import com.ytrewq.rosLearning.Forms.EmulationForm;
 import com.ytrewq.rosLearning.Services.CourseService;
@@ -136,5 +139,38 @@ public class EmulationController {
     @GetMapping("/admin/getAllEmulations")
     public List<EmulationDto> getAllEmulations() {
         return emulationService.getAllEmulations();
+    }
+
+    @GetMapping("/admin/deleteEmulation")
+    public Map<String, String> deleteEmulation(@RequestParam(name = "emulation_id") int emulationId) {
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        emulationService.deleteTaskEmulation(emulationId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateEmulation")
+    public EmulationDto updateEmulation(@RequestParam(name = "emulation_id") int emulationId,
+                                        @RequestBody EmulationForm form) {
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        Emulation emulation = new Emulation();
+        emulation.setId(emulationId);
+        emulation.setPrivate_title(form.getPrivate_title());
+        emulation.setDateOfCreation(LocalDateTime.now());
+        emulation.setTimerTime(form.getTimerTime());
+        emulation.setTimerDescription(form.getTimerDescription());
+        emulation.setScreenImageURL(form.getScreenImageURL());
+        emulation.setBlockSchemeJSON(form.getBlockSchemeJSON());
+        emulation.setBlockCodeJS(form.getBlockCodeJS());
+        emulation.setByteArrayInterface(form.getByteArrayInterface());
+        return emulationService.save(emulation);
     }
 }

@@ -131,17 +131,30 @@ public class TaskController {
     }
 
     @GetMapping("/admin/deleteTask")
-    public Map<String, String> deleteTask(@RequestParam(name = "task_id") int taskID) {
+    public Map<String, String> deleteTask(@RequestParam(name = "task_id") int taskId) {
 
-        if (!courseService.existsById(taskID)) {
+        if (!taskService.existsById(taskId)) {
             throw new AppException("Task not found.");
         }
 
-        taskService.deleteTask(taskID);
+        taskService.deleteTask(taskId);
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
     }
 
+    @PostMapping("/admin/updateTask")
+    public TaskDto updateTask(@RequestParam(name = "task_id") int taskId,
+                              @RequestBody TaskForm form) {
+        if (!taskService.existsById(taskId)) {
+            throw new AppException("Task not found.");
+        }
 
+        Task task = new Task();
+        task.setId(taskId);
+        task.setTitle(form.getTitle());
+        task.setDateOfCreation(LocalDateTime.now());
+        task.setDescription(form.getDescription());
+        return taskService.save(task);
+    }
 }
