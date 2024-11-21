@@ -36,7 +36,7 @@ public class EmulationController {
     ModelMapper modelMapper = new ModelMapper();
 
     @PostMapping("/admin/createEmulation")
-    public Map<String, String> createEmulation(@RequestBody EmulationForm form) {
+    public EmulationDto createEmulation(@RequestBody EmulationForm form) {
         Emulation emulation = new Emulation();
         emulation.setPrivate_title(form.getPrivate_title());
         emulation.setDateOfCreation(LocalDateTime.now());
@@ -46,7 +46,59 @@ public class EmulationController {
         emulation.setBlockSchemeJSON(form.getBlockSchemeJSON());
         emulation.setBlockCodeJS(form.getBlockCodeJS());
         emulation.setByteArrayInterface(form.getByteArrayInterface());
-        emulationService.save(emulation);
+        return emulationService.save(emulation);
+    }
+
+    @GetMapping("/admin/removeTaskEmulation")
+    public Map<String, String> removeTaskEmulation(@RequestParam(name = "task_id") int taskId,
+                                                   @RequestParam(name = "emulation_id") int emulationId) {
+
+        Task task = taskService.getTaskById(taskId);
+        if (task == null) {
+            throw new AppException("Task not found.");
+        }
+
+
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        taskService.removeTaskEmulation(task, emulationId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @GetMapping("/admin/deleteTaskEmulation")
+    public Map<String, String> deleteTaskEmulation(@RequestParam(name = "emulation_id") int emulationID) {
+
+        if (!courseService.existsById(emulationID)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        emulationService.deleteTaskEmulation(emulationID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @GetMapping("/admin/addTaskEmulation")
+    public Map<String, String> addTaskEmulation(@RequestParam(name = "task_id") int taskId,
+                                                @RequestParam(name = "emulation_id") int emulationId) {
+
+        Task task = taskService.getTaskById(taskId);
+        if (task == null) {
+            throw new AppException("Task not found.");
+        }
+
+        Emulation emulation = emulationService.getEmulationById(taskId);
+
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        taskService.addTaskEmulation(task, emulation);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
@@ -87,5 +139,38 @@ public class EmulationController {
     @GetMapping("/admin/getAllEmulations")
     public List<EmulationDto> getAllEmulations() {
         return emulationService.getAllEmulations();
+    }
+
+    @GetMapping("/admin/deleteEmulation")
+    public Map<String, String> deleteEmulation(@RequestParam(name = "emulation_id") int emulationId) {
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        emulationService.deleteTaskEmulation(emulationId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateEmulation")
+    public EmulationDto updateEmulation(@RequestParam(name = "emulation_id") int emulationId,
+                                        @RequestBody EmulationForm form) {
+        if (!emulationService.existsById(emulationId)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        Emulation emulation = new Emulation();
+        emulation.setId(emulationId);
+        emulation.setPrivate_title(form.getPrivate_title());
+        emulation.setDateOfCreation(LocalDateTime.now());
+        emulation.setTimerTime(form.getTimerTime());
+        emulation.setTimerDescription(form.getTimerDescription());
+        emulation.setScreenImageURL(form.getScreenImageURL());
+        emulation.setBlockSchemeJSON(form.getBlockSchemeJSON());
+        emulation.setBlockCodeJS(form.getBlockCodeJS());
+        emulation.setByteArrayInterface(form.getByteArrayInterface());
+        return emulationService.save(emulation);
     }
 }

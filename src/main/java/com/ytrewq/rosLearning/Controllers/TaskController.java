@@ -81,16 +81,12 @@ public class TaskController {
     }
 
     @PostMapping("/admin/createTask")
-    public Map<String, String> createTask(@RequestBody TaskForm form) {
+    public TaskDto createTask(@RequestBody TaskForm form) {
         Task task = new Task();
         task.setTitle(form.getTitle());
         task.setDateOfCreation(LocalDateTime.now());
         task.setDescription(form.getDescription());
-        taskService.save(task);
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
+        return taskService.save(task);
     }
 
     @GetMapping("/admin/addThemeTask")
@@ -132,5 +128,33 @@ public class TaskController {
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @GetMapping("/admin/deleteTask")
+    public Map<String, String> deleteTask(@RequestParam(name = "task_id") int taskId) {
+
+        if (!taskService.existsById(taskId)) {
+            throw new AppException("Task not found.");
+        }
+
+        taskService.deleteTask(taskId);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateTask")
+    public TaskDto updateTask(@RequestParam(name = "task_id") int taskId,
+                              @RequestBody TaskForm form) {
+        if (!taskService.existsById(taskId)) {
+            throw new AppException("Task not found.");
+        }
+
+        Task task = new Task();
+        task.setId(taskId);
+        task.setTitle(form.getTitle());
+        task.setDateOfCreation(LocalDateTime.now());
+        task.setDescription(form.getDescription());
+        return taskService.save(task);
     }
 }
