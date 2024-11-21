@@ -51,12 +51,30 @@ public class ThemeController {
     }
 
     @PostMapping("/admin/createTheme")
-    public Map<String, String> createCourse(@RequestBody ThemeForm form) {
+    public ThemesDto createTheme(@RequestBody ThemeForm form) {
         Theme theme = new Theme();
         theme.setTitle(form.getTitle());
         theme.setDateOfCreation(LocalDateTime.now());
         theme.setDescription(form.getDescription());
-        themeService.save(theme);
+        return themeService.save(theme);
+
+    }
+
+    @GetMapping("/admin/addCourseThemes")
+    public Map<String, String> addCourseThemes(@RequestParam(name = "course_id") int courseId,
+                                               @RequestParam(name = "theme_id") int themeId) {
+
+        Course course = courseService.getCourseById(courseId);
+        if (course == null) {
+            throw new AppException("Course not found.");
+        }
+
+
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme not found.");
+        }
+
+        themeService.addCourseTheme(course, themeId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
@@ -82,5 +100,34 @@ public class ThemeController {
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @GetMapping("/admin/deleteTheme")
+    public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeId) {
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme not found.");
+        }
+
+        themeService.deleteTheme(themeId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateTheme")
+    public ThemesDto updateTheme(@RequestParam(name = "theme_id") int themeId,
+                                 @RequestBody ThemeForm form) {
+
+        if (!themeService.existsById(themeId)) {
+            throw new AppException("Theme not found.");
+        }
+
+        Theme theme = new Theme();
+        theme.setId(themeId);
+        theme.setTitle(form.getTitle());
+        theme.setDateOfCreation(LocalDateTime.now());
+        theme.setDescription(form.getDescription());
+        return themeService.save(theme);
     }
 }

@@ -47,13 +47,26 @@ public class CourseController {
     }
 
     @PostMapping("/admin/createCourse")
-    public Map<String, String> createCourse(@RequestBody CourseForm form) {
+    public CourseDto createCourse(@RequestBody CourseForm form) {
         Course course = new Course();
         course.setTitle(form.getTitle());
         course.setDateOfCreation(LocalDateTime.now());
         course.setDescription(form.getDescription());
-        courseService.save(course);
+        return courseService.save(course);
+    }
 
+    @GetMapping("/admin/addUserCourse")
+    public Map<String, String> addUserCourse(@RequestParam(name = "username") String username,
+                                             @RequestParam(name = "course_id") int courseId) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            throw new AppException("User not found.");
+        }
+
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+        userService.addUserCourse(user, courseId);
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
@@ -76,5 +89,33 @@ public class CourseController {
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @GetMapping("/admin/deleteCourse")
+    public Map<String, String> deleteCourse(@RequestParam(name = "course_id") int courseId) {
+
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+
+        courseService.deleteCourse(courseId);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateCourse")
+    public CourseDto updateCourse(@RequestParam(name = "course_id") int courseId,
+                                  @RequestBody CourseForm form) {
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+
+        Course course = new Course();
+        course.setId(courseId);
+        course.setTitle(form.getTitle());
+        course.setDateOfCreation(LocalDateTime.now());
+        course.setDescription(form.getDescription());
+        return courseService.save(course);
     }
 }

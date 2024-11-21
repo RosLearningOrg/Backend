@@ -1,5 +1,6 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.EmulationDto;
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
@@ -61,7 +62,11 @@ public class ThemeMaterialService {
     }
 
     public void addThemeMaterial(Theme theme, ThemeMaterial material) {
-        String courseId = String.valueOf(material.getId());
+        addThemeMaterial(theme, material.getId());
+    }
+
+    public void addThemeMaterial(Theme theme, Integer materialId) {
+        String courseId = String.valueOf(materialId);
         if (theme.getMaterialsIdsStr() == null) {
             theme.setMaterialsIdsStr("");
         }
@@ -111,7 +116,12 @@ public class ThemeMaterialService {
         return themeRepository.existsById(themeId);
     }
 
-    public void save(ThemeMaterial themeMaterial) {
+    public ThemeMaterialDto save(ThemeMaterial themeMaterial) {
         themeMaterialRepository.save(themeMaterial);
+        return modelMapper.map(themeMaterial, ThemeMaterialDto.class);
+
+    }
+    public void deleteThemeMaterial(int themeMaterialID) {
+        themeMaterialRepository.deleteById(themeMaterialID);
     }
 }

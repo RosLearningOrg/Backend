@@ -55,7 +55,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/signup").permitAll()
                         .requestMatchers("/api/logout").authenticated()
-                        .requestMatchers("/api/test-user").hasAuthority("user")
+                        .requestMatchers("/api/user/**").hasAuthority("user")
                         .requestMatchers("/api/admin/**").hasAuthority("admin")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().denyAll()

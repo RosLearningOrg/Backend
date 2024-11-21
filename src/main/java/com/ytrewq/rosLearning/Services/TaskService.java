@@ -1,9 +1,8 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.EmulationDto;
 import com.ytrewq.rosLearning.DTOs.TaskDto;
-import com.ytrewq.rosLearning.Entities.Task;
-import com.ytrewq.rosLearning.Entities.Theme;
-import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Entities.*;
 import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import org.modelmapper.ModelMapper;
@@ -61,15 +60,24 @@ public class TaskService {
         return null;
     }
 
+    public TaskDto getThemeTaskDto(Theme theme, Integer taskId) {
+        Task task = getThemeTask(theme, taskId);
+        return modelMapper.map(task, TaskDto.class);
+    }
+
     public void addThemeTask(Theme theme, Task task) {
-        String taskId = String.valueOf(task.getId());
+        addThemeTask(theme, task.getId());
+    }
+
+    public void addThemeTask(Theme theme, Integer taskId) {
+        String taskIdStr = String.valueOf(taskId);
         if (theme.getTasksIdsStr() == null) {
             theme.setTasksIdsStr("");
         }
         if (!theme.getTasksIdsStr().isEmpty()) {
             theme.setTasksIdsStr(theme.getTasksIdsStr() + "/;/" + taskId);
         } else {
-            theme.setTasksIdsStr(taskId);
+            theme.setTasksIdsStr(taskIdStr);
         }
         themeRepository.save(theme);
     }
@@ -105,6 +113,10 @@ public class TaskService {
         return null;
     }
 
+    public Task getTaskById(Integer taskId) {
+        return taskRepository.findById(taskId).orElse(null);
+    }
+
     public List<TaskDto> getAllTasks() {
         return taskRepository.findAll().stream().map(task -> modelMapper.map(task, TaskDto.class)).toList();
     }
@@ -113,7 +125,22 @@ public class TaskService {
         return themeRepository.existsById(themeId);
     }
 
-    public void save(Task task) {
+    public TaskDto save(Task task) {
         taskRepository.save(task);
+        return modelMapper.map(task, TaskDto.class);
+
+    }
+    public void removeTaskEmulation(Task task, Integer emulationId) {
+        task.setEmulation(null);
+        taskRepository.save(task);
+    }
+
+    public void addTaskEmulation(Task task, Emulation emulation) {
+        task.setEmulation(emulation);
+
+        taskRepository.save(task);
+    }
+    public void deleteTask(int taskID) {
+        taskRepository.deleteById(taskID);
     }
 }

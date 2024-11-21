@@ -2,7 +2,6 @@ package com.ytrewq.rosLearning.Controllers;
 
 
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
-import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
 import com.ytrewq.rosLearning.Entities.User;
@@ -53,23 +52,40 @@ public class ThemeMaterialsController {
     }
 
     @PostMapping("/admin/createThemeMaterial")
-    public Map<String, String> createThemeMaterial(@RequestBody ThemeMaterialForm form) {
+    public ThemeMaterialDto createThemeMaterial(@RequestBody ThemeMaterialForm form) {
         ThemeMaterial themeMaterial = new ThemeMaterial();
         themeMaterial.setTitle(form.getTitle());
         themeMaterial.setMaterialType(form.getMaterialType());
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
-        themeMaterialService.save(themeMaterial);
+        themeMaterial.setMaterialTextMD(form.getMaterialTextMD());
+        return themeMaterialService.save(themeMaterial);
+    }
+
+    @GetMapping("/admin/addThemeMaterial")
+    public Map<String, String> addThemeMaterial(@RequestParam(name = "theme_id") int themeId,
+                                                @RequestParam(name = "material_id") int materialId) {
+
+        Theme theme = themeService.getThemeAdmin(themeId);
+        if (theme == null) {
+            throw new AppException("Theme not found.");
+        }
+
+
+        if (!themeMaterialService.existsById(themeId)) {
+            throw new AppException("ThemeMaterial not found.");
+        }
+
+        themeMaterialService.addThemeMaterial(theme, materialId);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
     }
 
-
     @GetMapping("/admin/removeThemeMaterial")
     public Map<String, String> removeThemeMaterial(@RequestParam(name = "theme_id") int themeId,
-                                                  @RequestParam(name = "material_id") int materialId) {
+                                                   @RequestParam(name = "material_id") int materialId) {
 
         Theme theme = themeService.getThemeAdmin(themeId);
         if (theme == null) {
@@ -86,5 +102,35 @@ public class ThemeMaterialsController {
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
+    }
+
+    @GetMapping("/admin/deleteThemeMaterial")
+    public Map<String, String> deleteThemeMaterial(@RequestParam(name = "material_id") int materialId) {
+        if (!themeMaterialService.existsById(materialId)) {
+            throw new AppException("Material not found.");
+        }
+
+        themeMaterialService.deleteThemeMaterial(materialId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @PostMapping("/admin/updateThemeMaterial")
+    public ThemeMaterialDto updateThemeMaterial(@RequestParam(name = "material_id") int materialId,
+                                                @RequestBody ThemeMaterialForm form) {
+        if (!themeMaterialService.existsById(materialId)) {
+            throw new AppException("Material not found.");
+        }
+
+        ThemeMaterial themeMaterial = new ThemeMaterial();
+        themeMaterial.setId(materialId);
+        themeMaterial.setTitle(form.getTitle());
+        themeMaterial.setMaterialType(form.getMaterialType());
+        themeMaterial.setMaterialURL(form.getMaterialURL());
+        themeMaterial.setMaterialText(form.getMaterialText());
+        themeMaterial.setMaterialTextMD(form.getMaterialTextMD());
+        return themeMaterialService.save(themeMaterial);
     }
 }
