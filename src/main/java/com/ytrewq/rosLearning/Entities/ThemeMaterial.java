@@ -14,11 +14,12 @@ public class ThemeMaterial extends BaseEntity {
     private String materialText;
     private String materialTextMD;
 
-    public ThemeMaterial(String title, String materialType, String materialURL, String materialText) {
+    public ThemeMaterial(String title, String materialType, String materialURL, String materialText, String materialTextMD) {
         this.title = title;
         this.materialType = materialType;
         this.materialURL = materialURL;
         this.materialText = materialText;
+        this.materialTextMD = materialTextMD;
     }
 
     public ThemeMaterial() {
@@ -51,7 +52,7 @@ public class ThemeMaterial extends BaseEntity {
         this.materialURL = materialURL;
     }
 
-    @Column(name = "materialText")
+    @Column(name = "materialText", length = 1023)
     public String getMaterialText() {
         return materialText;
     }
@@ -60,7 +61,7 @@ public class ThemeMaterial extends BaseEntity {
         this.materialText = materialText;
     }
 
-    @Column(name = "materialTextMD")
+    @Column(name = "materialTextMD", length = 8191)
     public String getMaterialTextMD() {
         return materialTextMD;
     }

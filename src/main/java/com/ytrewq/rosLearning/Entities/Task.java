@@ -41,7 +41,7 @@ public class Task extends BaseEntity {
         this.dateOfCreation = dateOfCreation;
     }
 
-    @Column(name = "description")
+    @Column(name = "description", length = 1023)
     public String getDescription() {
         return description;
     }
