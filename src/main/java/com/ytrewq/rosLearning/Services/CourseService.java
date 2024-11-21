@@ -44,4 +44,9 @@ public class CourseService {
         courseRepository.save(course);
         return modelMapper.map(course,CourseDto.class);
     }
+    public void deleteCourse(int courseID) {
+        courseRepository.deleteById(courseID);
+    }
+
+
 }

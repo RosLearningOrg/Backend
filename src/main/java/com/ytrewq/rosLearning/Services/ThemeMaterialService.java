@@ -121,4 +121,7 @@ public class ThemeMaterialService {
         return modelMapper.map(themeMaterial, ThemeMaterialDto.class);
 
     }
+    public void deleteThemeMaterial(int themeMaterialID) {
+        themeMaterialRepository.deleteById(themeMaterialID);
+    }
 }
