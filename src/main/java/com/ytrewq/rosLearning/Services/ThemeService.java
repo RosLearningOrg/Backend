@@ -132,7 +132,11 @@ public class ThemeService {
         return themeRepository.existsById(themeId);
     }
 
-    public void save(Theme theme) {
+    public ThemesDto save(Theme theme) {
         themeRepository.save(theme);
+        return modelMapper.map(theme,ThemesDto.class);
+    }
+    public void deleteTheme(int themeID) {
+        themeRepository.deleteById(themeID);
     }
 }

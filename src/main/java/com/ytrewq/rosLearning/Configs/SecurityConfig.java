@@ -1,5 +1,6 @@
 package com.ytrewq.rosLearning.Configs;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collections;
+import java.util.List;
 
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
@@ -24,16 +30,33 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    private CorsConfigurationSource corsConfigurationSource() {
+        return new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                CorsConfiguration ccfg = new CorsConfiguration();
+                ccfg.setAllowedOrigins(List.of("http://localhost:63342"));
+                ccfg.setAllowedMethods(Collections.singletonList("*"));
+                ccfg.setAllowCredentials(true);
+                ccfg.setAllowedHeaders(Collections.singletonList("*"));
+                return ccfg;
+
+            }
+        };
+
+    }
+
     @Bean("securityFilterChain")
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         var chain = http
+                .cors((cors) -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(customizer -> customizer
                         .requestMatchers("/api/csrf").permitAll()
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/signup").permitAll()
                         .requestMatchers("/api/logout").authenticated()
-                        .requestMatchers("/api/test-user").hasAuthority("user")
-                        .requestMatchers("/api/test-admin").hasAuthority("admin")
+                        .requestMatchers("/api/user/**").hasAuthority("user")
+                        .requestMatchers("/api/admin/**").hasAuthority("admin")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().denyAll()
                 )

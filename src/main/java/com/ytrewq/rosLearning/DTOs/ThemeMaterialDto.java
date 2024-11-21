@@ -6,6 +6,7 @@ public class ThemeMaterialDto {
     private String materialURL;
     private String materialText;
     private Integer id;
+    private String materialTextMD;
 
     public ThemeMaterialDto() {
     }
@@ -48,5 +49,13 @@ public class ThemeMaterialDto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getMaterialTextMD() {
+        return materialTextMD;
+    }
+
+    public void setMaterialTextMD(String materialTextMD) {
+        this.materialTextMD = materialTextMD;
     }
 }
