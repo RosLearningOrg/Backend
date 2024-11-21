@@ -5,6 +5,7 @@ public class ThemeMaterialForm {
     private String materialType;
     private String materialURL;
     private String materialText;
+    private String materialTextMD;
 
     public String getTitle() {
         return title;
@@ -36,5 +37,13 @@ public class ThemeMaterialForm {
 
     public void setMaterialText(String materialText) {
         this.materialText = materialText;
+    }
+
+    public String getMaterialTextMD() {
+        return materialTextMD;
+    }
+
+    public void setMaterialTextMD(String materialTextMD) {
+        this.materialTextMD = materialTextMD;
     }
 }

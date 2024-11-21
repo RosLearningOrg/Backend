@@ -58,6 +58,7 @@ public class ThemeMaterialsController {
         themeMaterial.setMaterialType(form.getMaterialType());
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
+        themeMaterial.setMaterialTextMD(form.getMaterialTextMD());
         return themeMaterialService.save(themeMaterial);
     }
 
@@ -129,6 +130,7 @@ public class ThemeMaterialsController {
         themeMaterial.setMaterialType(form.getMaterialType());
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
+        themeMaterial.setMaterialTextMD(form.getMaterialTextMD());
         return themeMaterialService.save(themeMaterial);
     }
 }
