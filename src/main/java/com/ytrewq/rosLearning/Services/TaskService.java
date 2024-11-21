@@ -1,9 +1,8 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.EmulationDto;
 import com.ytrewq.rosLearning.DTOs.TaskDto;
-import com.ytrewq.rosLearning.Entities.Task;
-import com.ytrewq.rosLearning.Entities.Theme;
-import com.ytrewq.rosLearning.Entities.User;
+import com.ytrewq.rosLearning.Entities.*;
 import com.ytrewq.rosLearning.Repositories.TaskRepository;
 import com.ytrewq.rosLearning.Repositories.ThemeRepository;
 import org.modelmapper.ModelMapper;
@@ -126,7 +125,22 @@ public class TaskService {
         return themeRepository.existsById(themeId);
     }
 
-    public void save(Task task) {
+    public TaskDto save(Task task) {
         taskRepository.save(task);
+        return modelMapper.map(task, TaskDto.class);
+
+    }
+    public void removeTaskEmulation(Task task, Integer emulationId) {
+        task.setEmulation(null);
+        taskRepository.save(task);
+    }
+
+    public void addTaskEmulation(Task task, Emulation emulation) {
+        task.setEmulation(emulation);
+
+        taskRepository.save(task);
+    }
+    public void deleteTask(int taskID) {
+        taskRepository.deleteById(taskID);
     }
 }

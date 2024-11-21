@@ -51,16 +51,13 @@ public class ThemeController {
     }
 
     @PostMapping("/admin/createTheme")
-    public Map<String, String> createCourse(@RequestBody ThemeForm form) {
+    public ThemesDto createTheme(@RequestBody ThemeForm form) {
         Theme theme = new Theme();
         theme.setTitle(form.getTitle());
         theme.setDateOfCreation(LocalDateTime.now());
         theme.setDescription(form.getDescription());
-        themeService.save(theme);
+        return themeService.save(theme);
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
     }
 
     @GetMapping("/admin/addCourseThemes")
@@ -83,6 +80,7 @@ public class ThemeController {
         map.put("result", "all_ok");
         return map;
     }
+
     @GetMapping("/admin/removeCourseThemes")
     public Map<String, String> removeCourseThemes(@RequestParam(name = "course_id") int courseId,
                                                   @RequestParam(name = "theme_id") int themeId) {
@@ -98,6 +96,19 @@ public class ThemeController {
         }
 
         themeService.removeCourseTheme(course, themeId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @GetMapping("/admin/deleteTheme")
+    public Map<String, String> removeThemeTask(@RequestParam(name = "theme_id") int themeID) {
+        if (!themeService.existsById(themeID)) {
+            throw new AppException("Theme not found.");
+        }
+
+        themeService.deleteTheme(themeID);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");

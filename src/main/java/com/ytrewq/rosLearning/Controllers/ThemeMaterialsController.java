@@ -53,17 +53,13 @@ public class ThemeMaterialsController {
     }
 
     @PostMapping("/admin/createThemeMaterial")
-    public Map<String, String> createThemeMaterial(@RequestBody ThemeMaterialForm form) {
+    public ThemeMaterialDto createThemeMaterial(@RequestBody ThemeMaterialForm form) {
         ThemeMaterial themeMaterial = new ThemeMaterial();
         themeMaterial.setTitle(form.getTitle());
         themeMaterial.setMaterialType(form.getMaterialType());
         themeMaterial.setMaterialURL(form.getMaterialURL());
         themeMaterial.setMaterialText(form.getMaterialText());
-        themeMaterialService.save(themeMaterial);
-
-        HashMap<String, String> map = new HashMap<>();
-        map.put("result", "all_ok");
-        return map;
+        return themeMaterialService.save(themeMaterial);
     }
 
     @GetMapping("/admin/addThemeMaterial")
@@ -89,7 +85,7 @@ public class ThemeMaterialsController {
 
     @GetMapping("/admin/removeThemeMaterial")
     public Map<String, String> removeThemeMaterial(@RequestParam(name = "theme_id") int themeId,
-                                                  @RequestParam(name = "material_id") int materialId) {
+                                                   @RequestParam(name = "material_id") int materialId) {
 
         Theme theme = themeService.getThemeAdmin(themeId);
         if (theme == null) {
@@ -102,6 +98,19 @@ public class ThemeMaterialsController {
         }
 
         themeMaterialService.removeThemeMaterial(theme, materialId);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @GetMapping("/admin/deleteThemeMaterial")
+    public Map<String, String> deleteThemeMaterial(@RequestParam(name = "theme_id") int themeID) {
+        if (!themeMaterialService.existsById(themeID)) {
+            throw new AppException("Task not found.");
+        }
+
+        themeMaterialService.deleteThemeMaterial(themeID);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
