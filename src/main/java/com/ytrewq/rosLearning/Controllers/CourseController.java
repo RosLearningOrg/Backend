@@ -91,4 +91,17 @@ public class CourseController {
         return map;
     }
 
+    @GetMapping("/admin/deleteCourse")
+    public Map<String, String> deleteCourse(@RequestParam(name = "course_id") int courseId) {
+
+        if (!courseService.existsById(courseId)) {
+            throw new AppException("Course not found.");
+        }
+
+        courseService.deleteCourse(courseId);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
 }

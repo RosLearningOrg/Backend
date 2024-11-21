@@ -129,4 +129,19 @@ public class TaskController {
         map.put("result", "all_ok");
         return map;
     }
+
+    @GetMapping("/admin/deleteTask")
+    public Map<String, String> deleteTask(@RequestParam(name = "task_id") int taskID) {
+
+        if (!courseService.existsById(taskID)) {
+            throw new AppException("Task not found.");
+        }
+
+        taskService.deleteTask(taskID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+
 }

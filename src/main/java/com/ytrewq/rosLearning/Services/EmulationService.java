@@ -39,5 +39,8 @@ public class EmulationService {
         Optional<Emulation> emulation = emulationRepository.findById(emulationId);
         return emulation.orElse(null);
     }
+    public void deleteTaskEmulation(int emulationID) {
+        emulationRepository.deleteById(emulationID);
+    }
 
 }

@@ -45,9 +45,10 @@ public class EmulationController {
         emulation.setByteArrayInterface(form.getByteArrayInterface());
         return emulationService.save(emulation);
     }
+
     @GetMapping("/admin/removeTaskEmulation")
     public Map<String, String> removeTaskEmulation(@RequestParam(name = "task_id") int taskId,
-                                                  @RequestParam(name = "emulation_id") int emulationId) {
+                                                   @RequestParam(name = "emulation_id") int emulationId) {
 
         Task task = taskService.getTaskById(taskId);
         if (task == null) {
@@ -65,9 +66,23 @@ public class EmulationController {
         map.put("result", "all_ok");
         return map;
     }
+
+    @GetMapping("/admin/deleteTaskEmulation")
+    public Map<String, String> deleteTaskEmulation(@RequestParam(name = "emulation_id") int emulationID) {
+
+        if (!courseService.existsById(emulationID)) {
+            throw new AppException("Emulation not found.");
+        }
+
+        emulationService.deleteTaskEmulation(emulationID);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
     @GetMapping("/admin/addTaskEmulation")
     public Map<String, String> addTaskEmulation(@RequestParam(name = "task_id") int taskId,
-                                                   @RequestParam(name = "emulation_id") int emulationId) {
+                                                @RequestParam(name = "emulation_id") int emulationId) {
 
         Task task = taskService.getTaskById(taskId);
         if (task == null) {
@@ -86,6 +101,7 @@ public class EmulationController {
         map.put("result", "all_ok");
         return map;
     }
+
     @GetMapping("/user/getTaskEmulation")
     public EmulationDto getTaskEmulationUser(@AuthenticationPrincipal User user,
                                              @RequestParam(name = "course_id") int courseId,

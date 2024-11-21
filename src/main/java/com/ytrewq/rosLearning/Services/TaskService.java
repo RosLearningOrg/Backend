@@ -134,9 +134,13 @@ public class TaskService {
         task.setEmulation(null);
         taskRepository.save(task);
     }
+
     public void addTaskEmulation(Task task, Emulation emulation) {
         task.setEmulation(emulation);
 
         taskRepository.save(task);
+    }
+    public void deleteTask(int taskID) {
+        taskRepository.deleteById(taskID);
     }
 }

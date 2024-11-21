@@ -136,4 +136,7 @@ public class ThemeService {
         themeRepository.save(theme);
         return modelMapper.map(theme,ThemesDto.class);
     }
+    public void deleteTheme(int themeID) {
+        themeRepository.deleteById(themeID);
+    }
 }

@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d0e843c-de4a-4e71-9cbe-160f970a1b67" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/CourseController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/EmulationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/EmulationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/TaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/TaskController.java" afterDir="false" />
