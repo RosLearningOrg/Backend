@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d0e843c-de4a-4e71-9cbe-160f970a1b67" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Controllers/UsersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Forms/UserForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ytrewq/rosLearning/Services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/CourseController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/CourseController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/EmulationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/EmulationController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/TaskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/TaskController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/ThemeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/ThemeController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/ThemeMaterialsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Controllers/ThemeMaterialsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/CourseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/CourseService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/EmulationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/EmulationService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/TaskService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/TaskService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/ThemeMaterialService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/ThemeMaterialService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/ThemeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ytrewq/rosLearning/Services/ThemeService.class" afterDir="false" />
-    </list>
+    <list default="true" id="5d0e843c-de4a-4e71-9cbe-160f970a1b67" name="Changes" comment="Add update User, delete User" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,6 +75,14 @@
       <option name="presentableId" value="Default" />
       <updated>1731356030275</updated>
     </task>
+    <task id="LOCAL-00001" summary="Add update User, delete User">
+      <created>1733821939771</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733821939771</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,5 +107,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add update User, delete User" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add update User, delete User" />
   </component>
 </project>

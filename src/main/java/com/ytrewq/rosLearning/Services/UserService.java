@@ -1,6 +1,5 @@
 package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.DTOs.UserDTO;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
@@ -46,6 +45,23 @@ public class UserService {
         currentUser.setCoursesIdsStr(String.join("/;/", coursesIdsStr));
         userRepository.save(currentUser);
     }
+    public void setCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            user.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
+            userRepository.save(user);
+        }
+    }
+    public void deleteCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            removeUserCourse(user,course.getId());
+        }
+
+    }
+
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
