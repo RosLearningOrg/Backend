@@ -1,9 +1,11 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.UserDTO;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    ModelMapper modelMapper=new ModelMapper();
     @Autowired
     private final UserRepository userRepository;
     @Autowired
@@ -89,5 +92,14 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+    public boolean existsById(Integer userId){
+        return userRepository.existsById(userId);
+    }
+    public void deleteUser(Integer userId){
+        userRepository.deleteById(userId);
+    }
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 }
