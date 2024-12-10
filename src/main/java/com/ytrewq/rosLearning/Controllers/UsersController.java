@@ -67,13 +67,33 @@ public class UsersController {
         for (String username : listUserForm.getUsernames()) {
             User user = userService.findByUsername(username);
             if (user == null) {
-                throw new AppException("User %s found.".formatted(username));
+                throw new AppException("User %s not found.".formatted(username));
             }
 
             users.add(user);
         }
 
         userService.setCourseUsers(course, users);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("result", "all_ok");
+        return map;
+    }
+
+    @DeleteMapping("/admin/deleteCourseUsers")
+    public Map<String, String> deleteCourseUsers(@RequestParam(name = "course_id") int courseId, @RequestBody ListUserForm listUserForm) {
+        Course course = courseService.getCourseById(courseId);
+        if (course == null) {
+            throw new AppException("Course not found.");
+        }
+        List<User> users = new ArrayList<>();
+        for (String username : listUserForm.getUsernames()) {
+            User user = userService.findByUsername(username);
+            if (user == null) {
+                throw new AppException("User %s not found.".formatted(username));
+            }
+            users.add(user);
+        }
+        userService.deleteCourseUsers(course, users);
         HashMap<String, String> map = new HashMap<>();
         map.put("result", "all_ok");
         return map;
