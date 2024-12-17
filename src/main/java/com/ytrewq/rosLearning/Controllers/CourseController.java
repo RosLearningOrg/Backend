@@ -111,7 +111,7 @@ public class CourseController {
             throw new AppException("Course not found.");
         }
 
-        Course course = new Course();
+        Course course = courseService.getCourseById(courseId);
         course.setId(courseId);
         course.setTitle(form.getTitle());
         course.setDateOfCreation(LocalDateTime.now());

@@ -123,7 +123,7 @@ public class ThemeController {
             throw new AppException("Theme not found.");
         }
 
-        Theme theme = new Theme();
+        Theme theme = themeService.getThemeAdmin(themeId);
         theme.setId(themeId);
         theme.setTitle(form.getTitle());
         theme.setDateOfCreation(LocalDateTime.now());
