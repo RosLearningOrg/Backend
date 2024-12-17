@@ -4,6 +4,7 @@ import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    ModelMapper modelMapper=new ModelMapper();
     @Autowired
     private final UserRepository userRepository;
     @Autowired
@@ -43,6 +45,23 @@ public class UserService {
         currentUser.setCoursesIdsStr(String.join("/;/", coursesIdsStr));
         userRepository.save(currentUser);
     }
+    public void setCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            user.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
+            userRepository.save(user);
+        }
+    }
+    public void deleteCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            removeUserCourse(user,course.getId());
+        }
+
+    }
+
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
@@ -89,5 +108,14 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+    public boolean existsById(Integer userId){
+        return userRepository.existsById(userId);
+    }
+    public void deleteUser(Integer userId){
+        userRepository.deleteById(userId);
+    }
+    public void updateUser(User user){
+        userRepository.save(user);
     }
 }
