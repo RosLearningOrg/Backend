@@ -150,7 +150,7 @@ public class TaskController {
             throw new AppException("Task not found.");
         }
 
-        Task task = new Task();
+        Task task = taskService.getTaskById(taskId);
         task.setId(taskId);
         task.setTitle(form.getTitle());
         task.setDateOfCreation(LocalDateTime.now());

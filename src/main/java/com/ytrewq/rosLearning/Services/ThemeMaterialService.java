@@ -1,6 +1,5 @@
 package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.DTOs.EmulationDto;
 import com.ytrewq.rosLearning.DTOs.ThemeMaterialDto;
 import com.ytrewq.rosLearning.Entities.Theme;
 import com.ytrewq.rosLearning.Entities.ThemeMaterial;
@@ -116,11 +115,17 @@ public class ThemeMaterialService {
         return themeRepository.existsById(themeId);
     }
 
+    public ThemeMaterial getThemeMaterialById(Integer themeMaterialId) {
+        return themeMaterialRepository.findById(themeMaterialId).orElse(null);
+    }
+
+
     public ThemeMaterialDto save(ThemeMaterial themeMaterial) {
         themeMaterialRepository.save(themeMaterial);
         return modelMapper.map(themeMaterial, ThemeMaterialDto.class);
 
     }
+
     public void deleteThemeMaterial(int themeMaterialID) {
         themeMaterialRepository.deleteById(themeMaterialID);
     }

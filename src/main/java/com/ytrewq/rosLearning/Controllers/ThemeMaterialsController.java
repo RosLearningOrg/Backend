@@ -124,7 +124,7 @@ public class ThemeMaterialsController {
             throw new AppException("Material not found.");
         }
 
-        ThemeMaterial themeMaterial = new ThemeMaterial();
+        ThemeMaterial themeMaterial = themeMaterialService.getThemeMaterialById(materialId);
         themeMaterial.setId(materialId);
         themeMaterial.setTitle(form.getTitle());
         themeMaterial.setMaterialType(form.getMaterialType());

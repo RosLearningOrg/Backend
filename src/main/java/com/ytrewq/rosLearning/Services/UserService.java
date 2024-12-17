@@ -25,6 +25,7 @@ public class UserService {
     }
 
     public List<Course> getUserCourses(User currentUser) {
+        System.out.println(userRepository.findCoursesIdsStrById(currentUser.getId()));
         String[] coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId()).split("/;/");
 
         List<Integer> coursesIds = new ArrayList<>();

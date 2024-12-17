@@ -70,8 +70,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
         Course course4 = new Course("Основы кибербезопасности", LocalDateTime.now(), "Этот курс посвящен основам кибербезопасности. Вы узнаете, как защитить свои данные и системы от киберугроз, изучите основы шифрования и аутентификации, а также методы защиты от различных видов атак.", null);
         courseService.save(course4);
 
-        List<Course> la = List.of(course, course1, course2, course3);
-        userService.setUserCourses(user, la);
+        List<Course> la = List.of(course, course1, course2, course3, course4);
+        userService.setUserCourses(user1, la);
         Theme theme1 = new Theme("Введение в Java", LocalDateTime.now(), "История языка, его особенности и области применения.", null, null);
         themeService.save(theme1);
         themeService.addCourseTheme(course, theme1);
