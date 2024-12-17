@@ -161,7 +161,7 @@ public class EmulationController {
             throw new AppException("Emulation not found.");
         }
 
-        Emulation emulation = new Emulation();
+        Emulation emulation = emulationService.getEmulationById(emulationId);
         emulation.setId(emulationId);
         emulation.setPrivate_title(form.getPrivate_title());
         emulation.setDateOfCreation(LocalDateTime.now());
