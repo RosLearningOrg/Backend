@@ -9,18 +9,15 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService {
-    ModelMapper modelMapper=new ModelMapper();
     @Autowired
     private final UserRepository userRepository;
     @Autowired
     private final CourseRepository courseRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     public UserService(UserRepository userRepository, CourseRepository courseRepository) {
         this.userRepository = userRepository;
@@ -47,23 +44,31 @@ public class UserService {
         currentUser.setCoursesIdsStr(String.join("/;/", coursesIdsStr));
         userRepository.save(currentUser);
     }
+
     public void setCourseUsers(Course course, List<User> users) {
         for (User user : users) {
-            String coursesIdsStr = user.getCoursesIdsStr();
-            String courseId = String.valueOf(course.getId());
-            user.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
-            userRepository.save(user);
+            addUserCourse(user, course.getId());
         }
     }
+
     public void deleteCourseUsers(Course course, List<User> users) {
         for (User user : users) {
-            String coursesIdsStr = user.getCoursesIdsStr();
-            String courseId = String.valueOf(course.getId());
-            removeUserCourse(user,course.getId());
+            removeUserCourse(user, course.getId());
         }
-
     }
 
+    public List<UserDTO> getCourseUsers(Integer courseId) {
+        String courseIdStr = courseId.toString();
+        Set<User> users = userRepository.findAll();
+        Set<User> resultUsers = new HashSet<>();
+        for (User user : users) {
+            if (("/;/" + userRepository.findCoursesIdsStrById(user.getId()) + "/;/").contains("/;/" + courseIdStr + "/;/")) {
+                resultUsers.add(user);
+            }
+
+        }
+        return resultUsers.stream().map(user -> modelMapper.map(user, UserDTO.class)).toList();
+    }
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
@@ -72,11 +77,6 @@ public class UserService {
             return course.orElse(null);
         }
         return null;
-    }
-
-
-    public void addUserCourse(User currentUser, Course course) {
-        addUserCourse(currentUser, course.getId());
     }
 
     public void addUserCourse(User currentUser, Integer courseId) {
@@ -96,7 +96,7 @@ public class UserService {
 
     public void removeUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
-        String coursesIdsStr =  userRepository.findCoursesIdsStrById(currentUser.getId());
+        String coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId());
         coursesIdsStr = "/;/" + coursesIdsStr + "/;/";
         coursesIdsStr = coursesIdsStr.replace("/;/" + courseIdStr + "/;/", "/;/");
         if (!coursesIdsStr.equals("/;/")) {
@@ -125,13 +125,16 @@ public class UserService {
     public void save(User user) {
         userRepository.save(user);
     }
-    public boolean existsById(Integer userId){
+
+    public boolean existsById(Integer userId) {
         return userRepository.existsById(userId);
     }
-    public void deleteUser(Integer userId){
+
+    public void deleteUser(Integer userId) {
         userRepository.deleteById(userId);
     }
-    public void updateUser(User user){
+
+    public void updateUser(User user) {
         userRepository.save(user);
     }
 }
