@@ -1,15 +1,19 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.CourseDto;
+import com.ytrewq.rosLearning.DTOs.UserDTO;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -17,6 +21,8 @@ public class UserService {
     private final UserRepository userRepository;
     @Autowired
     private final CourseRepository courseRepository;
+
+    ModelMapper modelMapper = new ModelMapper();
 
     public UserService(UserRepository userRepository, CourseRepository courseRepository) {
         this.userRepository = userRepository;
@@ -89,5 +95,19 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+
+    public List<UserDTO> getAllUsers() {
+        Set<User> users = userRepository.findAll();
+        return users.stream().map(user -> modelMapper.map(user, UserDTO.class)).toList();
+    }
+
+    public UserDTO getUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.map(value -> modelMapper.map(value, UserDTO.class)).orElse(null);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
     }
 }
