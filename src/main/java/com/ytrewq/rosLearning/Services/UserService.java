@@ -1,6 +1,5 @@
 package com.ytrewq.rosLearning.Services;
 
-import com.ytrewq.rosLearning.DTOs.CourseDto;
 import com.ytrewq.rosLearning.DTOs.UserDTO;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
@@ -17,12 +16,11 @@ import java.util.Set;
 
 @Service
 public class UserService {
+    ModelMapper modelMapper=new ModelMapper();
     @Autowired
     private final UserRepository userRepository;
     @Autowired
     private final CourseRepository courseRepository;
-
-    ModelMapper modelMapper = new ModelMapper();
 
     public UserService(UserRepository userRepository, CourseRepository courseRepository) {
         this.userRepository = userRepository;
@@ -49,6 +47,23 @@ public class UserService {
         currentUser.setCoursesIdsStr(String.join("/;/", coursesIdsStr));
         userRepository.save(currentUser);
     }
+    public void setCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            user.setCoursesIdsStr(coursesIdsStr + "/;/" + courseId);
+            userRepository.save(user);
+        }
+    }
+    public void deleteCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            String coursesIdsStr = user.getCoursesIdsStr();
+            String courseId = String.valueOf(course.getId());
+            removeUserCourse(user,course.getId());
+        }
+
+    }
+
 
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
@@ -108,6 +123,15 @@ public class UserService {
     }
 
     public void save(User user) {
+        userRepository.save(user);
+    }
+    public boolean existsById(Integer userId){
+        return userRepository.existsById(userId);
+    }
+    public void deleteUser(Integer userId){
+        userRepository.deleteById(userId);
+    }
+    public void updateUser(User user){
         userRepository.save(user);
     }
 }

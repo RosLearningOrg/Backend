@@ -55,4 +55,3 @@ public class UserForm {
         this.role = role;
     }
 }
-
