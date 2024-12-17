@@ -35,7 +35,7 @@ public class SecurityConfig {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration ccfg = new CorsConfiguration();
-                ccfg.setAllowedOrigins(List.of("http://localhost:63342"));
+                ccfg.setAllowedOrigins(List.of("http://localhost:5173/"));
                 ccfg.setAllowedMethods(Collections.singletonList("*"));
                 ccfg.setAllowCredentials(true);
                 ccfg.setAllowedHeaders(Collections.singletonList("*"));
@@ -54,6 +54,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/csrf").permitAll()
                         .requestMatchers("/api/login").permitAll()
                         .requestMatchers("/api/signup").permitAll()
+                        .requestMatchers("/generateData").permitAll()
                         .requestMatchers("/api/logout").authenticated()
                         .requestMatchers("/api/user/**").hasAuthority("user")
                         .requestMatchers("/api/admin/**").hasAuthority("admin")

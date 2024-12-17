@@ -1,15 +1,15 @@
 package com.ytrewq.rosLearning.Services;
 
+import com.ytrewq.rosLearning.DTOs.UserDTO;
 import com.ytrewq.rosLearning.Entities.Course;
 import com.ytrewq.rosLearning.Entities.User;
 import com.ytrewq.rosLearning.Repositories.CourseRepository;
 import com.ytrewq.rosLearning.Repositories.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -17,6 +17,7 @@ public class UserService {
     private final UserRepository userRepository;
     @Autowired
     private final CourseRepository courseRepository;
+    ModelMapper modelMapper = new ModelMapper();
 
     public UserService(UserRepository userRepository, CourseRepository courseRepository) {
         this.userRepository = userRepository;
@@ -24,6 +25,7 @@ public class UserService {
     }
 
     public List<Course> getUserCourses(User currentUser) {
+        System.out.println(userRepository.findCoursesIdsStrById(currentUser.getId()));
         String[] coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId()).split("/;/");
 
         List<Integer> coursesIds = new ArrayList<>();
@@ -44,6 +46,31 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
+    public void setCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            addUserCourse(user, course.getId());
+        }
+    }
+
+    public void deleteCourseUsers(Course course, List<User> users) {
+        for (User user : users) {
+            removeUserCourse(user, course.getId());
+        }
+    }
+
+    public List<UserDTO> getCourseUsers(Integer courseId) {
+        String courseIdStr = courseId.toString();
+        Set<User> users = userRepository.findAll();
+        Set<User> resultUsers = new HashSet<>();
+        for (User user : users) {
+            if (("/;/" + userRepository.findCoursesIdsStrById(user.getId()) + "/;/").contains("/;/" + courseIdStr + "/;/")) {
+                resultUsers.add(user);
+            }
+
+        }
+        return resultUsers.stream().map(user -> modelMapper.map(user, UserDTO.class)).toList();
+    }
+
     public Course getUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
         if (("/;/" + userRepository.findCoursesIdsStrById(currentUser.getId()) + "/;/").contains("/;/" + courseIdStr + "/;/")) {
@@ -51,11 +78,6 @@ public class UserService {
             return course.orElse(null);
         }
         return null;
-    }
-
-
-    public void addUserCourse(User currentUser, Course course) {
-        addUserCourse(currentUser, course.getId());
     }
 
     public void addUserCourse(User currentUser, Integer courseId) {
@@ -75,7 +97,7 @@ public class UserService {
 
     public void removeUserCourse(User currentUser, Integer courseId) {
         String courseIdStr = courseId.toString();
-        String coursesIdsStr =  userRepository.findCoursesIdsStrById(currentUser.getId());
+        String coursesIdsStr = userRepository.findCoursesIdsStrById(currentUser.getId());
         coursesIdsStr = "/;/" + coursesIdsStr + "/;/";
         coursesIdsStr = coursesIdsStr.replace("/;/" + courseIdStr + "/;/", "/;/");
         if (!coursesIdsStr.equals("/;/")) {
@@ -89,5 +111,31 @@ public class UserService {
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+
+    public List<UserDTO> getAllUsers() {
+        Set<User> users = userRepository.findAll();
+        return users.stream().map(user -> modelMapper.map(user, UserDTO.class)).toList();
+    }
+
+    public UserDTO getUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.map(value -> modelMapper.map(value, UserDTO.class)).orElse(null);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    public boolean existsById(Integer userId) {
+        return userRepository.existsById(userId);
+    }
+
+    public void deleteUser(Integer userId) {
+        userRepository.deleteById(userId);
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 }
